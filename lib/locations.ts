@@ -205,9 +205,9 @@ export const LOCALITIES_DATA: Record<string, LocalityData> = {
     metaDescription:
       'Turnkey interior design and modular kitchen execution in Bawadiya Kalan, Bhopal. Precision joinery, German hardware, and contemporary residential spaces.',
     heroImage:
-      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1600&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1600&auto=format&fit=crop',
     heroImageAlt:
-      'High-performance contemporary kitchen with fluted oak and quartzite island in Bawadiya Kalan, Bhopal',
+      'High-performance contemporary kitchen with waterfall marble island in Bawadiya Kalan, Bhopal',
     projectSlugs: ['bawadiya-kitchen'],
     relatedServices: [
       { slug: 'modular-kitchens', name: 'Modular Kitchens' },

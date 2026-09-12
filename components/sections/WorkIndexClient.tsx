@@ -92,6 +92,9 @@ export function WorkIndexClient({ initialProjects }: WorkIndexClientProps) {
   // 3. Filter projects
   const filteredProjects = initialProjects.filter((project) => {
     if (activeFilter === 'all') return true;
+    if (activeFilter === 'commercial') {
+      return ['commercial', 'office', 'retail', 'hospitality'].includes(project.frontmatter.projectType);
+    }
     return project.frontmatter.projectType === activeFilter;
   });
 

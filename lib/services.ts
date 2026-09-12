@@ -367,7 +367,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     heroPromise:
       'Architectural culinary systems engineered for heavy Indian cooking, moisture, and daily utility.',
     heroImage:
-      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=1800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1800&auto=format&fit=crop',
     heroImageAlt:
       'Minimal architectural modular kitchen with fluted oak island and dark quartz counters in Bhopal',
     scopeSummary:
@@ -398,7 +398,7 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
         description:
           'Hardwood core plywood with zero core voids, chemically treated against termites and boiling water immersion.',
         image:
-          'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=800&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=800&auto=format&fit=crop',
         imageAlt: 'Calibrated marine plywood kitchen carcass construction',
       },
       {
