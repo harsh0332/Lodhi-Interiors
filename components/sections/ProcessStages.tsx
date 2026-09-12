@@ -259,12 +259,18 @@ export function ProcessStages() {
                         key={idx}
                         className="flex items-start gap-2.5 font-sans text-xs leading-relaxed text-charcoal/85"
                       >
-                        <span
-                          className="mt-0.5 font-mono text-[0.8125rem] text-accent"
+                        <svg
+                          className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-accent"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                           aria-hidden="true"
                         >
-                          &check;
-                        </span>
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -282,12 +288,19 @@ export function ProcessStages() {
                         key={idx}
                         className="flex items-start gap-2.5 font-sans text-xs leading-relaxed text-charcoal/85"
                       >
-                        <span
-                          className="mt-0.5 font-mono text-[0.8125rem] text-greige"
+                        <svg
+                          className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-greige"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                           aria-hidden="true"
                         >
-                          &rarr;
-                        </span>
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <polyline points="12 5 19 12 12 19" />
+                        </svg>
                         <span>{item}</span>
                       </li>
                     ))}

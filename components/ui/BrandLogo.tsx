@@ -38,21 +38,21 @@ function ArchitecturalInsignia({ tone = 'auto', className }: { tone?: 'light' | 
         className="h-10 w-10 md:h-12 md:w-12 transition-all duration-500 ease-out"
         aria-hidden="true"
       >
-        {/* Outer Corner Drafting Guides (Expands smoothly on hover) */}
-        <g className="transition-transform duration-500 ease-out origin-center group-hover:scale-110">
+        {/* Outer Corner Drafting Guides (Expands & illuminates with gold on hover) */}
+        <g className="transition-all duration-500 ease-out origin-center group-hover:scale-115">
           {/* Top-Left Bracket */}
-          <path d="M4 12V4H12" stroke={primaryStroke} strokeWidth="1.2" strokeLinecap="square" className="opacity-70 group-hover:opacity-100 transition-opacity" />
+          <path d="M4 12V4H12" stroke={primaryStroke} strokeWidth="1.2" strokeLinecap="square" className="opacity-70 group-hover:opacity-100 group-hover:stroke-accent transition-all duration-300" />
           {/* Top-Right Bracket */}
-          <path d="M32 4H40V12" stroke={primaryStroke} strokeWidth="1.2" strokeLinecap="square" className="opacity-70 group-hover:opacity-100 transition-opacity" />
+          <path d="M32 4H40V12" stroke={primaryStroke} strokeWidth="1.2" strokeLinecap="square" className="opacity-70 group-hover:opacity-100 group-hover:stroke-accent transition-all duration-300" />
           {/* Bottom-Right Bracket */}
-          <path d="M40 32V40H32" stroke={primaryStroke} strokeWidth="1.2" strokeLinecap="square" className="opacity-70 group-hover:opacity-100 transition-opacity" />
+          <path d="M40 32V40H32" stroke={primaryStroke} strokeWidth="1.2" strokeLinecap="square" className="opacity-70 group-hover:opacity-100 group-hover:stroke-accent transition-all duration-300" />
           {/* Bottom-Left Bracket */}
-          <path d="M12 40H4V32" stroke={primaryStroke} strokeWidth="1.2" strokeLinecap="square" className="opacity-70 group-hover:opacity-100 transition-opacity" />
+          <path d="M12 40H4V32" stroke={primaryStroke} strokeWidth="1.2" strokeLinecap="square" className="opacity-70 group-hover:opacity-100 group-hover:stroke-accent transition-all duration-300" />
         </g>
 
         {/* Fine Architectural Grid Hairlines */}
-        <line x1="22" y1="2" x2="22" y2="42" stroke={primaryStroke} strokeWidth="0.5" strokeDasharray="1.5 3" className="opacity-25 group-hover:opacity-40 transition-opacity" />
-        <line x1="2" y1="22" x2="42" y2="22" stroke={primaryStroke} strokeWidth="0.5" strokeDasharray="1.5 3" className="opacity-25 group-hover:opacity-40 transition-opacity" />
+        <line x1="22" y1="2" x2="22" y2="42" stroke={primaryStroke} strokeWidth="0.5" strokeDasharray="1.5 3" className="opacity-25 group-hover:opacity-60 group-hover:stroke-accent/70 transition-all duration-300" />
+        <line x1="2" y1="22" x2="42" y2="22" stroke={primaryStroke} strokeWidth="0.5" strokeDasharray="1.5 3" className="opacity-25 group-hover:opacity-60 group-hover:stroke-accent/70 transition-all duration-300" />
 
         {/* The Monogram: Architectural "L" & "I" Formwork */}
         {/* Monolith Pillar "I" */}
@@ -62,7 +62,7 @@ function ArchitecturalInsignia({ tone = 'auto', className }: { tone?: 'light' | 
           width="3"
           height="24"
           fill={primaryStroke}
-          className="transition-all duration-300 group-hover:fill-accent"
+          className="transition-all duration-300 ease-out group-hover:fill-accent group-hover:-translate-y-0.5"
         />
 
         {/* Horizontal Cantilever Beam "L" */}
@@ -72,21 +72,31 @@ function ArchitecturalInsignia({ tone = 'auto', className }: { tone?: 'light' | 
           strokeWidth="2.4"
           strokeLinecap="square"
           strokeLinejoin="miter"
-          className="transition-all duration-300 group-hover:stroke-accent"
+          className="transition-all duration-300 ease-out group-hover:stroke-accent"
         />
 
-        {/* Warm Golden Ratio Accent Knot (Gleams on hover) */}
+        {/* Pulse Concentric Ring around Center Node on Hover */}
+        <circle
+          cx="22"
+          cy="22"
+          r="6.5"
+          stroke={accentColor}
+          strokeWidth="0.75"
+          className="opacity-0 scale-50 transition-all duration-500 ease-out origin-center group-hover:opacity-60 group-hover:scale-100"
+        />
+
+        {/* Warm Golden Ratio Accent Knot (Radiant gleam on hover) */}
         <circle
           cx="22"
           cy="22"
           r="2.5"
           fill={accentColor}
-          className="transition-all duration-500 ease-out group-hover:r-3.5 group-hover:drop-shadow-[0_0_8px_rgba(197,162,101,0.7)]"
+          className="transition-all duration-500 ease-out origin-center group-hover:scale-125 group-hover:drop-shadow-[0_0_10px_rgba(197,162,101,0.9)]"
         />
 
         {/* Precision Bevel Corner Notches */}
-        <rect x="29" y="32" width="3" height="3" fill={accentColor} className="transition-transform duration-300 group-hover:scale-125" />
-        <rect x="12" y="12" width="2" height="2" fill={accentColor} className="transition-transform duration-300 group-hover:scale-125" />
+        <rect x="29" y="32" width="3" height="3" fill={accentColor} className="transition-all duration-400 ease-out origin-center group-hover:scale-125 group-hover:drop-shadow-[0_0_6px_rgba(197,162,101,0.8)]" />
+        <rect x="12" y="12" width="2" height="2" fill={accentColor} className="transition-all duration-400 ease-out origin-center group-hover:scale-125 group-hover:drop-shadow-[0_0_6px_rgba(197,162,101,0.8)]" />
       </svg>
     </div>
   );
@@ -142,14 +152,14 @@ export function BrandLogo({
       {/* 2. Bespoke Logotype Typography */}
       <div className="flex flex-col justify-center">
         {/* Main Name Lockup */}
-        <div className="relative overflow-hidden">
+        <div className="relative pb-0.5">
           <div className="flex items-baseline tracking-[-0.015em] transition-all duration-300 ease-out group-hover:tracking-[0.01em]">
-            <span className={cn('font-serif font-normal leading-none', titleSizes[size])}>
+            <span className={cn('font-serif font-normal leading-none transition-transform duration-300 group-hover:translate-x-0.5', titleSizes[size])}>
               Lodhi
             </span>
             <span
               className={cn(
-                'ml-2 font-serif font-light italic leading-none transition-colors duration-300 group-hover:text-accent',
+                'ml-2 font-serif font-light italic leading-none transition-all duration-300 group-hover:text-accent group-hover:translate-x-1',
                 titleSizes[size],
               )}
             >
@@ -157,20 +167,22 @@ export function BrandLogo({
             </span>
           </div>
 
-          {/* Golden Architectural Underline (Sweeps on cursor hover) */}
-          <span
-            className="absolute bottom-0 left-0 h-[1.5px] w-full origin-left scale-x-0 bg-accent transition-transform duration-500 ease-out group-hover:scale-x-100"
+          {/* Golden Architectural Underline with Glowing Leading Dot (Sweeps on cursor hover) */}
+          <div
+            className="absolute bottom-0 left-0 flex h-[1.5px] w-full origin-left scale-x-0 items-center justify-end bg-gradient-to-r from-accent/30 via-accent to-accent transition-transform duration-500 ease-out group-hover:scale-x-100"
             aria-hidden="true"
-          />
+          >
+            <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent shadow-[0_0_8px_rgba(197,162,101,0.9)]" />
+          </div>
         </div>
 
         {/* Subtitle / Founder Attribution */}
         {showTagline && (
-          <div className="mt-1 flex items-center space-x-2 font-sans text-ui-label tracking-[0.1em] transition-colors duration-300">
+          <div className="mt-1 flex items-center space-x-2 font-sans text-ui-label tracking-[0.12em] transition-all duration-400 group-hover:tracking-[0.16em]">
             <span className="opacity-75 transition-opacity group-hover:opacity-100 text-[0.72rem] md:text-[0.78rem] uppercase font-medium">
               by Soumya Lodhi
             </span>
-            <span className="h-1 w-1 rounded-full bg-accent opacity-60" aria-hidden="true" />
+            <span className="h-1 w-1 rounded-full bg-accent opacity-60 transition-transform duration-300 group-hover:scale-125" aria-hidden="true" />
             <span className="opacity-60 transition-opacity group-hover:opacity-90 text-[0.7rem] md:text-[0.75rem] uppercase font-normal tracking-[0.12em]">
               Bhopal
             </span>

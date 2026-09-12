@@ -84,16 +84,34 @@ export function Header({ initialTone = 'bone' }: HeaderProps) {
           <BrandLogo size="md" />
 
           {/* Desktop Navigation */}
-          <nav aria-label="Main navigation" className="hidden items-center space-x-8 lg:flex">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="font-sans text-[0.875rem] font-medium tracking-[0.03em] text-current transition-colors duration-200 hover:text-accent focus-visible:ring-2 focus-visible:ring-accent"
-              >
-                {link.label}
-              </Link>
-            ))}
+          <nav aria-label="Main navigation" className="hidden items-center gap-8 xl:gap-10 lg:flex">
+            {NAV_LINKS.map((link) => {
+              const isActive =
+                pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={cn(
+                    'group relative py-1 font-sans text-[0.8125rem] font-medium uppercase tracking-[0.14em] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+                    isActive ? 'text-accent' : 'text-current/80 hover:text-current',
+                  )}
+                >
+                  <span className="inline-block transition-transform duration-300 group-hover:-translate-y-0.5">
+                    {link.label}
+                  </span>
+
+                  {/* Active / Hover Animated Gold Hairline Indicator */}
+                  <span
+                    className={cn(
+                      'absolute -bottom-1 left-0 h-[1.5px] w-full origin-left bg-accent transition-transform duration-300 ease-out',
+                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100',
+                    )}
+                    aria-hidden="true"
+                  />
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Right Action & Mobile Trigger */}
