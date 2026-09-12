@@ -398,8 +398,8 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
         description:
           'Hardwood core plywood with zero core voids, chemically treated against termites and boiling water immersion.',
         image:
-          'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=800&auto=format&fit=crop',
-        imageAlt: 'Calibrated marine plywood kitchen carcass construction',
+          '/images/projects/craft-moulding-installation.jpg',
+        imageAlt: 'In-house master joiners calibrating marine plywood kitchen carcasses in Bhopal',
       },
       {
         title: 'Engineered Quartz & Black Pearl Granite',

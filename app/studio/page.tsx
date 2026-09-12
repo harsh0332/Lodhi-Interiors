@@ -10,15 +10,13 @@ import { Display, Label } from '@/components/ui/Typography';
 import { Button } from '@/components/ui/Button';
 import { ProjectCard } from '@/components/ui/ProjectCard';
 import { Reveal } from '@/components/motion/Reveal';
-import { BLUR_DATA_URL } from '@/lib/images';
 
 export const metadata: Metadata = buildMetadata({
   title: 'The studio — Soumya Lodhi, interior designer in Bhopal | Lodhi Interiors',
   description:
     'Founded by Soumya Lodhi with 8+ years of practice in Bhopal. Lodhi Interiors unites architectural interior design with single-source turnkey site execution.',
   path: '/studio',
-  ogImage:
-    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1200&auto=format&fit=crop',
+  ogImage: '/images/soumya-lodhi.jpg',
   ogType: 'profile',
 });
 
@@ -222,13 +220,11 @@ export default async function StudioPage() {
             <Reveal delay={0.1}>
               <div className="relative aspect-[16/10] w-full overflow-hidden border border-greige/25 bg-paper">
                 <Image
-                  src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=75&w=1600&auto=format&fit=crop"
-                  alt="Lodhi Interiors site supervision and joinery craftsmen on site in Bhopal"
+                  src="/images/projects/craft-moulding-installation.jpg"
+                  alt="Lodhi Interiors in-house master joinery craftsmen on site in Bhopal"
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  quality={75}
-                  placeholder="blur"
-                  blurDataURL={BLUR_DATA_URL}
+                  quality={85}
                   className="object-cover"
                 />
               </div>
