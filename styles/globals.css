@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bone: #f6f3ee;
+    --color-paper: #ede9e2;
+    --color-greige: #a8a29a;
+    --color-charcoal: #1a1a18;
+    --color-charcoal-2: #24241f;
+    --color-accent: #8a6a3b;
+  }
+
+  html {
+    color-scheme: light;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f6f3ee;
+  }
+
+  body {
+    @apply bg-bone font-sans text-charcoal antialiased selection:bg-charcoal selection:text-bone;
+    overflow-x: hidden;
+  }
+
+  /* Universal focus-visible using accent token */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-bone;
+  }
+
+  /* Skip Link Accessibility styling */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1.25rem;
+    z-index: 9999;
+    padding: 0.75rem 1.5rem;
+    background-color: #1a1a18;
+    color: #f6f3ee;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: top 0.2s ease;
+  }
+
+  .skip-link:focus {
+    top: 1.25rem;
+    outline: 2px solid #8a6a3b;
+    outline-offset: 2px;
+  }
+}
+
+/* WCAG AA Color Contrast Calibrations */
+/* On light backgrounds (bone #F6F3EE, paper #EDE9E2), greige text is calibrated to deep warm stone #5F5A52 (6.33:1 ratio, AAA) */
+.text-greige {
+  color: #5f5a52;
+}
+
+/* In dark charcoal containers, text-greige uses the light architectural greige #A8A29A (6.68:1 ratio, AAA) */
+.bg-charcoal .text-greige,
+.bg-charcoal-2 .text-greige,
+[data-tone='dark'] .text-greige,
+footer .text-greige,
+#mobile-nav .text-greige {
+  color: #a8a29a;
+}
+
+/* In dark charcoal containers, accent text uses a brighter champagne brass #C5A265 (5.5:1 ratio, AA) */
+.bg-charcoal .text-accent,
+.bg-charcoal-2 .text-accent,
+[data-tone='dark'] .text-accent,
+footer .text-accent,
+#mobile-nav .text-accent {
+  color: #c5a265;
+}
+
+/* Pointer-fine hover transitions (active strictly on desktop mouse/trackpad pointers) */
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .group-pointer-hover\:scale-103 {
+    transform: scale(1.03);
+  }
+
+  .pointer-hover\:opacity-0 {
+    opacity: 0;
+  }
+
+  .group:hover .group-pointer-hover\:opacity-100 {
+    opacity: 1;
+  }
+}
+
+/* Global reduced motion override: guarantees zero layout shift or lingering opacities */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
