@@ -5,7 +5,7 @@ import type { Project, Insight } from '@/lib/content';
  * Schema.org JSON-LD builders for LODHI INTERIORS.
  * Strictly adheres to Google Search Central guidelines:
  * - Truthful representation only.
- * - Real street address with postal code 462023 and geo-coordinates.
+ * - Real street address with postal code 462021 and geo-coordinates.
  * - Provider links to canonical studio entity.
  * - Zero self-serving AggregateRating or Review markup.
  */
@@ -16,11 +16,10 @@ export function buildLocalBusinessSchema() {
     '@type': 'HomeAndConstructionBusiness',
     '@id': `${env.NEXT_PUBLIC_SITE_URL}/#studio`,
     name: 'LODHI INTERIORS',
-    legalName: 'Lodhi Interiors',
-    alternateName: 'Lodhi Interiors Bhopal',
-    description:
-      'Editorial, minimal interior design and turnkey execution studio in Bhopal, Madhya Pradesh, India. Founded by Soumya Lodhi with 8+ years in practice.',
     url: env.NEXT_PUBLIC_SITE_URL,
+    logo: `${env.NEXT_PUBLIC_SITE_URL}/images/og-default.jpg`,
+    description:
+      'Architectural interior design and turnkey execution studio in Bhopal, MP. Founded by Soumya Lodhi with 8+ years practice in residential and commercial spaces.',
     telephone: env.NEXT_PUBLIC_PHONE_NUMBER,
     email: 'hello@lodhiinteriors.com',
     founder: {
@@ -31,16 +30,16 @@ export function buildLocalBusinessSchema() {
     },
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Plot No 02, near Capital Petrol Pump',
+      streetAddress: 'Shop No 10, Sagar High Street, near Dmart, Ayodhya Bypass',
       addressLocality: 'Bhopal',
       addressRegion: 'Madhya Pradesh',
-      postalCode: '462023',
+      postalCode: '462021',
       addressCountry: 'IN',
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: '23.2332',
-      longitude: '77.4343',
+      latitude: '23.2796',
+      longitude: '77.4667',
     },
     areaServed: [
       {
@@ -92,10 +91,10 @@ export function buildFounderPersonSchema() {
     ],
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Plot No 02, near Capital Petrol Pump',
+      streetAddress: 'Shop No 10, Sagar High Street, near Dmart, Ayodhya Bypass',
       addressLocality: 'Bhopal',
       addressRegion: 'Madhya Pradesh',
-      postalCode: '462023',
+      postalCode: '462021',
       addressCountry: 'IN',
     },
   };
@@ -183,10 +182,10 @@ export function buildServiceSchema(service: {
       telephone: env.NEXT_PUBLIC_PHONE_NUMBER,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Plot No 02, near Capital Petrol Pump',
+        streetAddress: 'Shop No 10, Sagar High Street, near Dmart, Ayodhya Bypass',
         addressLocality: 'Bhopal',
         addressRegion: 'Madhya Pradesh',
-        postalCode: '462023',
+        postalCode: '462021',
         addressCountry: 'IN',
       },
     },
@@ -266,10 +265,10 @@ export function buildContactPageSchema() {
       telephone: env.NEXT_PUBLIC_PHONE_NUMBER,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Plot No 02, near Capital Petrol Pump',
+        streetAddress: 'Shop No 10, Sagar High Street, near Dmart, Ayodhya Bypass',
         addressLocality: 'Bhopal',
         addressRegion: 'Madhya Pradesh',
-        postalCode: '462023',
+        postalCode: '462021',
         addressCountry: 'IN',
       },
     },
@@ -296,10 +295,10 @@ export function buildLocalityPageSchema(locality: {
       telephone: env.NEXT_PUBLIC_PHONE_NUMBER,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: 'Plot No 02, near Capital Petrol Pump',
+        streetAddress: 'Shop No 10, Sagar High Street, near Dmart, Ayodhya Bypass',
         addressLocality: 'Bhopal',
         addressRegion: 'Madhya Pradesh',
-        postalCode: '462023',
+        postalCode: '462021',
         addressCountry: 'IN',
       },
       areaServed: {

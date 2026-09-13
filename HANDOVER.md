@@ -2,7 +2,7 @@
 
 **Studio Context**: LODHI INTERIORS — Premium Interior Design & Turnkey Execution Studio in Bhopal, Madhya Pradesh.  
 **Founder**: Soumya Lodhi (8+ years in architectural practice).  
-**Studio Address**: Plot No 02, near Capital Petrol Pump, Bhopal, MP 462023.  
+**Studio Address**: Shop No 10, Sagar High Street, near Dmart, Ayodhya Bypass, Bhopal, MP 462021.  
 **Canonical Domain**: https://lodhiinteriors.com  
 
 ---
@@ -100,8 +100,8 @@ Environment variables are defined in `.env.local` for local development and in t
 | Variable Name | Purpose | Example Value |
 | :--- | :--- | :--- |
 | `NEXT_PUBLIC_SITE_URL` | Canonical root domain without trailing slash | `https://lodhiinteriors.com` |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Studio WhatsApp number (Country code + digits, no spaces) | `918109392314` |
-| `NEXT_PUBLIC_PHONE_NUMBER` | Formatted phone number for website display & tel: links | `+91 81093 92314` |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Studio WhatsApp number (Country code + digits, no spaces) | `919131569865` |
+| `NEXT_PUBLIC_PHONE_NUMBER` | Formatted phone number for website display & tel: links | `+91 91315 69865` |
 | `NEXT_PUBLIC_GA4_MEASUREMENT_ID` | Google Analytics 4 tracking ID | `G-XXXXXXXXXX` |
 | `CRM_WEBHOOK_URL` | Optional webhook URL for automatic lead ingestion | `https://hooks.zapier.com/...` |
 

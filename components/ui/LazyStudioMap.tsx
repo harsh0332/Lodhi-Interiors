@@ -6,9 +6,9 @@ import { env } from '@/lib/env';
 export function LazyStudioMap() {
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
-  // Google Maps embed URL centered near Capital Petrol Pump, Bhopal
+  // Google Maps embed URL centered at Sagar High Street, near Dmart, Ayodhya Bypass, Bhopal
   const mapEmbedSrc =
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3666.082596541604!2d77.4126!3d23.2599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDE1JzM1LjYiTiA3N8KwMjQnNDUuNCJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin';
+    'https://maps.google.com/maps?q=Shop+No+10+Sagar+High+Street+near+Dmart+Ayodhya+bypass+Bhopal+462021&t=&z=15&ie=UTF8&iwloc=&output=embed';
 
   return (
     <div className="flex h-full flex-col border border-greige/30 bg-bone p-6 md:p-8">
@@ -20,8 +20,9 @@ export function LazyStudioMap() {
       </h3>
 
       <address className="mb-6 space-y-1 font-sans text-[0.9375rem] not-italic leading-relaxed text-charcoal/85">
-        <p>Plot No 02, near Capital Petrol Pump,</p>
-        <p>Bhopal, Madhya Pradesh 462023</p>
+        <p>Shop No 10, Sagar High Street,</p>
+        <p>Near Dmart, Ayodhya Bypass,</p>
+        <p>Bhopal, Madhya Pradesh 462021</p>
         <p className="pt-2">
           <a
             href={`tel:${env.NEXT_PUBLIC_PHONE_NUMBER}`}
