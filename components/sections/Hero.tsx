@@ -1,22 +1,36 @@
 'use client';
 
-import React, { useRef } from 'react';
-import Image from 'next/image';
+import React, { useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { useHeroSequence } from '@/components/motion/useHeroSequence';
 
 /**
  * Hero: Primary viewpoint into LODHI INTERIORS.
  * - Single h1 element on the page in display serif.
- * - Full-bleed photograph with solid low-opacity charcoal scrim (no gradients).
- * - Priority LCP image in the DOM from initial HTML paint.
+ * - Full-bleed cinematic video background with solid low-opacity charcoal scrim.
+ * - Mobile-optimized autoplay, muted, playsInline, and instant poster fallback.
  * - Orchestrated first-load sequence powered by useHeroSequence (Module 01 contract).
  * - Dynamic line-split masks, un-blur and subtle scale, and desktop parallax.
  * - Strict zero-layout-shift and immediate static presentation under prefers-reduced-motion.
  */
 export function Hero() {
   const containerRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   useHeroSequence(containerRef);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.defaultMuted = true;
+      video.muted = true;
+      const promise = video.play();
+      if (promise !== undefined) {
+        promise.catch(() => {
+          // Autoplay restricted on low power mode; poster frame seamlessly handles display
+        });
+      }
+    }
+  }, []);
 
   return (
     <section
@@ -25,16 +39,19 @@ export function Hero() {
       className="relative flex min-h-[90vh] w-full items-center justify-center overflow-hidden bg-charcoal md:min-h-screen"
       aria-label="Studio Overview"
     >
-      {/* 1. LCP Priority Hero Image */}
+      {/* 1. Cinematic Hero Video */}
       <div data-motion="media" className="absolute inset-0 h-full w-full overflow-hidden">
-        <Image
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=75&w=2000&auto=format&fit=crop"
-          alt="The Aranya Residence double-height living pavilion featuring natural Italian travertine and fluted teak joinery in Arera Colony, Bhopal"
-          fill
-          priority
-          sizes="100vw"
-          quality={75}
-          className="object-cover object-[center_35%] md:object-center will-change-transform"
+        <video
+          ref={videoRef}
+          src="/hero-video.mp4"
+          poster="/hero-poster.jpg"
+          autoPlay
+          muted
+          playsInline
+          loop
+          preload="auto"
+          aria-hidden="true"
+          className="h-full w-full object-cover object-[center_35%] md:object-center will-change-transform pointer-events-none select-none"
         />
         {/* Solid charcoal scrim for contrast; strictly no gradients */}
         <div className="pointer-events-none absolute inset-0 bg-charcoal/45" aria-hidden="true" />

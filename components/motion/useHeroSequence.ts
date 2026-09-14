@@ -41,7 +41,8 @@ export function useHeroSequence(rootRef: RefObject<HTMLElement | null>) {
 
     gsap.registerPlugin(ScrollTrigger);
 
-    const media = root.querySelector<HTMLElement>("[data-motion='media'] img") ||
+    const media = root.querySelector<HTMLElement>("[data-motion='media'] video") ||
+                  root.querySelector<HTMLElement>("[data-motion='media'] img") ||
                   root.querySelector<HTMLElement>("[data-motion='media']");
     const layer = root.querySelector<HTMLElement>("[data-motion='text-layer']");
     const title = root.querySelector<HTMLElement>("[data-motion='mask']");
