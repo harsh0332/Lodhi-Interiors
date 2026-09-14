@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/Typography';
 import { Reveal } from '@/components/motion/Reveal';
-import { useProcessSequence } from '@/components/motion/useProcessSequence';
 
 interface Stage {
   number: string;
@@ -154,15 +155,42 @@ const STAGES: Stage[] = [
 
 export function ProcessStages() {
   const [activeStage, setActiveStage] = useState('01');
-  const rootRef = useRef<HTMLDivElement>(null);
 
-  const handleActiveChange = useCallback((idx: number) => {
-    if (STAGES[idx]) {
-      setActiveStage(STAGES[idx].number);
-    }
+  // Real-time ScrollSpy using IntersectionObserver
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const stageId = entry.target.id.replace('stage-', '');
+            setActiveStage(stageId);
+          }
+        });
+      },
+      {
+        rootMargin: '-20% 0px -50% 0px',
+        threshold: 0.1,
+      },
+    );
+
+    STAGES.forEach((s) => {
+      const el = document.getElementById(`stage-${s.number}`);
+      if (el) observer.observe(el);
+    });
+
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 250);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
   }, []);
-
-  useProcessSequence(rootRef, handleActiveChange);
 
   const scrollToStage = (stageNum: string) => {
     const el = document.getElementById(`stage-${stageNum}`);
@@ -178,7 +206,7 @@ export function ProcessStages() {
   const progressPercent = activeIndex >= 0 ? (activeIndex / (STAGES.length - 1)) * 100 : 0;
 
   return (
-    <div ref={rootRef} data-motion-module="process">
+    <div>
       {/* 1. Interactive Horizontal Architectural Progress Ribbon */}
       <div className="mb-14 overflow-x-auto pb-4 pt-2">
         <div className="relative flex min-w-[680px] items-center justify-between px-4">
@@ -198,7 +226,6 @@ export function ProcessStages() {
               <button
                 key={s.number}
                 type="button"
-                data-motion="stage"
                 onClick={() => scrollToStage(s.number)}
                 className="group relative z-10 flex flex-col items-center focus-visible:outline-none"
               >
@@ -228,9 +255,9 @@ export function ProcessStages() {
         </div>
       </div>
 
-      <div data-motion="pin-scope" className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
+      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
         {/* 2. Desktop Sticky Navigation Column with Animated Progress Rail */}
-        <aside data-motion="pin-col" className="hidden border border-greige/30 bg-paper/60 p-6 lg:sticky lg:top-36 lg:col-span-4 lg:block">
+        <aside className="hidden border border-greige/30 bg-paper/60 p-6 lg:sticky lg:top-36 lg:col-span-4 lg:block">
           <Label className="mb-4 block text-accent">Sequence of Work</Label>
           <h3 className="mb-6 font-serif text-[1.25rem] font-normal text-charcoal">
             Six Disciplined Stages
@@ -244,7 +271,6 @@ export function ProcessStages() {
                   <li key={s.number}>
                     <button
                       type="button"
-                      data-motion="stage"
                       onClick={() => scrollToStage(s.number)}
                       className={cn(
                         "group flex w-full items-center justify-between rounded-sm px-3.5 py-2.5 text-left font-sans text-xs transition-all duration-200",
@@ -294,7 +320,6 @@ export function ProcessStages() {
             <article
               key={stage.number}
               id={`stage-${stage.number}`}
-              data-motion="detail"
               className="scroll-mt-36 border-t border-greige/30 pt-8 md:pt-10"
             >
               <Reveal>

@@ -230,13 +230,6 @@ footer .text-accent,
   will-change: transform;
 }
 
-[data-motion-engine="on"] [data-motion-module="closing-cta"] [data-motion-item] {
-  opacity: 0;
-}
-[data-motion-engine="on"] [data-motion-module="footer"] [data-motion-item] {
-  opacity: 0;
-}
-
 /* Module 07: Desktop Cursor Ring */
 .lodhi-cursor {
   position: fixed;
