@@ -347,8 +347,8 @@ export function useCaseCompare(rootRef: RefObject<HTMLElement | null>) {
         function onDown(e: PointerEvent) {
           if (e.button !== undefined && e.button !== 0) return;
           dragging = true;
-          handle!.setPointerCapture?.(e.pointerId);
-          root!.setAttribute('data-motion-dragging', '');
+          handle?.setPointerCapture?.(e.pointerId);
+          root?.setAttribute('data-motion-dragging', '');
           set(pctFromClientX(e.clientX), false);
           e.preventDefault();
         }
@@ -357,7 +357,7 @@ export function useCaseCompare(rootRef: RefObject<HTMLElement | null>) {
         }
         function onUp() {
           dragging = false;
-          root!.removeAttribute('data-motion-dragging');
+          root?.removeAttribute('data-motion-dragging');
         }
         function onStageDown(e: PointerEvent) {
           if (e.target === handle) return;

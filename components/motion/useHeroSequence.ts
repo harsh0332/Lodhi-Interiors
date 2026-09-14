@@ -198,10 +198,10 @@ export function useHeroSequence(rootRef: RefObject<HTMLElement | null>) {
       });
 
       if (media) {
-        tl.to(media, { y: () => -root.offsetHeight * speed, ease: 'none' }, 0);
+        tl.to(media, { y: () => -(root?.offsetHeight ?? 0) * speed, ease: 'none' }, 0);
       }
       if (layer) {
-        tl.to(layer, { y: () => -root.offsetHeight * speed * TEXT_DEPTH, ease: 'none' }, 0);
+        tl.to(layer, { y: () => -(root?.offsetHeight ?? 0) * speed * TEXT_DEPTH, ease: 'none' }, 0);
       }
       return tl;
     }
@@ -295,7 +295,7 @@ export function useHeroSequence(rootRef: RefObject<HTMLElement | null>) {
           boxWidth = w;
           if (remountTimer) clearTimeout(remountTimer);
           remountTimer = setTimeout(() => {
-            if (!root.isConnected) return;
+            if (!root?.isConnected) return;
             showLines(splitLines());
             ScrollTrigger.refresh();
           }, 140);
