@@ -1,38 +1,46 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
 import { env } from '@/lib/env';
 import { Section } from '@/components/ui/Section';
-import { Heading, Body } from '@/components/ui/Typography';
 import { Button } from '@/components/ui/Button';
-import { Reveal } from '@/components/motion/Reveal';
+import { useClosingCTAMotion } from '@/components/motion/useFooterMotion';
 
 /**
  * ClosingCTA: Full-width dark charcoal section sitting directly above the footer.
- * Line: "Tell us about your space."
- * Primary action to contact page, secondary action to WhatsApp.
+ * Port of Module 07A: Masked headline rise + staggered action reveals.
  */
 export function ClosingCTA() {
+  const containerRef = useRef<HTMLElement>(null);
+  useClosingCTAMotion(containerRef);
+
   return (
     <Section
+      ref={containerRef}
       tone="dark"
+      data-motion-module="closing-cta"
+      data-motion-start="top 80%"
       className="border-t border-greige/20 py-24 md:py-36"
       aria-label="Call to Action"
     >
       <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-        <Reveal>
-          <Heading level={2} className="mb-6 font-serif text-fluid-display font-normal text-bone">
-            Tell us about your space.
-          </Heading>
-        </Reveal>
+        <h2
+          data-motion="mask"
+          className="mb-6 overflow-hidden font-serif text-fluid-display font-normal text-bone"
+        >
+          <span className="inline-block">Tell us about your space.</span>
+        </h2>
 
-        <Reveal delay={0.1}>
-          <Body className="mx-auto mb-10 max-w-xl text-[1.0625rem] leading-relaxed text-bone/80">
-            Whether you are planning a private residence in Arera Colony or an executive corporate
-            headquarters in Bhopal, we welcome disciplined architectural conversations.
-          </Body>
-        </Reveal>
+        <p className="mx-auto mb-10 max-w-xl font-sans text-[1.0625rem] leading-relaxed text-bone/80">
+          Whether you are planning a private residence in Arera Colony or an executive corporate
+          headquarters in Bhopal, we welcome disciplined architectural conversations.
+        </p>
 
-        <Reveal delay={0.2}>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
+        <div
+          data-motion-group
+          className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6"
+        >
+          <div data-motion-item className="w-full sm:w-auto">
             <Button
               variant="secondary"
               tone="dark"
@@ -41,6 +49,8 @@ export function ClosingCTA() {
             >
               Start your project
             </Button>
+          </div>
+          <div data-motion-item className="w-full sm:w-auto">
             <Button
               variant="primary"
               tone="dark"
@@ -52,8 +62,9 @@ export function ClosingCTA() {
               WhatsApp Consultation
             </Button>
           </div>
-        </Reveal>
+        </div>
       </div>
     </Section>
   );
 }
+

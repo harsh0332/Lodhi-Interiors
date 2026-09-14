@@ -153,6 +153,7 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
         alt={`${frontmatter.title} interior space in ${frontmatter.locality}, Bhopal`}
         priority
         aspectRatio="21/9"
+        transitionKey={slug}
         caption={`${frontmatter.title} &mdash; ${frontmatter.locality}, Bhopal. Conceived and delivered turnkey by Lodhi Interiors.`}
       />
 

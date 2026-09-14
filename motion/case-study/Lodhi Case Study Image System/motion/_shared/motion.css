@@ -1,0 +1,44 @@
+/* Lodhi Interiors — motion primitives (shared)
+   Eases, durations, hover transition, media defaults. No component styles.
+   Modules own their own pre-animation gating, always wrapped in
+   @media (prefers-reduced-motion: no-preference) and scoped to
+   html[data-motion-engine="on"] so no-JS users see the final state. */
+
+:root {
+  --ease-entrance: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-exit: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+
+  --dur-fast: 250ms;
+  --dur-base: 500ms;
+  --dur-slow: 700ms;
+  --dur-cinematic: 900ms;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-media);
+}
+
+[data-motion-hover] {
+  transition:
+    transform var(--dur-fast) var(--ease-snap),
+    opacity var(--dur-fast) var(--ease-snap),
+    filter var(--dur-fast) var(--ease-snap);
+  will-change: auto;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-hover] {
+    transition: none;
+  }
+}

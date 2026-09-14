@@ -7,6 +7,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { BrandLogo } from '@/components/ui/BrandLogo';
 import { MobileNav } from './MobileNav';
+import { useHeaderMotion } from '@/components/motion/useHeaderMotion';
 
 export interface HeaderProps {
   initialTone?: 'bone' | 'charcoal';
@@ -22,39 +23,25 @@ const NAV_LINKS = [
 ];
 
 /**
- * Header: Global architectural navigation bar.
+ * Header: Global architectural navigation bar powered by useHeaderMotion (Module 05A).
  * - Left: Logotype in serif with "by Soumya Lodhi" caption on desktop.
- * - Center: Editorial navigation links.
+ * - Center: Editorial navigation links with CSS brass indicator.
  * - Right: "Start your project" CTA + Mobile hamburger.
- * - Scroll: Transparent over hero with bone text, transitions to solid bone + charcoal text after 80px.
- * - Hides on scroll down, reveals on scroll up over 250ms.
+ * - Scroll: Transparent over hero with bone text, transitions to solid bone with hysteresis.
+ * - Hides on scroll down, reveals on scroll up and on focusin.
  */
 export function Header({ initialTone = 'bone' }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
-  const lastScrollY = useRef(0);
+
+  useHeaderMotion(headerRef);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // 80px threshold for solid bone background transition
-      if (currentScrollY > 80) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-
-      // Hide on scroll down, reveal on scroll up (with 12px threshold to prevent flicker)
-      if (currentScrollY > 120 && currentScrollY > lastScrollY.current + 12) {
-        setIsVisible(false);
-      } else if (currentScrollY < lastScrollY.current - 12 || currentScrollY <= 80) {
-        setIsVisible(true);
-      }
-
-      lastScrollY.current = currentScrollY;
+      setIsScrolled(currentScrollY > 80);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -73,9 +60,10 @@ export function Header({ initialTone = 'bone' }: HeaderProps) {
   return (
     <>
       <header
+        ref={headerRef}
+        data-motion-module="site-header"
         className={cn(
-          'fixed left-0 right-0 top-0 z-40 w-full transition-all duration-[250ms] ease-out',
-          isVisible ? 'translate-y-0' : '-translate-y-full',
+          'fixed left-0 right-0 top-0 z-40 w-full will-change-transform',
           headerThemeClasses,
         )}
       >
@@ -131,6 +119,7 @@ export function Header({ initialTone = 'bone' }: HeaderProps) {
             <button
               ref={hamburgerRef}
               type="button"
+              data-menu-trigger
               onClick={() => setIsMobileNavOpen(true)}
               aria-expanded={isMobileNavOpen}
               aria-controls="mobile-nav"

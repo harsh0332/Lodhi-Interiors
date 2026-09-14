@@ -35,6 +35,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       console.log('[Lenis] Smooth scroll engine initialised (single authority)');
     }
     isLenisInitialised = true;
+    document.documentElement.setAttribute('data-motion-engine', 'on');
 
     const lenis = new Lenis({
       duration: 1.2,
@@ -103,6 +104,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
       lenis.destroy();
       lenisRef.current = null;
       isLenisInitialised = false;
+      document.documentElement.removeAttribute('data-motion-engine');
     };
   }, []);
 

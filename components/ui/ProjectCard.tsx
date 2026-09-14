@@ -36,7 +36,7 @@ export function ProjectCard({
   priority = false,
   className,
 }: ProjectCardProps) {
-  const { triggerTransition } = useProjectTransition();
+  const { captureTransition } = useProjectTransition();
   const href = `/work/${slug}`;
 
   const aspectClass =
@@ -51,7 +51,7 @@ export function ProjectCard({
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey) {
       e.preventDefault();
-      triggerTransition(href);
+      captureTransition(e.currentTarget, href, slug);
     }
   };
 
@@ -59,6 +59,8 @@ export function ProjectCard({
     <Link
       href={href}
       onClick={handleClick}
+      data-motion="transition-link"
+      data-transition-key={slug}
       className={cn(
         'group relative block overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bone',
         className,

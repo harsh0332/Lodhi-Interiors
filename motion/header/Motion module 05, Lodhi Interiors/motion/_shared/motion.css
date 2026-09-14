@@ -1,0 +1,48 @@
+/* Lodhi Interiors — motion primitives (shared layer)
+   Eases, durations, the shared hover transition, focus visibility.
+   Pre-animation states are gated on html[data-motion-engine="on"] so a
+   no-JS user always sees the final state.
+*/
+
+:root {
+  --ease-entrance: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-exit: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+
+  --dur-fast: 250ms;
+  --dur-base: 500ms;
+  --dur-slow: 700ms;
+  --dur-cinematic: 900ms;
+}
+
+/* Shared, opt-in hover transition. */
+[data-motion-hover] {
+  transition: opacity var(--dur-fast) var(--ease-snap),
+              transform var(--dur-fast) var(--ease-snap),
+              color var(--dur-fast) var(--ease-snap);
+}
+
+/* Focus is always visible, on every branch. */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+/* Masks used by reveal/stagger modules. */
+[data-motion-mask] {
+  display: block;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-hover] { transition: none; }
+  html:not(#\#) *,
+  html:not(#\#) *::before,
+  html:not(#\#) *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

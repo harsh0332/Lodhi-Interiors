@@ -1,0 +1,66 @@
+/* Lodhi Interiors — motion primitives (1.0.0)
+   Pre-animation states are gated on html[data-motion-engine="on"], written by
+   scroll-engine.js. No-JS users see final states. Transform / opacity / filter /
+   clip-path only. */
+
+:root {
+  --ease-entrance: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-exit: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+
+  --dur-fast: 250ms;
+  --dur-base: 500ms;
+  --dur-slow: 700ms;
+  --dur-cinematic: 900ms;
+}
+
+/* ---- Pre-animation states -------------------------------------------- */
+html[data-motion-engine="on"] [data-motion="fade-up"] {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+}
+html[data-motion-engine="on"] [data-motion="mask"] {
+  overflow: hidden;
+}
+html[data-motion-engine="on"] [data-motion="mask"] > * {
+  display: block;
+  transform: translate3d(0, 110%, 0);
+}
+
+/* ---- Shared hover transition (opt in with data-motion-hover) ---------- */
+[data-motion-hover] {
+  transition: transform var(--dur-base) var(--ease-entrance),
+              opacity var(--dur-fast) var(--ease-entrance),
+              filter var(--dur-base) var(--ease-entrance);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-hover] { transition: none; }
+}
+
+/* ---- Route-transition overlay layer ---------------------------------- */
+/* Created and removed by the route-transition module. Never authored in HTML. */
+.lodhi-tx-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  overflow: hidden;
+  contain: strict;
+}
+.lodhi-tx-clone {
+  position: fixed;
+  display: block;
+  margin: 0;
+  border-radius: var(--radius-media);
+  object-fit: cover;
+  background: var(--surface-alt);
+  will-change: transform, clip-path, opacity;
+  backface-visibility: hidden;
+}
+
+:where(a):focus-visible,
+:where(button):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}

@@ -1,0 +1,186 @@
+/* Lodhi Interiors — module 06: case study image system (styles)
+   Every aspect ratio is reserved: <img width/height> + aspect-ratio on the
+   frame, so CLS stays at 0 while photographs arrive.
+   Pre-animation gating is scoped to html[data-motion-engine="on"] and wrapped
+   in prefers-reduced-motion: no-preference — no-JS and reduced-motion users
+   get the final state with no hidden images. */
+
+/* ---- page shell (demo chrome, module-agnostic) --------------------- */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  letter-spacing: var(--tr-body);
+  text-wrap: pretty;
+}
+a { color: var(--link); text-decoration: none; border-bottom: var(--hairline) solid var(--line-strong); }
+a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+.cs-wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+.cs-masthead {
+  display: flex; flex-wrap: wrap; gap: var(--s-5);
+  align-items: baseline; justify-content: space-between;
+  padding-block: var(--s-5); border-bottom: var(--border);
+}
+.cs-mark { font-family: var(--font-display); font-size: var(--fs-h3); letter-spacing: 0.08em; text-transform: uppercase; }
+.cs-nav { display: flex; gap: var(--s-5); font-size: var(--fs-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); }
+.cs-nav a { border: 0; color: inherit; }
+.cs-nav a:hover { color: var(--ink); }
+
+.cs-lede { display: grid; gap: var(--s-6); padding-block: var(--section-y) var(--s-8); }
+.cs-lede h1 { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-h1); line-height: var(--lh-h1); letter-spacing: var(--tr-h1); margin: 0; max-width: 22ch; }
+.cs-lede p { margin: 0; max-width: 52ch; color: var(--ink-soft); }
+.cs-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: var(--s-5); border-top: var(--border); padding-top: var(--s-5); }
+.cs-facts dt { font-size: var(--fs-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); }
+.cs-facts dd { margin: var(--s-2) 0 0; }
+
+.cs-section { padding-block: var(--section-y) 0; }
+.cs-section__label {
+  font-size: var(--fs-caption); line-height: var(--lh-caption); letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--ink-muted);
+  border-top: var(--border); padding-top: var(--s-3); margin-bottom: var(--s-6);
+}
+.cs-note { max-width: var(--measure); color: var(--ink-soft); margin: 0 0 var(--s-6); }
+.cs-foot { padding-block: var(--section-y) var(--s-9); color: var(--ink-muted); font-size: var(--fs-caption); }
+
+/* ---- A: full-bleed reveals ---------------------------------------- */
+.cs-fullbleed { display: grid; gap: var(--section-y); }
+.cs-figure { margin: 0; display: grid; gap: var(--s-3); }
+.cs-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-alt);
+  aspect-ratio: var(--ar, 3 / 2);
+  transform: translateZ(0);
+}
+.cs-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+}
+.cs-figure--bleed { margin-inline: calc(var(--gutter) * -1); }
+@media (min-width: 900px) {
+  .cs-figure--inset { max-width: 62ch; }
+}
+.cs-caption {
+  font-size: var(--fs-caption); line-height: var(--lh-caption); letter-spacing: var(--tr-caption);
+  color: var(--ink-muted); margin: 0;
+  display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4);
+}
+.cs-figure--bleed .cs-caption { padding-inline: var(--gutter); }
+.cs-caption b { font-weight: 500; color: var(--ink-soft); }
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-motion-engine="on"] [data-motion-module="case-fullbleed"] [data-motion="reveal"]:not([data-motion-wipe="down"]) {
+    clip-path: inset(0% 0% 100% 0%);
+  }
+  html[data-motion-engine="on"] [data-motion-module="case-fullbleed"] [data-motion-wipe="down"] {
+    clip-path: inset(100% 0% 0% 0%);
+  }
+  html[data-motion-engine="on"] [data-motion-module="case-fullbleed"] [data-motion="caption"] { opacity: 0; }
+  html[data-motion-engine="on"] [data-motion-module="case-gallery"] [data-motion-item] { opacity: 0; }
+}
+
+/* ---- B: gallery ---------------------------------------------------- */
+.cs-gallery { display: grid; gap: var(--s-4); }
+.cs-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: var(--s-4);
+  margin: 0; padding: 0; list-style: none;
+}
+.cs-strip > li { margin: 0; }
+.cs-hint { font-size: var(--fs-caption); color: var(--ink-muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* Touch / narrow: horizontal scroll-snap with a peeking next image.
+   No dots, no arrows. overscroll-behavior-x keeps the page chain intact and
+   touch-action leaves vertical panning to the document. */
+@media (max-width: 899px), (hover: none), (pointer: coarse) {
+  .cs-strip {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline-start: 0;
+    overscroll-behavior-x: contain;
+    overscroll-behavior-y: auto;
+    touch-action: pan-x pan-y pinch-zoom;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    gap: var(--s-3);
+  }
+  .cs-strip::-webkit-scrollbar { display: none; }
+  .cs-strip > li {
+    flex: 0 0 78%;          /* the next image stays partly visible */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .cs-strip > li:last-child { padding-inline-end: var(--gutter); flex-basis: calc(78% + var(--gutter)); }
+}
+
+/* ---- C: before / after -------------------------------------------- */
+.cs-compare { display: grid; gap: var(--s-3); }
+.cs-stage {
+  --pos: 50%;
+  --pos-px: 50%;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-alt);
+  aspect-ratio: 3 / 2;
+  touch-action: pan-y;
+}
+.cs-layer { position: absolute; inset: 0; margin: 0; }
+.cs-layer img { width: 100%; height: 100%; object-fit: cover; }
+.cs-layer--after { clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.cs-tag {
+  position: absolute; top: var(--s-4); z-index: 2;
+  font-size: var(--fs-caption); letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--c-bone); color: var(--ink); padding: var(--s-1) var(--s-3);
+  border-radius: var(--radius);
+}
+.cs-layer--before .cs-tag { left: var(--s-4); }
+.cs-layer--after .cs-tag { right: var(--s-4); }
+
+.cs-handle {
+  position: absolute; top: 0; left: 0; z-index: 3;
+  width: 2px; height: 100%;
+  background: var(--c-bone);
+  transform: translate3d(var(--pos-px), 0, 0);
+  cursor: ew-resize;
+  touch-action: none;
+}
+.cs-handle::after {
+  content: "";
+  position: absolute; top: 50%; left: 50%;
+  width: 44px; height: 44px;
+  transform: translate(-50%, -50%);
+  border: var(--hairline) solid var(--c-bone);
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--c-charcoal) 42%, transparent);
+}
+.cs-handle:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Mobile / touch: no divider. The two images stack, each clearly labelled. */
+@media (max-width: 899px), (hover: none), (pointer: coarse) {
+  .cs-stage {
+    aspect-ratio: auto;
+    display: grid;
+    gap: var(--s-3);
+    overflow: visible;
+    touch-action: auto;
+  }
+  .cs-layer { position: relative; inset: auto; aspect-ratio: 3 / 2; overflow: hidden; }
+  .cs-layer--after { clip-path: none; }
+  .cs-handle { display: none; }
+}
+
+.cs-legend { font-size: var(--fs-caption); color: var(--ink-muted); margin: 0; }

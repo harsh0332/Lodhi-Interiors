@@ -1,0 +1,74 @@
+/* Lodhi Interiors — motion primitives
+   Eases + durations as CSS variables (mirrored 1:1 in scroll-engine.js → LodhiMotion.EASE / .DURATION)
+   plus the reduced-motion reset. Load after tokens.css. */
+
+:root {
+  /* ---- Eases -------------------------------------------------------
+     entrance  — things arriving. Decelerating, no overshoot.
+     exit      — things leaving. Accelerating out.
+     cinematic — long image reveals, clip-path and scale. Slow in, long settle.
+     snap      — interface feedback: buttons, toggles, cursor marks.
+  */
+  --ease-entrance: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-exit: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ---- Durations --------------------------------------------------- */
+  --dur-fast: 250ms;
+  --dur-base: 500ms;
+  --dur-slow: 700ms;
+  --dur-cinematic: 900ms;
+
+  /* Stagger grammar (seconds are handled JS-side; ms here for CSS transitions). */
+  --stagger-tight: 40ms;
+  --stagger-base: 80ms;
+  --stagger-loose: 120ms;
+}
+
+/* Pre-animation state is declared in CSS so nothing depends on JS to be legible:
+   elements are only hidden once the engine confirms it will animate them
+   (html[data-motion-engine="on"]). Without JS, or with reduced motion, everything
+   is visible at its final state. */
+html[data-motion-engine="on"] [data-motion]:not([data-motion-ready]) {
+  will-change: transform, opacity;
+}
+
+/* Interface feedback uses CSS, not GSAP. */
+a,
+button,
+[data-motion-hover] {
+  transition:
+    color var(--dur-fast) var(--ease-snap),
+    opacity var(--dur-fast) var(--ease-snap),
+    transform var(--dur-fast) var(--ease-snap),
+    border-color var(--dur-fast) var(--ease-snap);
+}
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: var(--hairline) solid var(--focus);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* ---- Reduced motion reset -----------------------------------------
+   Final state, instantly, zero tween. The engine additionally skips
+   tween creation entirely (see scroll-engine.js matchMedia branch);
+   this is the belt-and-braces CSS half. */
+@media (prefers-reduced-motion: reduce) {
+  html[data-motion-engine="on"] [data-motion] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    filter: none !important;
+    will-change: auto !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

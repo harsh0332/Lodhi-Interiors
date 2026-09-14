@@ -69,8 +69,8 @@ function resolveEnv(): EnvConfig {
     const fallbackSource: Record<string, string | undefined> = {
       NEXT_PUBLIC_GA4_MEASUREMENT_ID:
         process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID || 'G-BUILD_FALLBACK',
-      NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919131569865',
-      NEXT_PUBLIC_PHONE_NUMBER: process.env.NEXT_PUBLIC_PHONE_NUMBER || '+91 91315 69865',
+      NEXT_PUBLIC_WHATSAPP_NUMBER: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919131569856',
+      NEXT_PUBLIC_PHONE_NUMBER: process.env.NEXT_PUBLIC_PHONE_NUMBER || '+91 91315 69856',
       NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://lodhiinteriors.com',
     };
     return validateEnv(fallbackSource);

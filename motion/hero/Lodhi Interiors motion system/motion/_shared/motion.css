@@ -1,0 +1,47 @@
+/* Lodhi Interiors — motion primitives (shared layer, 1.0.0)
+   Owns: ease/duration CSS tokens, the pre-animation gate, the shared hover
+   transition. Owns no component styles. Every pre-animation rule is gated on
+   [data-motion-engine="on"] so a no-JS visitor sees final states.
+*/
+
+:root {
+  --ease-entrance: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-exit: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+
+  --dur-fast: 250ms;
+  --dur-base: 500ms;
+  --dur-slow: 700ms;
+  --dur-cinematic: 900ms;
+}
+
+/* ---- Shared hover transition -------------------------------------- */
+[data-motion-hover] {
+  transition:
+    color var(--dur-fast) var(--ease-snap),
+    opacity var(--dur-fast) var(--ease-snap),
+    transform var(--dur-fast) var(--ease-snap);
+}
+
+/* ---- Pre-animation gate -------------------------------------------
+   Only transform / opacity / filter / clip-path. Nothing here affects layout.
+*/
+[data-motion-engine="on"] [data-motion="fade-up"],
+[data-motion-engine="on"] [data-motion-item] {
+  opacity: 0;
+}
+[data-motion-engine="on"] [data-motion="mask"] [data-motion-line-inner] {
+  transform: translate3d(0, 110%, 0);
+}
+
+/* Reduced motion: the gate never applies — the markup is the final state. */
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-engine="on"] [data-motion="fade-up"],
+  [data-motion-engine="on"] [data-motion-item],
+  [data-motion-engine="on"] [data-motion="mask"] [data-motion-line-inner] {
+    opacity: 1;
+    transform: none;
+  }
+  [data-motion-hover] { transition: none; }
+}

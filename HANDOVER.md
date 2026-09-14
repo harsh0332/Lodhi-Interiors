@@ -100,8 +100,8 @@ Environment variables are defined in `.env.local` for local development and in t
 | Variable Name | Purpose | Example Value |
 | :--- | :--- | :--- |
 | `NEXT_PUBLIC_SITE_URL` | Canonical root domain without trailing slash | `https://lodhiinteriors.com` |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Studio WhatsApp number (Country code + digits, no spaces) | `919131569865` |
-| `NEXT_PUBLIC_PHONE_NUMBER` | Formatted phone number for website display & tel: links | `+91 91315 69865` |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Studio WhatsApp number (Country code + digits, no spaces) | `919131569856` |
+| `NEXT_PUBLIC_PHONE_NUMBER` | Formatted phone number for website display & tel: links | `+91 91315 69856` |
 | `NEXT_PUBLIC_GA4_MEASUREMENT_ID` | Google Analytics 4 tracking ID | `G-XXXXXXXXXX` |
 | `CRM_WEBHOOK_URL` | Optional webhook URL for automatic lead ingestion | `https://hooks.zapier.com/...` |
 

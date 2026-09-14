@@ -11,6 +11,7 @@ import { Heading, Label } from '@/components/ui/Typography';
 import { Button } from '@/components/ui/Button';
 import { Reveal } from '@/components/motion/Reveal';
 import { useProjectTransition } from '@/components/motion/ProjectTransition';
+import { useSelectedWorkGallery } from '@/components/motion/useSelectedWorkGallery';
 import { BLUR_DATA_URL, IMAGE_QUALITY } from '@/lib/images';
 
 export interface SelectedWorkProps {
@@ -18,7 +19,7 @@ export interface SelectedWorkProps {
 }
 
 /**
- * SelectedWorkItem: Wraps project display and runs 1.04 to 1 scale-in animation on viewport entry.
+ * SelectedWorkCard: Formatted card for project display obeying Module 02 & 03 contract.
  */
 function SelectedWorkCard({
   project,
@@ -29,41 +30,7 @@ function SelectedWorkCard({
   aspectRatio?: '4/3' | '16/10' | '21/9';
   priority?: boolean;
 }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
   const { frontmatter } = project;
-
-  useEffect(() => {
-    const el = containerRef.current;
-    const img = imageRef.current;
-    if (!el || !img || typeof window === 'undefined') return;
-
-    gsap.registerPlugin(ScrollTrigger);
-    const mm = gsap.matchMedia();
-
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
-      gsap.fromTo(
-        img,
-        { scale: 1.04 },
-        {
-          scale: 1,
-          duration: 1.2,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 85%',
-            once: true,
-          },
-        },
-      );
-    });
-
-    mm.add('(prefers-reduced-motion: reduce)', () => {
-      gsap.set(img, { scale: 1, clearProps: 'all' });
-    });
-
-    return () => mm.revert();
-  }, []);
 
   const aspectClass =
     aspectRatio === '16/10'
@@ -83,15 +50,19 @@ function SelectedWorkCard({
   };
 
   return (
-    <div ref={containerRef} className="group relative block overflow-hidden">
+    <div data-motion-item className="group relative block overflow-hidden">
       <Link
         href={href}
         onClick={handleClick}
+        data-motion="transition-link"
+        data-transition-key={frontmatter.slug}
         className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bone"
       >
-        <div className={`relative w-full overflow-hidden bg-paper ${aspectClass}`}>
+        <div
+          data-motion="reveal"
+          className={`relative w-full overflow-hidden bg-paper ${aspectClass}`}
+        >
           <Image
-            ref={imageRef}
             src={frontmatter.heroImage}
             alt={`${frontmatter.title} architectural space in ${frontmatter.locality}, Bhopal`}
             fill
@@ -104,11 +75,16 @@ function SelectedWorkCard({
             quality={IMAGE_QUALITY}
             placeholder={priority ? undefined : 'blur'}
             blurDataURL={priority ? undefined : BLUR_DATA_URL}
+            data-motion="parallax"
+            data-motion-speed="0.8"
             className="group-pointer-hover:scale-103 object-cover transition-transform duration-300 ease-out will-change-transform"
           />
         </div>
 
-        <div className="mt-5 flex flex-col gap-2 border-b border-greige/20 pb-4 md:flex-row md:items-baseline md:justify-between">
+        <div
+          data-motion="caption"
+          className="mt-5 flex flex-col gap-2 border-b border-greige/20 pb-4 md:flex-row md:items-baseline md:justify-between"
+        >
           <div>
             <h3 className="font-serif text-fluid-h3 font-medium text-charcoal transition-colors duration-200 group-hover:text-accent">
               {frontmatter.title}
@@ -135,6 +111,9 @@ function SelectedWorkCard({
  * SelectedWork: Alternating full-width and two-up layout of 3 to 5 featured projects.
  */
 export function SelectedWork({ projects }: SelectedWorkProps) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  useSelectedWorkGallery(sectionRef);
+
   if (!projects || projects.length === 0) {
     return null;
   }
@@ -144,11 +123,12 @@ export function SelectedWork({ projects }: SelectedWorkProps) {
   const fourthProject = projects[3];
 
   return (
-    <Section
-      tone="light"
-      className="border-t border-greige/20 py-20 md:py-36"
-      aria-label="Selected Work"
-    >
+    <div ref={sectionRef} data-motion-module="selected-work">
+      <Section
+        tone="light"
+        className="border-t border-greige/20 py-20 md:py-36"
+        aria-label="Selected Work"
+      >
       {/* Section Header */}
       <div className="mb-16 flex flex-col justify-between gap-4 md:mb-24 md:flex-row md:items-end">
         <div>
@@ -202,5 +182,6 @@ export function SelectedWork({ projects }: SelectedWorkProps) {
         </Reveal>
       </div>
     </Section>
-  );
+  </div>
+);
 }

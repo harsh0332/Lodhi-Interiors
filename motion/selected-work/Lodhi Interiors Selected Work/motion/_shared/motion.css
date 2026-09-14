@@ -1,0 +1,43 @@
+/* Lodhi Interiors — motion primitives (shared layer, v1.0.0)
+   Only: duration/ease custom properties, Lenis plumbing, pre-animation gates,
+   the shared hover transition. No component styles. */
+
+:root {
+  --ease-entrance: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-exit: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+
+  --dur-fast: 250ms;
+  --dur-base: 500ms;
+  --dur-slow: 700ms;
+  --dur-cinematic: 900ms;
+}
+
+/* ---- Lenis plumbing (engine adds the classes) ---------------------- */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ---- Pre-animation gates ------------------------------------------
+   Gated on data-motion-engine so a no-JS visitor sees the final state,
+   and on no-preference so reduced motion never hides anything. */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-motion-engine="on"] [data-motion="reveal"],
+  html[data-motion-engine="on"] [data-motion="fade-up"],
+  html[data-motion-engine="on"] [data-motion="line"],
+  html[data-motion-engine="on"] [data-motion="caption"] { opacity: 0; }
+}
+
+/* ---- Shared hover transition --------------------------------------- */
+[data-motion-hover] {
+  transition:
+    transform var(--dur-fast) var(--ease-snap),
+    opacity var(--dur-fast) var(--ease-entrance),
+    filter var(--dur-fast) var(--ease-entrance);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-hover] { transition: none; }
+}

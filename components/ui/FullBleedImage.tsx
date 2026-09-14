@@ -1,8 +1,11 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Caption } from './Typography';
 import { BLUR_DATA_URL, IMAGE_QUALITY } from '@/lib/images';
+import { useCaseFullbleed } from '@/components/motion/useCaseStudyMedia';
 
 export interface FullBleedImageProps {
   src: string;
@@ -15,9 +18,9 @@ export interface FullBleedImageProps {
 }
 
 /**
- * FullBleedImage: Escapes container bounds to span the full browser viewport.
+ * FullBleedImage: Escapes container bounds to span the full browser viewport
+ * with Module 06A alternating clip-path wipe reveal.
  * - Reserves aspect ratio to prevent cumulative layout shift.
- * - Supports priority loading flag.
  * - Strictly 0 radius, no borders, no box shadows.
  */
 export function FullBleedImage({
@@ -29,6 +32,9 @@ export function FullBleedImage({
   className,
   imageClassName,
 }: FullBleedImageProps) {
+  const containerRef = useRef<HTMLElement>(null);
+  useCaseFullbleed(containerRef);
+
   const aspectClass =
     aspectRatio === '16/9'
       ? 'aspect-[16/9]'
@@ -38,12 +44,17 @@ export function FullBleedImage({
 
   return (
     <figure
+      ref={containerRef}
+      data-motion-module="case-fullbleed"
       className={cn(
         'relative left-1/2 right-1/2 my-12 -ml-[50vw] -mr-[50vw] w-screen max-w-none overflow-hidden md:my-24',
         className,
       )}
     >
-      <div className={cn('relative w-full overflow-hidden bg-paper', aspectClass)}>
+      <div
+        data-motion="reveal"
+        className={cn('relative w-full overflow-hidden bg-paper', aspectClass)}
+      >
         <Image
           src={src}
           alt={alt}
@@ -53,11 +64,14 @@ export function FullBleedImage({
           quality={IMAGE_QUALITY}
           placeholder={priority ? undefined : 'blur'}
           blurDataURL={priority ? undefined : BLUR_DATA_URL}
-          className={cn('object-cover', imageClassName)}
+          className={cn('object-cover will-change-transform', imageClassName)}
         />
       </div>
       {caption && (
-        <figcaption className="mx-auto mt-4 max-w-container px-5 text-left md:px-12">
+        <figcaption
+          data-motion="caption"
+          className="mx-auto mt-4 max-w-container px-5 text-left md:px-12"
+        >
           <Caption>{caption}</Caption>
         </figcaption>
       )}

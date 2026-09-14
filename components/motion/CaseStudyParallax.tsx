@@ -6,6 +6,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { cn } from '@/lib/utils';
 import { Caption } from '@/components/ui/Typography';
+import { useRouteTransitionPlay } from './ProjectTransition';
 
 export interface CaseStudyParallaxProps {
   src: string;
@@ -14,14 +15,12 @@ export interface CaseStudyParallaxProps {
   aspectRatio?: '21/9' | '16/9' | '16/10';
   caption?: string;
   className?: string;
+  transitionKey?: string;
 }
 
 /**
- * CaseStudyParallax: Editorial full-bleed architectural photograph with subtle parallax.
- * - Desktop: 8-10% vertical parallax scrub via ScrollTrigger inside gsap.matchMedia.
- * - Reduced motion & mobile (<768px): fully static presentation.
- * - Initial entry: 1.04 to 1 scale reveal with opacity fade (700ms).
- * - Calls ScrollTrigger.refresh() on document ready/font load to prevent Lenis desync.
+ * CaseStudyParallax: Editorial full-bleed architectural photograph with subtle parallax
+ * and Module 03 route transition target support.
  */
 export function CaseStudyParallax({
   src,
@@ -30,9 +29,12 @@ export function CaseStudyParallax({
   aspectRatio = '21/9',
   caption,
   className,
+  transitionKey,
 }: CaseStudyParallaxProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+
+  useRouteTransitionPlay(containerRef, transitionKey);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -112,6 +114,9 @@ export function CaseStudyParallax({
   return (
     <figure
       ref={containerRef}
+      data-motion-module="route-transition"
+      data-motion="transition-target"
+      data-transition-key={transitionKey || 'any'}
       className={cn(
         'relative left-1/2 right-1/2 my-12 -ml-[50vw] -mr-[50vw] w-screen max-w-none overflow-hidden md:my-20',
         className,

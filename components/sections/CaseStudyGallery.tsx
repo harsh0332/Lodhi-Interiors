@@ -1,10 +1,12 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
 import Image from 'next/image';
 import type { GalleryItem } from '@/lib/content';
 import { cn } from '@/lib/utils';
 import { Caption } from '@/components/ui/Typography';
-import { Reveal } from '@/components/motion/Reveal';
 import { BLUR_DATA_URL } from '@/lib/images';
+import { useCaseGallery } from '@/components/motion/useCaseStudyMedia';
 
 export interface CaseStudyGalleryProps {
   images: GalleryItem[];
@@ -12,18 +14,21 @@ export interface CaseStudyGalleryProps {
 }
 
 /**
- * CaseStudyGallery: Architectural photography gallery.
+ * CaseStudyGallery: Architectural photography gallery powered by useCaseGallery (Module 06B).
  * - Desktop: Irregular rhythm mixing full-width, two-up pairs, and offset portraits.
  * - Mobile (<768px): Swipeable horizontal carousel with native CSS scroll-snap.
  * - Reserved aspect ratios for 0 CLS, responsive sizes, lazy loaded, quality 75.
  */
 export function CaseStudyGallery({ images, className }: CaseStudyGalleryProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  useCaseGallery(rootRef);
+
   if (!images || images.length === 0) {
     return null;
   }
 
   return (
-    <div className={cn('w-full', className)}>
+    <div ref={rootRef} data-motion-module="case-gallery" className={cn('w-full', className)}>
       {/* 1. Mobile Swipeable Horizontal Scroller (<768px) with native scroll-snap */}
       <div className="md:hidden">
         <div className="mb-3 flex items-center justify-between px-1">
@@ -36,6 +41,7 @@ export function CaseStudyGallery({ images, className }: CaseStudyGalleryProps) {
         </div>
 
         <div
+          data-motion-group
           className="scrollbar-none -mx-5 flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4"
           style={{ WebkitOverflowScrolling: 'touch' }}
           role="region"
@@ -45,7 +51,11 @@ export function CaseStudyGallery({ images, className }: CaseStudyGalleryProps) {
           {images.map((item, idx) => {
             const isPortrait = item.orientation === 'portrait';
             return (
-              <div key={idx} className="flex w-[82vw] max-w-sm shrink-0 snap-start flex-col">
+              <div
+                key={idx}
+                data-motion-item
+                className="flex w-[82vw] max-w-sm shrink-0 snap-start flex-col"
+              >
                 <div
                   className={cn(
                     'relative w-full overflow-hidden bg-paper',
@@ -75,81 +85,22 @@ export function CaseStudyGallery({ images, className }: CaseStudyGalleryProps) {
       </div>
 
       {/* 2. Desktop Editorial Layout (>=768px) */}
-      <div className="hidden space-y-16 md:block lg:space-y-24">
-        {/* We arrange photos in an architectural rhythm: full-width, two-up, offset */}
+      <div data-motion-group className="hidden space-y-16 md:block lg:space-y-24">
         {images.map((item, idx) => {
-          // Rhythm calculation
           const patternIndex = idx % 5;
           const isPortrait = item.orientation === 'portrait';
 
-          // If current or next forms a two-up pair (patternIndex 1 and 2)
           if (patternIndex === 1 && idx + 1 < images.length) {
             const nextItem = images[idx + 1]!;
             return (
               <div key={idx} className="grid grid-cols-2 gap-8 lg:gap-12">
-                <Reveal delay={0.05}>
-                  <figure className="flex flex-col">
-                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper">
-                      <Image
-                        src={item.src}
-                        alt={item.alt}
-                        fill
-                        sizes="(max-width: 1280px) 50vw, 600px"
-                        quality={75}
-                        placeholder="blur"
-                        blurDataURL={BLUR_DATA_URL}
-                        className="object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
-                      />
-                    </div>
-                    {item.alt && (
-                      <figcaption className="mt-3">
-                        <Caption className="text-charcoal/70">{item.alt}</Caption>
-                      </figcaption>
-                    )}
-                  </figure>
-                </Reveal>
-
-                <Reveal delay={0.1}>
-                  <figure className="flex flex-col">
-                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper">
-                      <Image
-                        src={nextItem.src}
-                        alt={nextItem.alt}
-                        fill
-                        sizes="(max-width: 1280px) 50vw, 600px"
-                        quality={75}
-                        placeholder="blur"
-                        blurDataURL={BLUR_DATA_URL}
-                        className="object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
-                      />
-                    </div>
-                    {nextItem.alt && (
-                      <figcaption className="mt-3">
-                        <Caption className="text-charcoal/70">{nextItem.alt}</Caption>
-                      </figcaption>
-                    )}
-                  </figure>
-                </Reveal>
-              </div>
-            );
-          }
-
-          // Skip rendering idx + 1 because it was rendered in the pair above
-          if (patternIndex === 2 && idx > 0 && (idx - 1) % 5 === 1) {
-            return null;
-          }
-
-          // Full width hero spread
-          if (patternIndex === 0) {
-            return (
-              <Reveal key={idx} delay={0.05}>
-                <figure className="w-full">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-paper lg:aspect-[21/9]">
+                <figure data-motion-item className="flex flex-col">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper">
                     <Image
                       src={item.src}
                       alt={item.alt}
                       fill
-                      sizes="(max-width: 1280px) 100vw, 1200px"
+                      sizes="(max-width: 1280px) 50vw, 600px"
                       quality={75}
                       placeholder="blur"
                       blurDataURL={BLUR_DATA_URL}
@@ -162,38 +113,43 @@ export function CaseStudyGallery({ images, className }: CaseStudyGalleryProps) {
                     </figcaption>
                   )}
                 </figure>
-              </Reveal>
+
+                <figure data-motion-item className="flex flex-col">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper">
+                    <Image
+                      src={nextItem.src}
+                      alt={nextItem.alt}
+                      fill
+                      sizes="(max-width: 1280px) 50vw, 600px"
+                      quality={75}
+                      placeholder="blur"
+                      blurDataURL={BLUR_DATA_URL}
+                      className="object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
+                    />
+                  </div>
+                  {nextItem.alt && (
+                    <figcaption className="mt-3">
+                      <Caption className="text-charcoal/70">{nextItem.alt}</Caption>
+                    </figcaption>
+                  )}
+                </figure>
+              </div>
             );
           }
 
-          // Offset portrait or single plate
-          return (
-            <Reveal key={idx} delay={0.05}>
-              <figure
-                className={cn(
-                  'flex flex-col',
-                  isPortrait
-                    ? 'mx-auto max-w-xl'
-                    : patternIndex === 3
-                      ? 'mr-auto max-w-4xl'
-                      : 'ml-auto max-w-4xl',
-                )}
-              >
-                <div
-                  className={cn(
-                    'relative w-full overflow-hidden bg-paper',
-                    isPortrait ? 'aspect-[3/4]' : 'aspect-[16/10]',
-                  )}
-                >
+          if (patternIndex === 2 && idx > 0 && (idx - 1) % 5 === 1) {
+            return null;
+          }
+
+          if (patternIndex === 0) {
+            return (
+              <figure key={idx} data-motion-item className="w-full">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-paper lg:aspect-[21/9]">
                   <Image
                     src={item.src}
                     alt={item.alt}
                     fill
-                    sizes={
-                      isPortrait
-                        ? '(max-width: 1280px) 50vw, 550px'
-                        : '(max-width: 1280px) 80vw, 950px'
-                    }
+                    sizes="(max-width: 1280px) 100vw, 1200px"
                     quality={75}
                     placeholder="blur"
                     blurDataURL={BLUR_DATA_URL}
@@ -206,7 +162,49 @@ export function CaseStudyGallery({ images, className }: CaseStudyGalleryProps) {
                   </figcaption>
                 )}
               </figure>
-            </Reveal>
+            );
+          }
+
+          return (
+            <figure
+              key={idx}
+              data-motion-item
+              className={cn(
+                'flex flex-col',
+                isPortrait
+                  ? 'mx-auto max-w-xl'
+                  : patternIndex === 3
+                    ? 'mr-auto max-w-4xl'
+                    : 'ml-auto max-w-4xl',
+              )}
+            >
+              <div
+                className={cn(
+                  'relative w-full overflow-hidden bg-paper',
+                  isPortrait ? 'aspect-[3/4]' : 'aspect-[16/10]',
+                )}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes={
+                    isPortrait
+                      ? '(max-width: 1280px) 50vw, 550px'
+                      : '(max-width: 1280px) 80vw, 950px'
+                  }
+                  quality={75}
+                  placeholder="blur"
+                  blurDataURL={BLUR_DATA_URL}
+                  className="object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
+                />
+              </div>
+              {item.alt && (
+                <figcaption className="mt-3">
+                  <Caption className="text-charcoal/70">{item.alt}</Caption>
+                </figcaption>
+              )}
+            </figure>
           );
         })}
       </div>

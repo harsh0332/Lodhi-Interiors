@@ -1,9 +1,11 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import { env } from '@/lib/env';
 import { Button } from '@/components/ui/Button';
 import { BrandLogo } from '@/components/ui/BrandLogo';
-import { Reveal } from '@/components/motion/Reveal';
+import { useFooterReveal } from '@/components/motion/useFooterMotion';
 
 const FOOTER_NAV = [
   { label: 'Work', href: '/work' },
@@ -34,42 +36,49 @@ const FOOTER_LOCALITIES = [
 
 /**
  * Footer: Large editorial closing section on charcoal background.
- * - Staggered rise of the closing statement, studio NAP block, and column navigation.
- * - Completely static under prefers-reduced-motion.
+ * Port of Module 07B: Staggered rise of structural footer blocks.
+ * Completely static under prefers-reduced-motion.
  */
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const footerRef = useRef<HTMLElement>(null);
+  useFooterReveal(footerRef);
 
   return (
-    <footer className="w-full border-t border-greige/20 bg-charcoal pb-12 pt-24 text-bone md:pt-36">
+    <footer
+      ref={footerRef}
+      data-motion-module="footer"
+      data-motion-start="top 90%"
+      className="w-full border-t border-greige/20 bg-charcoal pb-12 pt-24 text-bone md:pt-36"
+    >
       <div className="mx-auto max-w-container px-5 md:px-12">
         {/* Top Editorial Callout + Studio NAP */}
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Left Column: Editorial CTA */}
-          <div className="flex flex-col items-start lg:col-span-7">
-            <Reveal>
-              <p className="max-w-[20ch] font-serif text-fluid-h2 font-normal leading-[1.15] text-bone">
-                Planning a space? Let us design and deliver it.
-              </p>
-              <div className="mt-8">
-                <Button
-                  variant="primary"
-                  tone="dark"
-                  href="/contact"
-                  className="text-[1rem] tracking-wide"
-                >
-                  Start your project
-                </Button>
-              </div>
-            </Reveal>
+          <div data-motion-item className="flex flex-col items-start lg:col-span-7">
+            <p className="max-w-[20ch] font-serif text-fluid-h2 font-normal leading-[1.15] text-bone">
+              Planning a space? Let us design and deliver it.
+            </p>
+            <div className="mt-8">
+              <Button
+                variant="primary"
+                tone="dark"
+                href="/contact"
+                className="text-[1rem] tracking-wide"
+              >
+                Start your project
+              </Button>
+            </div>
           </div>
 
           {/* Right Column: Verified Studio NAP & Direct Action Buttons */}
-          <div className="flex flex-col space-y-4 font-sans text-[0.875rem] text-greige lg:col-span-5">
-            <Reveal delay={0.1}>
-              <div className="mb-2">
-                <BrandLogo size="md" tone="light" />
-              </div>
+          <div
+            data-motion-item
+            className="flex flex-col space-y-4 font-sans text-[0.875rem] text-greige lg:col-span-5"
+          >
+            <div className="mb-2">
+              <BrandLogo size="md" tone="light" />
+            </div>
 
               <address className="not-italic leading-relaxed text-greige/90">
                 Shop No 10, Sagar High Street,
@@ -142,100 +151,97 @@ export function Footer() {
                   </a>
                 </div>
               </div>
-            </Reveal>
           </div>
         </div>
 
         {/* Hairline Divider Rule */}
-        <div className="mt-16 border-t border-greige/30 pt-12 md:mt-24">
-          <Reveal delay={0.15}>
-            <div className="grid grid-cols-2 gap-10 md:grid-cols-12">
-              {/* Navigation Column */}
-              <div className="col-span-1 md:col-span-3">
-                <span className="mb-4 block font-sans text-ui-label uppercase tracking-[0.08em] text-greige">
-                  Studio
-                </span>
-                <ul className="space-y-2.5">
-                  {FOOTER_NAV.map((link) => (
-                    <li key={link.label}>
-                      <Link
-                        href={link.href}
-                        className="font-sans text-[0.875rem] text-bone/80 transition-colors hover:text-bone focus-visible:ring-2 focus-visible:ring-accent"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Services Column */}
-              <div className="col-span-1 md:col-span-4">
-                <span className="mb-4 block font-sans text-ui-label uppercase tracking-[0.08em] text-greige">
-                  Capabilities
-                </span>
-                <ul className="space-y-2.5">
-                  {FOOTER_SERVICES.map((service) => (
-                    <li key={service.label}>
-                      <Link
-                        href={service.href}
-                        className="font-sans text-[0.875rem] text-bone/80 transition-colors hover:text-bone focus-visible:ring-2 focus-visible:ring-accent"
-                      >
-                        {service.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Bhopal Localities Column */}
-              <div className="col-span-1 md:col-span-2">
-                <span className="mb-4 block font-sans text-ui-label uppercase tracking-[0.08em] text-greige">
-                  Bhopal
-                </span>
-                <ul className="space-y-2.5">
-                  {FOOTER_LOCALITIES.map((loc) => (
-                    <li key={loc.label}>
-                      <Link
-                        href={loc.href}
-                        className="font-sans text-[0.875rem] text-bone/80 transition-colors hover:text-bone focus-visible:ring-2 focus-visible:ring-accent"
-                      >
-                        {loc.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Practice Summary */}
-              <div className="col-span-2 md:col-span-3">
-                <span className="mb-4 block font-sans text-ui-label uppercase tracking-[0.08em] text-greige">
-                  Practice
-                </span>
-                <p className="font-sans text-[0.8125rem] leading-relaxed text-greige">
-                  Founded by Soumya Lodhi. Over 8 years of dedicated architectural design and
-                  in-house turnkey execution across Bhopal and Madhya Pradesh.
-                </p>
-              </div>
+        <div data-motion-item className="mt-16 border-t border-greige/30 pt-12 md:mt-24">
+          <div className="grid grid-cols-2 gap-10 md:grid-cols-12">
+            {/* Navigation Column */}
+            <div className="col-span-1 md:col-span-3">
+              <span className="mb-4 block font-sans text-ui-label uppercase tracking-[0.08em] text-greige">
+                Studio
+              </span>
+              <ul className="space-y-2.5">
+                {FOOTER_NAV.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      href={link.href}
+                      className="font-sans text-[0.875rem] text-bone/80 transition-colors hover:text-bone focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Dedicated Legal Bar: Unobstructed by floating WhatsApp button */}
-            <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-greige/20 pt-8 pb-20 font-sans text-ui-caption text-greige/80 sm:flex-row sm:items-center lg:pb-4">
-              <div>© {currentYear} LODHI INTERIORS. All rights reserved.</div>
-              {/* lg:pr-56 leaves ample safe margin so WhatsApp Soumya button never collides */}
-              <div className="text-[0.78125rem] lg:pr-56">
-                Designed &amp; Crafted by{' '}
-                <a
-                  href="https://pixellayerss.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-accent underline-offset-4 transition-colors duration-200 hover:text-bone hover:underline focus-visible:ring-1 focus-visible:ring-accent"
-                >
-                  Pixel Layer
-                </a>
-              </div>
+            {/* Services Column */}
+            <div className="col-span-1 md:col-span-4">
+              <span className="mb-4 block font-sans text-ui-label uppercase tracking-[0.08em] text-greige">
+                Capabilities
+              </span>
+              <ul className="space-y-2.5">
+                {FOOTER_SERVICES.map((service) => (
+                  <li key={service.label}>
+                    <Link
+                      href={service.href}
+                      className="font-sans text-[0.875rem] text-bone/80 transition-colors hover:text-bone focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      {service.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </Reveal>
+
+            {/* Bhopal Localities Column */}
+            <div className="col-span-1 md:col-span-2">
+              <span className="mb-4 block font-sans text-ui-label uppercase tracking-[0.08em] text-greige">
+                Bhopal
+              </span>
+              <ul className="space-y-2.5">
+                {FOOTER_LOCALITIES.map((loc) => (
+                  <li key={loc.label}>
+                    <Link
+                      href={loc.href}
+                      className="font-sans text-[0.875rem] text-bone/80 transition-colors hover:text-bone focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      {loc.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Practice Summary */}
+            <div className="col-span-2 md:col-span-3">
+              <span className="mb-4 block font-sans text-ui-label uppercase tracking-[0.08em] text-greige">
+                Practice
+              </span>
+              <p className="font-sans text-[0.8125rem] leading-relaxed text-greige">
+                Founded by Soumya Lodhi. Over 8 years of dedicated architectural design and
+                in-house turnkey execution across Bhopal and Madhya Pradesh.
+              </p>
+            </div>
+          </div>
+
+          {/* Dedicated Legal Bar: Unobstructed by floating WhatsApp button */}
+          <div data-motion-item className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-greige/20 pt-8 pb-20 font-sans text-ui-caption text-greige/80 sm:flex-row sm:items-center lg:pb-4">
+            <div>© {currentYear} LODHI INTERIORS. All rights reserved.</div>
+            {/* lg:pr-56 leaves ample safe margin so WhatsApp Soumya button never collides */}
+            <div className="text-[0.78125rem] lg:pr-56">
+              Designed &amp; Crafted by{' '}
+              <a
+                href="https://pixellayerss.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-accent underline-offset-4 transition-colors duration-200 hover:text-bone hover:underline focus-visible:ring-1 focus-visible:ring-accent"
+              >
+                Pixel Layer
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

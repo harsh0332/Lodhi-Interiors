@@ -10,6 +10,23 @@
     --color-charcoal: #1a1a18;
     --color-charcoal-2: #24241f;
     --color-accent: #8a6a3b;
+
+    /* ---- Motion Eases ---- */
+    --ease-entrance: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --ease-exit: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+    --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+
+    /* ---- Motion Durations ---- */
+    --dur-fast: 250ms;
+    --dur-base: 500ms;
+    --dur-slow: 700ms;
+    --dur-cinematic: 900ms;
+
+    /* ---- Motion Staggers ---- */
+    --stagger-tight: 40ms;
+    --stagger-base: 80ms;
+    --stagger-loose: 120ms;
   }
 
   html {
@@ -92,11 +109,186 @@ footer .text-accent,
   }
 }
 
+/* Interface feedback & motion layer */
+[data-motion-hover] {
+  transition:
+    color var(--dur-fast) var(--ease-snap),
+    opacity var(--dur-fast) var(--ease-snap),
+    transform var(--dur-fast) var(--ease-snap),
+    border-color var(--dur-fast) var(--ease-snap);
+}
+
+/* Page Transition Layer & Clones (Module 03) */
+.lodhi-tx-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+}
+.lodhi-tx-clone {
+  position: absolute;
+  object-fit: cover;
+  will-change: transform, clip-path, opacity;
+}
+
+/* Case Study Before/After Compare (Module 06C) */
+[data-motion-module="case-compare"] {
+  --pos: 50%;
+  --pos-px: 50%;
+}
+
+.lodhi-compare-stage {
+  --pos: 50%;
+  --pos-px: 50%;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.lodhi-compare-layer {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+.lodhi-compare-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lodhi-compare-after {
+  clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0);
+}
+
+.lodhi-compare-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  width: 2px;
+  height: 100%;
+  background: #f6f5f2;
+  transform: translate3d(var(--pos-px, 50%), 0, 0);
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.lodhi-compare-handle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(246, 245, 242, 0.85);
+  border-radius: 50%;
+  background: rgba(33, 31, 28, 0.75);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f6f5f2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='15 18 9 12 15 6'%3E%3C/polyline%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f6f5f2' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+  background-position: left 6px center, right 6px center;
+  background-repeat: no-repeat;
+}
+
+.lodhi-compare-handle:focus-visible {
+  outline: 2px solid #8B2500;
+  outline-offset: 3px;
+}
+
+@media (max-width: 899px), (hover: none), (pointer: coarse) {
+  .lodhi-compare-stage {
+    aspect-ratio: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    overflow: visible;
+    touch-action: auto;
+  }
+  .lodhi-compare-layer {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  .lodhi-compare-after {
+    clip-path: none !important;
+  }
+  .lodhi-compare-handle {
+    display: none !important;
+  }
+}
+
+/* Module 07: Closing CTA mask & actions pre-animation state */
+[data-motion="mask"] {
+  overflow: hidden;
+}
+[data-motion="mask"] > * {
+  will-change: transform;
+}
+
+[data-motion-engine="on"] [data-motion-module="closing-cta"] [data-motion-item] {
+  opacity: 0;
+}
+[data-motion-engine="on"] [data-motion-module="footer"] [data-motion-item] {
+  opacity: 0;
+}
+
+/* Module 07: Desktop Cursor Ring */
+.lodhi-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(184, 151, 107, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  will-change: transform;
+}
+@media (hover: none), (pointer: coarse), (max-width: 899px), (prefers-reduced-motion: reduce) {
+  .lodhi-cursor { display: none !important; }
+}
+
+/* Module 07: Sticky Mobile Bar */
+[data-motion-module="mobile-action-bar"] {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  will-change: transform;
+}
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+  [data-motion-module="mobile-action-bar"] {
+    display: none !important;
+  }
+}
+@media (max-width: 899px), (hover: none), (pointer: coarse) {
+  [data-motion-engine="on"] [data-motion-module="mobile-action-bar"] {
+    transform: translateY(110%);
+    visibility: hidden;
+  }
+}
+
+
 /* Global reduced motion override: guarantees zero layout shift or lingering opacities */
 @media (prefers-reduced-motion: reduce) {
+  html[data-motion-engine="on"] [data-motion] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    filter: none !important;
+    will-change: auto !important;
+  }
   *,
-  ::before,
-  ::after {
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

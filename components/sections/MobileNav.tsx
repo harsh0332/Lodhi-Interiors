@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { env } from '@/lib/env';
 import { BrandLogo } from '@/components/ui/BrandLogo';
+import { useNavOverlay } from '@/components/motion/useHeaderMotion';
 
 export interface MobileNavProps {
   isOpen: boolean;
@@ -22,7 +23,8 @@ const NAV_ITEMS = [
 ];
 
 /**
- * MobileNav: Full-screen editorial overlay on charcoal background.
+ * MobileNav: Full-screen editorial overlay on charcoal background powered by useNavOverlay (Module 05B).
+ * - Cinematic clip-path curtain wipe with item masks.
  * - Staggered nav items at fluid h2 scale with generous vertical spacing.
  * - Focus trap, body scroll lock, Escape to close, focus restored to trigger.
  * - Auto-close on route change via usePathname.
@@ -44,53 +46,7 @@ export function MobileNav({ isOpen, onClose, triggerRef }: MobileNavProps) {
     }
   }, [pathname, isOpen, onClose]);
 
-  // Lock body scroll and handle focus management
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    // Focus the close button upon opening
-    const timer = setTimeout(() => {
-      closeButtonRef.current?.focus();
-    }, 50);
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        onClose();
-        triggerRef.current?.focus();
-        return;
-      }
-
-      if (e.key === 'Tab' && overlayRef.current) {
-        const focusableElements = overlayRef.current.querySelectorAll<HTMLElement>(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-        );
-        const first = focusableElements[0];
-        const last = focusableElements[focusableElements.length - 1];
-
-        if (!first || !last) return;
-
-        if (e.shiftKey && document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      window.removeEventListener('keydown', handleKeyDown);
-      clearTimeout(timer);
-    };
-  }, [isOpen, onClose, triggerRef]);
+  useNavOverlay({ overlayRef, triggerRef, isOpen, onClose });
 
   if (!isOpen) return null;
 
@@ -98,10 +54,11 @@ export function MobileNav({ isOpen, onClose, triggerRef }: MobileNavProps) {
     <div
       ref={overlayRef}
       id="mobile-nav"
+      data-motion-module="nav-overlay"
       role="dialog"
       aria-modal="true"
       aria-label="Navigation menu"
-      className="fixed inset-0 z-50 flex flex-col justify-between overflow-y-auto bg-charcoal p-6 pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] text-bone transition-opacity duration-300 sm:p-10"
+      className="fixed inset-0 z-50 flex flex-col justify-between overflow-y-auto bg-charcoal p-6 pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] text-bone sm:p-10"
     >
       {/* Top bar: Brand title + Close button */}
       <div className="flex items-center justify-between border-b border-greige/20 pb-5">
@@ -138,11 +95,12 @@ export function MobileNav({ isOpen, onClose, triggerRef }: MobileNavProps) {
       <nav aria-label="Mobile main navigation" className="my-auto py-8">
         <ul className="flex flex-col space-y-6">
           {NAV_ITEMS.map((item) => (
-            <li key={item.label}>
+            <li key={item.label} className="overflow-hidden py-1">
               <Link
                 href={item.href}
                 onClick={onClose}
-                className="flex min-h-[44px] items-center py-1 font-serif text-fluid-h2 font-normal text-bone transition-colors duration-200 hover:text-accent focus-visible:ring-2 focus-visible:ring-accent"
+                data-motion="menu-item"
+                className="flex min-h-[44px] items-center py-1 font-serif text-fluid-h2 font-normal text-bone transition-colors duration-200 hover:text-accent focus-visible:ring-2 focus-visible:ring-accent will-change-transform"
               >
                 {item.label}
               </Link>
@@ -152,7 +110,10 @@ export function MobileNav({ isOpen, onClose, triggerRef }: MobileNavProps) {
       </nav>
 
       {/* Bottom: Contact & Social links within thumb reach */}
-      <div className="flex flex-col gap-4 border-t border-greige/20 pt-6 font-sans text-ui-caption text-greige sm:flex-row sm:items-center sm:justify-between">
+      <div
+        data-motion="menu-util"
+        className="flex flex-col gap-4 border-t border-greige/20 pt-6 font-sans text-ui-caption text-greige sm:flex-row sm:items-center sm:justify-between will-change-transform"
+      >
         <div className="flex flex-wrap items-center gap-4">
           <a
             href={`tel:${env.NEXT_PUBLIC_PHONE_NUMBER}`}

@@ -1,0 +1,90 @@
+/* Lodhi Interiors — design tokens
+   Scope: :root only. No component styles, no resets beyond metric-matched fallbacks.
+   Type pairing: Bodoni Moda (display/headings) + Archivo (body/UI)
+*/
+
+@font-face {
+  font-family: "Bodoni Fallback";
+  src: local("Didot"), local("Times New Roman"), local("Times");
+  size-adjust: 102%;
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Archivo Fallback";
+  src: local("Helvetica Neue"), local("Helvetica"), local("Arial");
+  size-adjust: 100%;
+  ascent-override: 94%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+:root {
+  --c-bone: #F6F3EE;
+  --c-paper: #EDE9E2;
+  --c-greige: #A8A29A;
+  --c-charcoal: #1A1A18;
+  --c-charcoal-2: #24241F;
+  --c-accent: #8A6A3B;
+
+  --surface: var(--c-bone);
+  --surface-alt: var(--c-paper);
+  --ink: var(--c-charcoal);
+  --ink-soft: var(--c-charcoal-2);
+  --ink-muted: var(--c-greige);
+  --line: color-mix(in oklab, var(--c-charcoal) 14%, transparent);
+  --line-strong: color-mix(in oklab, var(--c-charcoal) 28%, transparent);
+  --link: var(--c-accent);
+  --focus: var(--c-accent);
+
+  --font-display: "Bodoni Moda", "Bodoni Fallback", Didot, "Times New Roman", serif;
+  --font-body: "Archivo", "Archivo Fallback", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --fs-display: clamp(2.75rem, 8vw, 6rem);
+  --lh-display: 1.02;
+  --tr-display: -0.02em;
+
+  --fs-h1: clamp(2.25rem, 5.5vw, 4rem);
+  --lh-h1: 1.06;
+  --tr-h1: -0.018em;
+
+  --fs-h2: clamp(1.6rem, 3.4vw, 2.5rem);
+  --lh-h2: 1.14;
+  --tr-h2: -0.012em;
+
+  --fs-h3: clamp(1.15rem, 2vw, 1.5rem);
+  --lh-h3: 1.25;
+  --tr-h3: -0.006em;
+
+  --fs-body: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --lh-body: 1.65;
+  --tr-body: 0em;
+
+  --fs-caption: 0.8125rem;
+  --lh-caption: 1.45;
+  --tr-caption: 0.01em;
+
+  --measure: 68ch;
+
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+  --s-11: 160px;
+
+  --section-y: clamp(96px, 8vw, 160px);
+  --gutter: clamp(20px, 4vw, 64px);
+  --maxw: 1440px;
+
+  --radius: 2px;
+  --radius-media: 0;
+  --hairline: 1px;
+  --border: var(--hairline) solid var(--line);
+}

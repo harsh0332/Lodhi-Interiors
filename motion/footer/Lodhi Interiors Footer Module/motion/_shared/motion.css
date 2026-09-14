@@ -1,0 +1,39 @@
+/* Lodhi Interiors — motion primitives (shared)
+   Durations, eases, Lenis hooks, hover transition, focus ring.
+   No component styles. Pre-animation states are gated on
+   [data-motion-engine="on"] so no-JS users see final state. */
+
+:root {
+  --dur-fast: 250ms;
+  --dur-base: 500ms;
+  --dur-slow: 700ms;
+  --dur-cinematic: 900ms;
+
+  --ease-entrance: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-exit: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* Shared hover transition — opt in with data-motion-hover */
+[data-motion-hover] {
+  transition: opacity var(--dur-fast) var(--ease-snap),
+              transform var(--dur-fast) var(--ease-snap),
+              border-color var(--dur-fast) var(--ease-snap),
+              color var(--dur-fast) var(--ease-snap);
+}
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: var(--hairline) solid var(--focus);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-hover] { transition-duration: 1ms; }
+}
