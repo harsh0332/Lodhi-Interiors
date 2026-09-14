@@ -1,10 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import type { Project } from '@/lib/content';
 import { Section } from '@/components/ui/Section';
 import { Heading, Label } from '@/components/ui/Typography';

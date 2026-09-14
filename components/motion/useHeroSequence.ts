@@ -52,7 +52,6 @@ export function useHeroSequence(rootRef: RefObject<HTMLElement | null>) {
     const titleSource = title ? title.textContent || '' : '';
     let boxWidth: number | null = null;
     let remountTimer: ReturnType<typeof setTimeout> | null = null;
-    let settleTimer: ReturnType<typeof setTimeout> | null = null;
     let observer: ResizeObserver | null = null;
     let introTl: gsap.core.Timeline | null = null;
     let loop: gsap.core.Tween | null = null;
@@ -308,7 +307,6 @@ export function useHeroSequence(rootRef: RefObject<HTMLElement | null>) {
     return () => {
       if (observer) observer.disconnect();
       if (remountTimer) clearTimeout(remountTimer);
-      if (settleTimer) clearTimeout(settleTimer);
       if (loop) loop.kill();
       if (title) {
         title.removeAttribute('data-motion-split');

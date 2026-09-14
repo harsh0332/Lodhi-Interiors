@@ -1,6 +1,6 @@
 'use client';
 
-import { RefObject, useEffect } from 'react';
+import { RefObject } from 'react';
 import { gsap } from 'gsap';
 import { useIsomorphicLayoutEffect } from './useIsomorphicLayoutEffect';
 import { MOTION_DURATION, MOTION_EASE, MOTION_MEDIA } from './tokens';
