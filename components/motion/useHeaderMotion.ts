@@ -247,10 +247,11 @@ export function useNavOverlay({
     }
 
     function focusables(): HTMLElement[] {
-      const inside = Array.from(root!.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
+      if (!root) return [];
+      const inside = Array.from(root.querySelectorAll<HTMLElement>(FOCUSABLE)).filter(
         (el) => el.offsetParent !== null || el === document.activeElement,
       );
-      return [trigger!, ...inside];
+      return trigger ? [trigger, ...inside] : inside;
     }
 
     function onKeyDown(e: KeyboardEvent) {
@@ -262,8 +263,9 @@ export function useNavOverlay({
       if (e.key !== 'Tab') return;
       const list = focusables();
       if (!list.length) return;
-      const first = list[0]!;
-      const last = list[list.length - 1]!;
+      const first = list[0];
+      const last = list[list.length - 1];
+      if (!first || !last) return;
       const i = list.indexOf(document.activeElement as HTMLElement);
 
       if (i === -1) {
@@ -324,7 +326,8 @@ export function useNavOverlay({
 
       // Focus first focusable item
       const list = focusables();
-      (list[1] || trigger).focus({ preventScroll: true });
+      const targetFocus = list[1] || trigger;
+      targetFocus?.focus({ preventScroll: true });
     }
 
     return () => {

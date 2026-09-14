@@ -286,7 +286,9 @@ export function useHeroSequence(rootRef: RefObject<HTMLElement | null>) {
       const copyBox = root.querySelector('.hero__copy') || title;
       if (copyBox && typeof window.ResizeObserver !== 'undefined') {
         observer = new ResizeObserver((entries) => {
-          const w = Math.round(entries[0].contentRect.width);
+          const entry = entries[0];
+          if (!entry) return;
+          const w = Math.round(entry.contentRect.width);
           if (boxWidth === null) {
             boxWidth = w;
             return;

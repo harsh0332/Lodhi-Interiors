@@ -250,7 +250,8 @@ export function useCaseGallery(rootRef: RefObject<HTMLElement | null>) {
 
       // Mobile: Touch scroller reveal
       mm.add(MOTION_MEDIA.mobile, () => {
-        const release = whenPaintable(imgs[0] || null, () => {}, 800);
+        const firstImg = imgs[0] ?? null;
+        const release = whenPaintable(firstImg, () => {}, 800);
         const tl = gsap.timeline({
           scrollTrigger: { trigger: group, start: 'top 92%', once: true },
           onComplete: finalState,
