@@ -202,34 +202,34 @@ export default async function StudioPage() {
       </div>
 
       {/* 3. How We Work Differently: Four factual operational blocks */}
-      <Section tone="umber" className="border-t border-white/10 py-24 md:py-36">
-        <div className="mb-16 max-w-3xl">
+      <Section tone="umber" className="border-t border-white/10 py-16 sm:py-24 md:py-36">
+        <div className="mb-10 sm:mb-16 max-w-3xl">
           <Reveal>
-            <span className="mb-3 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-accent-gold">
+            <span className="mb-2.5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-accent-gold">
               <span className="h-1.5 w-1.5 rounded-full bg-accent-gold" />
               Operational Architecture
             </span>
-            <h2 className="mb-4 font-serif text-fluid-h2 text-bone">How We Work Differently</h2>
-            <p className="font-sans text-[1.0625rem] leading-relaxed text-bone/75">
+            <h2 className="mb-3.5 font-serif text-[1.625rem] sm:text-fluid-h2 text-bone">How We Work Differently</h2>
+            <p className="font-sans text-xs sm:text-[1.0625rem] leading-relaxed text-bone/75">
               Our advantage is not a slogan; it is the structural separation between studio-led
               turnkey custody and ordinary contractor brokerage.
             </p>
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-8">
+        <div className="grid grid-cols-1 gap-4 sm:gap-8 md:grid-cols-2 lg:gap-8">
           {DIFFERENTIATORS.map((diff, idx) => (
             <Reveal key={diff.title} delay={idx * 0.05}>
-              <div className="group relative flex h-full flex-col justify-between border border-white/10 bg-[#191714] p-8 sm:p-10 transition-all duration-300 hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-glow-gold">
+              <div className="group relative flex h-full flex-col justify-between border border-white/10 bg-[#191714] p-5 sm:p-8 md:p-10 transition-all duration-300 hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-glow-gold rounded-sm">
                 <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-gold/0 via-accent-gold/40 to-accent-gold/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <div>
-                  <div className="mb-6 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-sm border border-accent-gold/30 bg-accent/15 text-accent-gold transition-colors duration-300 group-hover:border-accent-gold group-hover:bg-accent/25">
+                  <div className="mb-4 sm:mb-6 flex items-center justify-between">
+                    <div className="flex items-center gap-2.5 sm:gap-3">
+                      <div className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-sm border border-accent-gold/30 bg-accent/15 text-accent-gold transition-colors duration-300 group-hover:border-accent-gold group-hover:bg-accent/25">
                         {diff.icon}
                       </div>
-                      <span className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-gold">
+                      <span className="font-mono text-[0.625rem] sm:text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-gold">
                         {diff.tag}
                       </span>
                     </div>
@@ -238,10 +238,10 @@ export default async function StudioPage() {
                     </span>
                   </div>
 
-                  <h3 className="mb-3 font-serif text-[1.3125rem] font-medium text-bone transition-colors duration-200 group-hover:text-accent-gold">
+                  <h3 className="mb-2 sm:mb-3 font-serif text-[1.1875rem] sm:text-[1.3125rem] font-medium text-bone transition-colors duration-200 group-hover:text-accent-gold">
                     {diff.title}
                   </h3>
-                  <p className="font-sans text-[0.9375rem] leading-relaxed text-bone/70">
+                  <p className="font-sans text-xs sm:text-[0.9375rem] leading-relaxed text-bone/70">
                     {diff.description}
                   </p>
                 </div>
@@ -252,20 +252,20 @@ export default async function StudioPage() {
       </Section>
 
       {/* 4. The Team: Real craftsmen, designers & site supervisors */}
-      <Section tone="light" className="border-t border-greige/20 py-20 md:py-32">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="space-y-6 lg:col-span-6">
+      <Section tone="light" className="border-t border-greige/20 py-16 sm:py-20 md:py-32">
+        <div className="grid grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="space-y-4 sm:space-y-6 lg:col-span-6">
             <Reveal>
               <Label className="mb-2 block text-accent">Collective Craft</Label>
-              <h2 className="mb-4 font-serif text-fluid-h2 text-charcoal">
+              <h2 className="mb-3 sm:mb-4 font-serif text-[1.625rem] sm:text-fluid-h2 text-charcoal">
                 The Site &amp; Studio Team
               </h2>
-              <p className="font-sans text-[1.0625rem] leading-[1.75] text-charcoal/85">
+              <p className="font-sans text-xs sm:text-[1.0625rem] leading-[1.75] text-charcoal/85">
                 A disciplined team of interior architects, project managers, and trade specialists.
                 Our core site supervisors, master carpenters, stone masons, and MEP technicians have
                 worked alongside Soumya Lodhi for up to eight years.
               </p>
-              <p className="font-sans text-[0.9375rem] leading-relaxed text-charcoal/75">
+              <p className="font-sans text-xs sm:text-[0.9375rem] leading-relaxed text-charcoal/75">
                 We do not use outsourced labor brokers. When you commission Lodhi Interiors, the
                 same craftsmen who fabricated our documented Arera Colony and Shahpura millwork are
                 the ones setting laser levels on your site.
@@ -275,7 +275,7 @@ export default async function StudioPage() {
 
           <div className="lg:col-span-6">
             <Reveal delay={0.1}>
-              <div className="relative aspect-[16/10] w-full overflow-hidden border border-greige/25 bg-paper">
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm border border-greige/25 bg-paper">
                 <Image
                   src="/images/projects/craft-moulding-installation.jpg"
                   alt="Lodhi Interiors in-house master joinery craftsmen on site in Bhopal"
@@ -285,7 +285,7 @@ export default async function StudioPage() {
                   className="object-cover"
                 />
               </div>
-              <span className="mt-3 block font-sans text-ui-caption text-greige">
+              <span className="mt-2.5 block font-sans text-ui-caption text-greige">
                 On-site joinery calibration and millwork framing in Bhopal.
               </span>
             </Reveal>
@@ -294,12 +294,12 @@ export default async function StudioPage() {
       </Section>
 
       {/* 5. Where We Work: Genuine Bhopal Localities */}
-      <Section tone="travertine" className="border-t border-greige/20 py-20 md:py-32">
-        <div className="mb-16 max-w-3xl">
+      <Section tone="travertine" className="border-t border-greige/20 py-16 sm:py-20 md:py-32">
+        <div className="mb-10 sm:mb-16 max-w-3xl">
           <Reveal>
             <Label className="mb-2 block text-accent">Geography of Practice</Label>
-            <h2 className="mb-4 font-serif text-fluid-h2 text-charcoal">Where We Work</h2>
-            <p className="font-sans text-[1rem] leading-relaxed text-charcoal/80">
+            <h2 className="mb-3 sm:mb-4 font-serif text-[1.625rem] sm:text-fluid-h2 text-charcoal">Where We Work</h2>
+            <p className="font-sans text-xs sm:text-[1rem] leading-relaxed text-charcoal/80">
               Headquartered in Bhopal, we accept commissions across Madhya Pradesh and selective
               architectural projects across central India. We maintain active project presence in
               Bhopal’s key residential and commercial sectors.
@@ -307,19 +307,19 @@ export default async function StudioPage() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {LOCALITIES.map((loc, idx) => (
             <Reveal key={loc.name} delay={idx * 0.03}>
-              <div className="group flex h-full flex-col justify-between border border-greige/25 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-luxury">
-                <div className="mb-2 flex items-baseline justify-between">
-                  <span className="font-serif text-[1.125rem] font-medium text-charcoal transition-colors group-hover:text-accent">
+              <div className="group flex h-full flex-col justify-between rounded-sm border border-greige/25 bg-white p-3.5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-luxury">
+                <div className="mb-1.5 sm:mb-2 flex items-baseline justify-between">
+                  <span className="font-serif text-[0.9375rem] sm:text-[1.125rem] font-medium text-charcoal transition-colors group-hover:text-accent">
                     {loc.name}
                   </span>
-                  <span className="font-mono text-[0.75rem] text-accent/50 transition-colors group-hover:text-accent">
+                  <span className="font-mono text-[0.6875rem] sm:text-[0.75rem] text-accent/50 transition-colors group-hover:text-accent">
                     &rarr;
                   </span>
                 </div>
-                <span className="font-sans text-[0.8125rem] leading-relaxed text-charcoal/65">
+                <span className="font-sans text-[0.75rem] sm:text-[0.8125rem] leading-snug sm:leading-relaxed text-charcoal/65">
                   {loc.note}
                 </span>
               </div>

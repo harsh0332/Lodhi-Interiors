@@ -207,8 +207,43 @@ export function ProcessStages() {
 
   return (
     <div>
-      {/* 1. Interactive Horizontal Architectural Progress Ribbon */}
-      <div className="mb-14 overflow-x-auto pb-4 pt-2">
+      {/* 1. Mobile Stage Quick Navigator Grid (lg:hidden) */}
+      <div className="mb-8 lg:hidden">
+        <div className="mb-2.5 flex items-center justify-between px-1">
+          <span className="font-mono text-[0.6875rem] font-semibold uppercase tracking-wider text-accent">
+            Process Navigator ({activeStage} / 06)
+          </span>
+          <span className="font-mono text-[0.6875rem] text-charcoal/60">
+            Tap stage to view
+          </span>
+        </div>
+        <div className="grid grid-cols-6 gap-1.5">
+          {STAGES.map((s) => {
+            const isActive = activeStage === s.number;
+            return (
+              <button
+                key={s.number}
+                type="button"
+                onClick={() => scrollToStage(s.number)}
+                className={cn(
+                  "flex flex-col items-center justify-center py-2 px-0.5 rounded-sm border text-center transition-all duration-200",
+                  isActive
+                    ? "bg-charcoal text-accent-gold border-accent-gold shadow-sm ring-1 ring-accent-gold"
+                    : "bg-white text-charcoal/80 border-greige/30 hover:border-accent/50",
+                )}
+              >
+                <span className="font-mono text-xs font-bold">{s.number}</span>
+                <span className="font-sans text-[0.5625rem] font-medium truncate max-w-full leading-tight mt-0.5">
+                  {s.title.split(' ')[0]}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 2. Desktop Horizontal Architectural Progress Ribbon (hidden lg:block) */}
+      <div className="mb-14 hidden overflow-x-auto pb-4 pt-2 lg:block">
         <div className="relative flex min-w-[680px] items-center justify-between px-4">
           {/* Background Connecting Rail */}
           <div className="absolute left-10 right-10 top-5 h-[2px] bg-greige/25" aria-hidden="true" />
@@ -378,12 +413,12 @@ export function ProcessStages() {
                 </p>
 
                 {/* Two-Column Deliverables & Requirements Elevated Cards */}
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
                   {/* What you receive: Studio Deliverables */}
-                  <div className="group relative flex flex-col justify-between overflow-hidden rounded-sm border border-accent-gold/45 bg-gradient-to-br from-[#FAF7F2] via-white to-[#F6F1E8] p-6 shadow-luxury transition-all duration-300 hover:border-accent-gold/80 hover:shadow-glow-subtle sm:p-7">
+                  <div className="group relative flex flex-col justify-between overflow-hidden rounded-sm border border-accent-gold/45 bg-gradient-to-br from-[#FAF7F2] via-white to-[#F6F1E8] p-4 sm:p-7 shadow-luxury transition-all duration-300 hover:border-accent-gold/80 hover:shadow-glow-subtle">
                     <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-gold via-accent to-accent-gold/30" />
                     <div>
-                      <div className="mb-5 flex items-center justify-between">
+                      <div className="mb-4 sm:mb-5 flex items-center justify-between">
                         <span className="flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wider text-accent-gold">
                           <span className="h-1.5 w-1.5 rounded-full bg-accent-gold" />
                           What You Receive
@@ -392,11 +427,11 @@ export function ProcessStages() {
                           STUDIO DELIVERABLES
                         </span>
                       </div>
-                      <ul className="space-y-3">
+                      <ul className="space-y-2.5 sm:space-y-3">
                         {stage.receives.map((item, idx) => (
                           <li
                             key={idx}
-                            className="flex items-start gap-3 font-sans text-[0.8125rem] font-medium leading-relaxed text-charcoal sm:text-xs"
+                            className="flex items-start gap-2.5 sm:gap-3 font-sans text-xs font-medium leading-relaxed text-charcoal"
                           >
                             <div className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border border-accent-gold/60 bg-accent-gold/20 text-accent">
                               <svg
@@ -420,10 +455,10 @@ export function ProcessStages() {
                   </div>
 
                   {/* What we need from you: Client Milestones */}
-                  <div className="group relative flex flex-col justify-between overflow-hidden rounded-sm border border-greige/35 bg-white p-6 shadow-luxury transition-all duration-300 hover:border-charcoal/40 sm:p-7">
+                  <div className="group relative flex flex-col justify-between overflow-hidden rounded-sm border border-greige/35 bg-white p-4 sm:p-7 shadow-luxury transition-all duration-300 hover:border-charcoal/40">
                     <div className="absolute inset-x-0 top-0 h-[2px] bg-greige/40" />
                     <div>
-                      <div className="mb-5 flex items-center justify-between">
+                      <div className="mb-4 sm:mb-5 flex items-center justify-between">
                         <span className="flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wider text-charcoal">
                           <span className="h-1.5 w-1.5 rounded-full bg-greige" />
                           What We Need From You
@@ -432,11 +467,11 @@ export function ProcessStages() {
                           CLIENT MILESTONES
                         </span>
                       </div>
-                      <ul className="space-y-3">
+                      <ul className="space-y-2.5 sm:space-y-3">
                         {stage.needs.map((item, idx) => (
                           <li
                             key={idx}
-                            className="flex items-start gap-3 font-sans text-[0.8125rem] leading-relaxed text-charcoal/85 sm:text-xs"
+                            className="flex items-start gap-2.5 sm:gap-3 font-sans text-xs leading-relaxed text-charcoal/85"
                           >
                             <div className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border border-charcoal/25 bg-charcoal/10 text-charcoal">
                               <svg
