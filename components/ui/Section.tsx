@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 
-export type SectionTone = 'light' | 'paper' | 'dark';
+export type SectionTone = 'light' | 'paper' | 'dark' | 'umber' | 'travertine' | 'sandstone';
 
 export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   tone?: SectionTone;
@@ -14,7 +14,7 @@ export interface SectionProps extends React.HTMLAttributes<HTMLElement> {
 
 /**
  * Section: Core layout wrapper managing architectural vertical rhythm and colour tones.
- * - Tones: light (bone), paper (paper band), dark (charcoal with inverted text)
+ * - Tones: light (bone), paper (paper band), dark (charcoal), umber (warm dark espresso), travertine (warm limestone), sandstone
  * - Vertical rhythm: 96px mobile (py-24), 160px desktop (py-40)
  * - Container: 1280px max, 20px gutters mobile (px-5), 48px desktop (px-12)
  */
@@ -34,6 +34,9 @@ export const Section = React.forwardRef<HTMLElement, SectionProps>(function Sect
     light: 'bg-bone text-charcoal',
     paper: 'bg-paper text-charcoal',
     dark: 'bg-charcoal text-bone',
+    umber: 'bg-umber text-bone',
+    travertine: 'bg-travertine text-charcoal',
+    sandstone: 'bg-sandstone text-charcoal',
   };
 
   return (

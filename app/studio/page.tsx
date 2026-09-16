@@ -23,23 +23,60 @@ export const metadata: Metadata = buildMetadata({
 const DIFFERENTIATORS = [
   {
     title: 'Single-Point Accountability',
+    tag: 'Turnkey Custody',
     description:
       'One studio drafts the architectural drawings, manages procurement, and directs on-site execution. When challenges arise on site, there is no third-party contractor to deflect responsibility onto.',
+    icon: (
+      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="9" />
+        <line x1="12" y1="3" x2="12" y2="7" />
+        <line x1="12" y1="17" x2="12" y2="21" />
+        <line x1="3" y1="12" x2="7" y2="12" />
+        <line x1="17" y1="12" x2="21" y2="12" />
+        <circle cx="12" cy="12" r="2" />
+      </svg>
+    ),
   },
   {
     title: 'In-House Joinery & Trade Custody',
+    tag: '1.5mm Shadowline',
     description:
       'Rather than bidding projects out to transient labor crews, our master carpenters, certified electricians, and plumbing technicians work under direct studio supervision, preserving 1.5mm shadowline tolerances.',
+    icon: (
+      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 21V7l5-4v18" />
+        <path d="M9 21h11V10l-6-5-5 4" />
+        <path d="M14 14h3" />
+        <path d="M14 18h3" />
+      </svg>
+    ),
   },
   {
     title: 'Climatic Material Discipline',
+    tag: 'IS 710 Marine Grade',
     description:
       'We specify natural stones, quarter-sawn veneers, breathable lime plasters, and certified IS 710 marine plywood engineered to endure Bhopal’s 44°C dry summers and high monsoon humidity cycles.',
+    icon: (
+      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
+        <path d="M12 8v8" />
+        <path d="M8 12h8" />
+      </svg>
+    ),
   },
   {
     title: 'Daily Site Supervision',
+    tag: 'Daily Field Audit',
     description:
       'Execution quality is governed on site, not from a distant showroom. Our project leads maintain continuous daily presence in Bhopal, verifying laser alignment, structural waterproofing, and trade sequencing.',
+    icon: (
+      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M3 9h18" />
+        <path d="M9 21V9" />
+        <circle cx="15" cy="15" r="2" />
+      </svg>
+    ),
   },
 ];
 
@@ -165,29 +202,49 @@ export default async function StudioPage() {
       </div>
 
       {/* 3. How We Work Differently: Four factual operational blocks */}
-      <Section tone="paper" className="border-t border-greige/20 py-20 md:py-32">
+      <Section tone="umber" className="border-t border-white/10 py-24 md:py-36">
         <div className="mb-16 max-w-3xl">
           <Reveal>
-            <Label className="mb-2 block text-accent">Operational Model</Label>
-            <h2 className="mb-4 font-serif text-fluid-h2 text-charcoal">How We Work Differently</h2>
-            <p className="font-sans text-[1rem] leading-relaxed text-charcoal/80">
+            <span className="mb-3 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-accent-gold">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-gold" />
+              Operational Architecture
+            </span>
+            <h2 className="mb-4 font-serif text-fluid-h2 text-bone">How We Work Differently</h2>
+            <p className="font-sans text-[1.0625rem] leading-relaxed text-bone/75">
               Our advantage is not a slogan; it is the structural separation between studio-led
               turnkey custody and ordinary contractor brokerage.
             </p>
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-8">
           {DIFFERENTIATORS.map((diff, idx) => (
             <Reveal key={diff.title} delay={idx * 0.05}>
-              <div className="flex h-full flex-col border border-greige/30 bg-bone p-8">
-                <span className="mb-3 block font-mono text-ui-label text-accent">0{idx + 1}</span>
-                <h3 className="mb-3 font-serif text-[1.25rem] font-medium text-charcoal">
-                  {diff.title}
-                </h3>
-                <p className="font-sans text-[0.9375rem] leading-relaxed text-charcoal/80">
-                  {diff.description}
-                </p>
+              <div className="group relative flex h-full flex-col justify-between border border-white/10 bg-[#191714] p-8 sm:p-10 transition-all duration-300 hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-glow-gold">
+                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-gold/0 via-accent-gold/40 to-accent-gold/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+                <div>
+                  <div className="mb-6 flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-sm border border-accent-gold/30 bg-accent/15 text-accent-gold transition-colors duration-300 group-hover:border-accent-gold group-hover:bg-accent/25">
+                        {diff.icon}
+                      </div>
+                      <span className="font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-gold">
+                        {diff.tag}
+                      </span>
+                    </div>
+                    <span className="font-mono text-xs font-medium text-bone/40">
+                      0{idx + 1}
+                    </span>
+                  </div>
+
+                  <h3 className="mb-3 font-serif text-[1.3125rem] font-medium text-bone transition-colors duration-200 group-hover:text-accent-gold">
+                    {diff.title}
+                  </h3>
+                  <p className="font-sans text-[0.9375rem] leading-relaxed text-bone/70">
+                    {diff.description}
+                  </p>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -237,7 +294,7 @@ export default async function StudioPage() {
       </Section>
 
       {/* 5. Where We Work: Genuine Bhopal Localities */}
-      <Section tone="paper" className="border-t border-greige/20 py-20 md:py-32">
+      <Section tone="travertine" className="border-t border-greige/20 py-20 md:py-32">
         <div className="mb-16 max-w-3xl">
           <Reveal>
             <Label className="mb-2 block text-accent">Geography of Practice</Label>
@@ -253,11 +310,16 @@ export default async function StudioPage() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {LOCALITIES.map((loc, idx) => (
             <Reveal key={loc.name} delay={idx * 0.03}>
-              <div className="flex h-full flex-col border border-greige/25 bg-bone p-5">
-                <span className="mb-1 font-serif text-[1.125rem] font-medium text-charcoal">
-                  {loc.name}
-                </span>
-                <span className="mt-auto font-sans text-[0.8125rem] leading-relaxed text-greige">
+              <div className="group flex h-full flex-col justify-between border border-greige/25 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-luxury">
+                <div className="mb-2 flex items-baseline justify-between">
+                  <span className="font-serif text-[1.125rem] font-medium text-charcoal transition-colors group-hover:text-accent">
+                    {loc.name}
+                  </span>
+                  <span className="font-mono text-[0.75rem] text-accent/50 transition-colors group-hover:text-accent">
+                    &rarr;
+                  </span>
+                </div>
+                <span className="font-sans text-[0.8125rem] leading-relaxed text-charcoal/65">
                   {loc.note}
                 </span>
               </div>

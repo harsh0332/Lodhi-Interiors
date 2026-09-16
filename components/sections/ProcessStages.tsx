@@ -233,10 +233,10 @@ export function ProcessStages() {
                   className={cn(
                     "flex h-10 w-10 items-center justify-center rounded-full border-2 font-mono text-xs font-semibold transition-all duration-300",
                     isActive
-                      ? "border-accent bg-accent text-charcoal scale-110 shadow-[0_0_14px_rgba(197,162,101,0.6)]"
+                      ? "border-accent-gold bg-charcoal text-accent-gold scale-110 shadow-[0_0_16px_rgba(197,162,101,0.4)] ring-2 ring-accent-gold/30"
                       : isPassed
-                        ? "border-accent bg-bone text-accent"
-                        : "border-greige/30 bg-bone text-greige group-hover:border-accent/60",
+                        ? "border-accent-gold/60 bg-white text-accent font-medium shadow-sm"
+                        : "border-greige/30 bg-white text-greige group-hover:border-accent/60",
                   )}
                 >
                   {s.number}
@@ -244,7 +244,7 @@ export function ProcessStages() {
                 <span
                   className={cn(
                     "mt-2.5 max-w-[105px] text-center font-sans text-[0.75rem] font-medium transition-colors duration-200",
-                    isActive ? "text-accent font-semibold" : "text-charcoal/70 group-hover:text-charcoal",
+                    isActive ? "text-accent font-bold" : "text-charcoal/70 group-hover:text-charcoal",
                   )}
                 >
                   {(s.title.split('&')[0] ?? s.title).trim()}
@@ -257,9 +257,9 @@ export function ProcessStages() {
 
       <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16">
         {/* 2. Desktop Sticky Navigation Column with Animated Progress Rail */}
-        <aside className="hidden border border-greige/30 bg-paper/60 p-6 lg:sticky lg:top-36 lg:col-span-4 lg:block">
-          <Label className="mb-4 block text-accent">Sequence of Work</Label>
-          <h3 className="mb-6 font-serif text-[1.25rem] font-normal text-charcoal">
+        <aside className="hidden rounded-sm border border-greige/30 bg-white/90 p-6 shadow-luxury backdrop-blur-md lg:sticky lg:top-36 lg:col-span-4 lg:block">
+          <Label className="mb-4 block text-accent-gold">Sequence of Work</Label>
+          <h3 className="mb-6 font-serif text-[1.25rem] font-medium text-charcoal">
             Six Disciplined Stages
           </h3>
 
@@ -273,25 +273,30 @@ export function ProcessStages() {
                       type="button"
                       onClick={() => scrollToStage(s.number)}
                       className={cn(
-                        "group flex w-full items-center justify-between rounded-sm px-3.5 py-2.5 text-left font-sans text-xs transition-all duration-200",
+                        "group flex w-full items-center justify-between rounded-sm px-3.5 py-3 text-left font-sans text-xs transition-all duration-200",
                         isActive
-                          ? "bg-charcoal font-medium text-bone shadow-md"
-                          : "text-charcoal/70 hover:bg-paper hover:text-charcoal",
+                          ? "bg-charcoal font-medium text-bone shadow-md border-l-2 border-accent-gold"
+                          : "text-charcoal/70 hover:bg-sandstone/40 hover:text-charcoal",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
                       )}
                     >
                       <span className="flex items-center gap-3">
                         <span
                           className={cn(
-                            "font-mono transition-colors",
-                            isActive ? "text-accent font-bold" : "text-greige group-hover:text-accent",
+                            "font-mono text-xs transition-colors",
+                            isActive ? "text-accent-gold font-bold" : "text-greige group-hover:text-accent",
                           )}
                         >
                           {s.number}
                         </span>
-                        <span>{s.title}</span>
+                        <span className={cn(isActive && "text-bone font-medium")}>{s.title}</span>
                       </span>
-                      <span className="ml-2 flex-shrink-0 font-mono text-[0.75rem] opacity-70">
+                      <span
+                        className={cn(
+                          "ml-2 flex-shrink-0 font-mono text-[0.6875rem] px-1.5 py-0.5 rounded transition-colors",
+                          isActive ? "bg-white/10 text-accent-gold" : "text-greige/80 bg-paper/60",
+                        )}
+                      >
                         {s.duration}
                       </span>
                     </button>
@@ -302,13 +307,13 @@ export function ProcessStages() {
           </nav>
 
           <div className="mt-8 border-t border-greige/20 pt-6">
-            <span className="mb-1 block font-sans text-[0.8125rem] text-greige">
+            <span className="mb-1 block font-mono text-xs uppercase tracking-wider text-greige">
               Total Typical Duration
             </span>
-            <span className="font-serif text-[1.125rem] font-medium text-charcoal">
+            <span className="font-serif text-[1.25rem] font-medium text-charcoal">
               16 to 26 weeks
             </span>
-            <p className="mt-1 font-sans text-[0.8125rem] leading-relaxed text-charcoal/70">
+            <p className="mt-2 font-sans text-[0.8125rem] leading-relaxed text-charcoal/70">
               Variable depending on structural scope, monsoon windows, and custom millwork volume.
             </p>
           </div>
@@ -372,65 +377,87 @@ export function ProcessStages() {
                   {stage.detail}
                 </p>
 
-                {/* Two-Column Deliverables & Requirements Grid */}
-                <div className="grid grid-cols-1 gap-6 border border-greige/30 bg-paper/50 p-6 md:grid-cols-2">
-                  {/* What you receive */}
-                  <div>
-                    <span className="mb-3 block font-sans text-ui-label font-medium uppercase tracking-wider text-accent">
-                      What You Receive
-                    </span>
-                    <ul className="space-y-2.5">
-                      {stage.receives.map((item, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-2.5 font-sans text-xs leading-relaxed text-charcoal/85"
-                        >
-                          <svg
-                            className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-accent"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            aria-hidden="true"
+                {/* Two-Column Deliverables & Requirements Elevated Cards */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  {/* What you receive: Studio Deliverables */}
+                  <div className="group relative flex flex-col justify-between overflow-hidden rounded-sm border border-accent-gold/45 bg-gradient-to-br from-[#FAF7F2] via-white to-[#F6F1E8] p-6 shadow-luxury transition-all duration-300 hover:border-accent-gold/80 hover:shadow-glow-subtle sm:p-7">
+                    <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-gold via-accent to-accent-gold/30" />
+                    <div>
+                      <div className="mb-5 flex items-center justify-between">
+                        <span className="flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wider text-accent-gold">
+                          <span className="h-1.5 w-1.5 rounded-full bg-accent-gold" />
+                          What You Receive
+                        </span>
+                        <span className="rounded border border-accent-gold/35 bg-accent-gold/15 px-2 py-0.5 font-mono text-[0.6875rem] font-semibold uppercase tracking-wider text-accent">
+                          STUDIO DELIVERABLES
+                        </span>
+                      </div>
+                      <ul className="space-y-3">
+                        {stage.receives.map((item, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-3 font-sans text-[0.8125rem] font-medium leading-relaxed text-charcoal sm:text-xs"
                           >
-                            <polyline points="20 6 9 17 4 12" />
-                          </svg>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                            <div className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border border-accent-gold/60 bg-accent-gold/20 text-accent">
+                              <svg
+                                className="h-2.5 w-2.5"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                              >
+                                <polyline points="20 6 9 17 4 12" />
+                              </svg>
+                            </div>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
 
-                  {/* What we need from you */}
-                  <div className="border-t border-greige/25 pt-5 md:border-l md:border-t-0 md:pl-6 md:pt-0">
-                    <span className="mb-3 block font-sans text-ui-label font-medium uppercase tracking-wider text-greige">
-                      What We Need From You
-                    </span>
-                    <ul className="space-y-2.5">
-                      {stage.needs.map((item, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-2.5 font-sans text-xs leading-relaxed text-charcoal/85"
-                        >
-                          <svg
-                            className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-greige"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            aria-hidden="true"
+                  {/* What we need from you: Client Milestones */}
+                  <div className="group relative flex flex-col justify-between overflow-hidden rounded-sm border border-greige/35 bg-white p-6 shadow-luxury transition-all duration-300 hover:border-charcoal/40 sm:p-7">
+                    <div className="absolute inset-x-0 top-0 h-[2px] bg-greige/40" />
+                    <div>
+                      <div className="mb-5 flex items-center justify-between">
+                        <span className="flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-wider text-charcoal">
+                          <span className="h-1.5 w-1.5 rounded-full bg-greige" />
+                          What We Need From You
+                        </span>
+                        <span className="rounded border border-charcoal/20 bg-charcoal/5 px-2 py-0.5 font-mono text-[0.6875rem] font-semibold uppercase tracking-wider text-charcoal/75">
+                          CLIENT MILESTONES
+                        </span>
+                      </div>
+                      <ul className="space-y-3">
+                        {stage.needs.map((item, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-3 font-sans text-[0.8125rem] leading-relaxed text-charcoal/85 sm:text-xs"
                           >
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                          </svg>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                            <div className="mt-0.5 flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border border-charcoal/25 bg-charcoal/10 text-charcoal">
+                              <svg
+                                className="h-2.5 w-2.5"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                aria-hidden="true"
+                              >
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                              </svg>
+                            </div>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </Reveal>

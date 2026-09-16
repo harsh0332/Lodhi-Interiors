@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Section } from '@/components/ui/Section';
-import { Heading, Label } from '@/components/ui/Typography';
+import { Heading } from '@/components/ui/Typography';
 import { Reveal } from '@/components/motion/Reveal';
 
 const SERVICES = [
@@ -55,44 +55,52 @@ const SERVICES = [
  */
 export function ServicesList() {
   return (
-    <Section tone="paper" className="py-24 md:py-40" aria-label="Services">
+    <Section tone="umber" className="py-24 md:py-40 border-t border-white/10" aria-label="Services">
       {/* Section Header */}
       <div className="mb-16 flex flex-col justify-between gap-4 md:mb-20 md:flex-row md:items-end">
         <div>
           <Reveal>
-            <Label className="mb-2 block text-accent">Capabilities</Label>
-            <Heading level={2}>Areas of Practice</Heading>
+            <span className="mb-3 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-accent-gold">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-gold" />
+              Capabilities
+            </span>
+            <Heading level={2} className="text-bone">Areas of Practice</Heading>
           </Reveal>
         </div>
         <Reveal delay={0.1}>
-          <p className="max-w-sm font-sans text-ui-caption text-greige">
+          <p className="max-w-sm font-sans text-ui-caption text-bone/70">
             Complete design and turnkey delivery under one roof. No contractor handoffs.
           </p>
         </Reveal>
       </div>
 
       {/* Typographic Services List with Hairline Rules */}
-      <nav aria-label="Services list" className="border-t border-greige/30">
-        <ul className="divide-y divide-greige/30">
+      <nav aria-label="Services list" className="border-t border-white/10">
+        <ul className="divide-y divide-white/10">
           {SERVICES.map((service, index) => (
             <li key={service.name}>
               <Reveal delay={index * 0.04}>
                 <Link
                   href={service.href}
-                  className="group flex items-baseline justify-between py-6 transition-transform duration-300 ease-out hover:translate-x-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper sm:py-8"
+                  className="group flex items-center justify-between py-6 sm:py-8 px-2 -mx-2 rounded-sm transition-all duration-300 ease-out hover:bg-white/[0.03] hover:translate-x-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-gold"
                 >
                   <div className="flex items-baseline gap-4 sm:gap-8">
-                    <span className="font-mono font-sans text-ui-caption text-greige">
+                    <span className="font-mono text-xs font-medium text-accent-gold/80 bg-white/5 border border-white/10 px-2 py-0.5 rounded">
                       {service.number}
                     </span>
-                    <span className="font-serif text-fluid-h2 font-normal text-charcoal transition-colors duration-200 group-hover:text-accent">
+                    <span className="font-serif text-fluid-h2 font-normal text-bone transition-colors duration-200 group-hover:text-accent-gold">
                       {service.name}
                     </span>
                   </div>
 
-                  <span className="hidden font-sans text-ui-caption uppercase tracking-[0.08em] text-greige sm:block">
-                    {service.scope}
-                  </span>
+                  <div className="hidden sm:flex items-center gap-3">
+                    <span className="font-mono text-[0.6875rem] font-semibold uppercase tracking-wider text-accent-gold bg-accent/15 border border-accent/30 px-3 py-1 rounded-full transition-all group-hover:border-accent-gold/60">
+                      {service.scope}
+                    </span>
+                    <span className="font-mono text-base text-accent-gold opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200">
+                      &rarr;
+                    </span>
+                  </div>
                 </Link>
               </Reveal>
             </li>

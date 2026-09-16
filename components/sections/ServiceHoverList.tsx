@@ -11,9 +11,25 @@ export interface ServiceHoverListProps {
   services: ServiceData[];
 }
 
+function getCategoryBadge(tag: string) {
+  if (tag.includes('Residential')) {
+    return 'bg-[#C5A265]/15 text-[#8A6A3B] border-[#C5A265]/35';
+  }
+  if (tag.includes('Turnkey')) {
+    return 'bg-emerald-950/10 text-emerald-800 border-emerald-700/25';
+  }
+  if (tag.includes('Joinery') || tag.includes('Kitchen')) {
+    return 'bg-[#8B4513]/10 text-[#8B4513] border-[#8B4513]/25';
+  }
+  if (tag.includes('Hospitality') || tag.includes('Dining')) {
+    return 'bg-purple-950/10 text-purple-900 border-purple-800/25';
+  }
+  return 'bg-charcoal/10 text-charcoal/80 border-charcoal/20';
+}
+
 /**
  * ServiceHoverList: Typographic index of services with desktop hover photo reveal.
- * Strictly typographic; zero icon tiles.
+ * Elevated with architectural category badges, interactive hover states, and glassmorphic preview.
  */
 export function ServiceHoverList({ services }: ServiceHoverListProps) {
   const [activeSlug, setActiveSlug] = useState<string>(services[0]?.slug ?? '');
@@ -37,16 +53,21 @@ export function ServiceHoverList({ services }: ServiceHoverListProps) {
                     onMouseEnter={() => setActiveSlug(service.slug)}
                     onFocus={() => setActiveSlug(service.slug)}
                     className={cn(
-                      'group block py-6 transition-transform duration-300 ease-out hover:translate-x-2 md:py-8',
+                      'group block -mx-3 sm:-mx-4 rounded-sm p-4 sm:p-6 transition-all duration-300 ease-out',
+                      isHovered
+                        ? 'bg-white shadow-luxury border border-greige/20 translate-x-1.5'
+                        : 'hover:bg-sandstone/30',
                       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bone',
                     )}
                   >
-                    <div className="mb-2 flex items-baseline justify-between gap-4">
-                      <div className="flex items-baseline gap-4 sm:gap-6">
+                    <div className="mb-2.5 flex items-baseline justify-between gap-4">
+                      <div className="flex items-baseline gap-3.5 sm:gap-5">
                         <span
                           className={cn(
-                            'font-mono text-ui-caption transition-colors duration-200',
-                            isHovered ? 'text-accent' : 'text-greige',
+                            'flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded font-mono text-xs font-semibold transition-all duration-200',
+                            isHovered
+                              ? 'bg-charcoal text-accent-gold shadow-sm'
+                              : 'bg-paper text-greige group-hover:text-charcoal',
                           )}
                         >
                           {number}
@@ -61,12 +82,22 @@ export function ServiceHoverList({ services }: ServiceHoverListProps) {
                         </h2>
                       </div>
 
-                      <span className="hidden font-sans text-ui-caption uppercase tracking-[0.08em] text-greige sm:block">
-                        {service.categoryTag}
-                      </span>
+                      <div className="flex items-center gap-3">
+                        <span
+                          className={cn(
+                            'hidden sm:inline-block font-mono text-[0.6875rem] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full border',
+                            getCategoryBadge(service.categoryTag),
+                          )}
+                        >
+                          {service.categoryTag}
+                        </span>
+                        <span className="hidden sm:inline-block font-mono text-base text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-200">
+                          &rarr;
+                        </span>
+                      </div>
                     </div>
 
-                    <p className="max-w-xl pl-8 font-sans text-[0.875rem] leading-relaxed text-charcoal/70 sm:pl-11">
+                    <p className="max-w-xl pl-9.5 sm:pl-12 font-sans text-[0.875rem] leading-relaxed text-charcoal/75">
                       {service.shortDescription}
                     </p>
                   </Link>
@@ -79,7 +110,7 @@ export function ServiceHoverList({ services }: ServiceHoverListProps) {
 
       {/* 2. Right Column: Representative Photograph on Desktop Hover */}
       <div className="sticky top-32 hidden lg:col-span-5 lg:block">
-        <div className="relative aspect-[4/5] w-full overflow-hidden border border-greige/20 bg-paper transition-all duration-300">
+        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm border border-accent-gold/40 bg-charcoal shadow-luxury-lg transition-all duration-300">
           {activeService && (
             <>
               <Image
@@ -91,14 +122,18 @@ export function ServiceHoverList({ services }: ServiceHoverListProps) {
                 className="object-cover transition-opacity duration-300"
               />
               <div
-                className="pointer-events-none absolute inset-0 bg-charcoal/20"
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/20 to-transparent"
                 aria-hidden="true"
               />
-              <div className="absolute bottom-4 left-4 right-4 border border-greige/20 bg-bone/95 p-4">
-                <span className="mb-0.5 block font-serif text-[1rem] text-charcoal">
+              <div className="absolute inset-3 pointer-events-none border border-white/10" />
+              <div className="absolute bottom-5 left-5 right-5 rounded-sm border border-white/15 bg-charcoal/90 p-5 shadow-lg backdrop-blur-md">
+                <span className="mb-1 block font-mono text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-gold">
+                  {activeService.categoryTag}
+                </span>
+                <span className="mb-1 block font-serif text-[1.1875rem] font-medium text-bone">
                   {activeService.name}
                 </span>
-                <span className="block font-sans text-ui-caption text-greige">
+                <span className="block font-sans text-xs leading-relaxed text-bone/70">
                   {activeService.heroPromise}
                 </span>
               </div>

@@ -19,7 +19,19 @@ const config: Config = {
         greige: '#A8A29A',
         charcoal: '#1A1A18',
         'charcoal-2': '#24241F',
+        'charcoal-rich': '#131311',
         accent: '#8A6A3B',
+        'accent-gold': '#C5A265',
+        'accent-light': '#D4AF37',
+        travertine: '#FAF7F2',
+        sandstone: '#EFE9DF',
+        umber: '#221E1A',
+      },
+      boxShadow: {
+        luxury: '0 14px 36px -12px rgba(26, 26, 24, 0.08)',
+        'luxury-lg': '0 24px 48px -18px rgba(26, 26, 24, 0.12)',
+        'glow-gold': '0 0 25px -4px rgba(197, 162, 101, 0.25)',
+        'glow-subtle': '0 0 40px -10px rgba(138, 106, 59, 0.15)',
       },
       fontSize: {
         'fluid-display': [

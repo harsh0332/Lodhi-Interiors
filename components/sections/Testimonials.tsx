@@ -1,6 +1,6 @@
 import React from 'react';
 import { Section } from '@/components/ui/Section';
-import { Heading, Label } from '@/components/ui/Typography';
+import { Heading } from '@/components/ui/Typography';
 import { Reveal } from '@/components/motion/Reveal';
 
 const TESTIMONIALS = [
@@ -43,14 +43,17 @@ const DEVELOPER_COMMUNITIES = [
 export function Testimonials() {
   return (
     <Section
-      tone="light"
+      tone="travertine"
       className="border-t border-greige/20 py-24 md:py-40"
       aria-label="Client Perspectives"
     >
       {/* Section Header */}
       <div className="mb-16 md:mb-24">
         <Reveal>
-          <Label className="mb-2 block text-accent">Client Perspectives</Label>
+          <span className="mb-3 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-accent">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            Client Perspectives
+          </span>
           <Heading level={2}>Accountability in Practice</Heading>
         </Reveal>
       </div>
@@ -60,18 +63,24 @@ export function Testimonials() {
         {TESTIMONIALS.map((item, index) => (
           <div key={item.name} className={index > 0 ? 'pt-10 lg:pl-12 lg:pt-0' : ''}>
             <Reveal delay={index * 0.1}>
-              <blockquote className="flex h-full flex-col justify-between">
-                <p className="mb-8 font-serif text-fluid-h3 font-normal leading-[1.3] text-charcoal">
-                  &ldquo;{item.quote}&rdquo;
-                </p>
+              <blockquote className="group flex h-full flex-col justify-between">
+                <div>
+                  <span className="mb-2 block font-serif text-3xl font-medium leading-none text-accent-gold/70">
+                    &ldquo;
+                  </span>
+                  <p className="mb-8 font-serif text-fluid-h3 font-normal leading-[1.35] text-charcoal">
+                    {item.quote}&rdquo;
+                  </p>
+                </div>
 
                 <footer className="border-t border-greige/20 pt-4">
                   <cite className="not-italic">
-                    <span className="block font-sans text-[0.875rem] font-medium text-charcoal">
+                    <span className="block font-sans text-[0.9375rem] font-semibold text-charcoal">
                       {item.name}
                     </span>
-                    <span className="mt-0.5 block font-sans text-ui-caption text-greige">
-                      {item.locality} • {item.projectType}
+                    <span className="mt-1.5 inline-flex items-center gap-1.5 font-mono text-[0.75rem] text-accent">
+                      <span className="h-1 w-1 rounded-full bg-accent" />
+                      {item.locality} &middot; {item.projectType}
                     </span>
                   </cite>
                 </footer>
@@ -86,18 +95,18 @@ export function Testimonials() {
         <Reveal delay={0.2}>
           <div className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
             <div>
-              <p className="font-sans text-[0.8125rem] uppercase tracking-[0.15em] text-greige">
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-greige">
                 Turnkey Execution Across Premier Bhopal Communities &amp; Developments
               </p>
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-serif text-fluid-body text-charcoal/80 md:justify-end">
-              {DEVELOPER_COMMUNITIES.map((dev, i) => (
-                <React.Fragment key={dev}>
-                  <span>{dev}</span>
-                  {i < DEVELOPER_COMMUNITIES.length - 1 && (
-                    <span className="text-greige/40 select-none">/</span>
-                  )}
-                </React.Fragment>
+            <div className="flex flex-wrap items-center justify-center gap-2 md:justify-end">
+              {DEVELOPER_COMMUNITIES.map((dev) => (
+                <span
+                  key={dev}
+                  className="rounded-full border border-greige/30 bg-white px-3.5 py-1 font-serif text-xs font-medium text-charcoal shadow-sm transition-colors hover:border-accent"
+                >
+                  {dev}
+                </span>
               ))}
             </div>
           </div>
