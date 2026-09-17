@@ -75,7 +75,7 @@ export function Footer() {
               </div>
 
               <a
-                href="https://share.google/IB2n0yeAwqOrG2RqV"
+                href="https://maps.app.goo.gl/vUjqWdot6fNntShv9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group block not-italic leading-relaxed text-greige/90 transition-colors hover:text-bone"
@@ -98,7 +98,7 @@ export function Footer() {
                 </span>
                 <div className="flex flex-wrap gap-2.5">
                   <a
-                    href="https://share.google/IB2n0yeAwqOrG2RqV"
+                    href="https://maps.app.goo.gl/vUjqWdot6fNntShv9"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 border border-greige/30 bg-bone/[0.04] px-3.5 py-2 text-[0.8125rem] font-sans font-medium text-bone/90 transition-all duration-200 hover:border-accent hover:bg-bone/10 hover:text-bone focus-visible:ring-2 focus-visible:ring-accent"

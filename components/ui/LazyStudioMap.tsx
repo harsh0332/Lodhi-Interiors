@@ -3,27 +3,27 @@
 import React from 'react';
 import { env } from '@/lib/env';
 
-export const GOOGLE_BUSINESS_PROFILE_URL = 'https://share.google/IB2n0yeAwqOrG2RqV';
+export const GOOGLE_MAPS_LINK = 'https://maps.app.goo.gl/vUjqWdot6fNntShv9';
 export const GOOGLE_MAPS_EMBED_URL =
-  'https://maps.google.com/maps?q=Lodhi+Interiors+Sagar+High+Street+Ayodhya+Bypass+Bhopal&t=&z=16&ie=UTF8&iwloc=&output=embed';
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3665.258839846879!2d77.4506303!3d23.279524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa2d32a3da72a8083%3A0x67edecd563e96895!2sLodhi%20Interiors!5e0!3m2!1sen!2sin!4v1789661850000';
 
 export function LazyStudioMap() {
   return (
     <div className="flex h-full flex-col border border-greige/30 bg-bone p-6 sm:p-8">
-      {/* Top Header with Google Business Verified Pill */}
+      {/* Top Header with Google Maps Verified Pill */}
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <span className="font-mono text-xs font-semibold uppercase tracking-widest text-accent">
           Studio Headquarters
         </span>
         <a
-          href={GOOGLE_BUSINESS_PROFILE_URL}
+          href={GOOGLE_MAPS_LINK}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-2.5 py-1 font-mono text-[0.6875rem] font-medium text-accent transition-colors hover:bg-accent/20"
-          title="Verified on Google Business Profile"
+          title="Open in Google Maps"
         >
           <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-          Google Verified Studio
+          Google Maps Location
         </a>
       </div>
 
@@ -86,10 +86,10 @@ export function LazyStudioMap() {
           />
         </div>
 
-        {/* Bottom Action Bar: Open Google Business Directions */}
+        {/* Bottom Action Bar: Open Google Maps Navigation */}
         <div className="border-t border-greige/20 bg-bone/95 p-3 sm:p-3.5 backdrop-blur-sm">
           <a
-            href={GOOGLE_BUSINESS_PROFILE_URL}
+            href={GOOGLE_MAPS_LINK}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-between gap-2 bg-charcoal px-4 py-2.5 font-sans text-xs font-medium text-bone transition-all duration-200 hover:bg-charcoal-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"

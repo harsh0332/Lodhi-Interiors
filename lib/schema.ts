@@ -38,8 +38,8 @@ export function buildLocalBusinessSchema() {
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: '23.2796',
-      longitude: '77.4667',
+      latitude: '23.279524',
+      longitude: '77.4532052',
     },
     areaServed: [
       {
@@ -53,9 +53,10 @@ export function buildLocalBusinessSchema() {
     ],
     priceRange: '₹₹₹₹',
     image: `${env.NEXT_PUBLIC_SITE_URL}/images/og-default.jpg`,
-    hasMap: 'https://share.google/IB2n0yeAwqOrG2RqV',
+    hasMap: 'https://maps.app.goo.gl/vUjqWdot6fNntShv9',
     sameAs: [
       'https://instagram.com/lodhiinteriors',
+      'https://maps.app.goo.gl/vUjqWdot6fNntShv9',
       'https://share.google/IB2n0yeAwqOrG2RqV',
     ],
     openingHoursSpecification: [
