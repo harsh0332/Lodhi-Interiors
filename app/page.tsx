@@ -16,7 +16,7 @@ import {
 } from '@/components/sections';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Lodhi Interiors — Interior Design and Turnkey Execution Studio in Bhopal',
+  title: 'Interior Designer in Bhopal | Lodhi Interiors',
   description:
     'Bhopal studio shaping complete luxury residential and commercial interiors from concept to turnkey execution. Founded by Soumya Lodhi, 8+ years in practice.',
   path: '/',

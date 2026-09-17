@@ -16,7 +16,7 @@ import { StickyMobileBar } from '@/components/sections/StickyMobileBar';
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
-    default: 'LODHI INTERIORS | Architectural & Turnkey Interior Studio Bhopal',
+    default: 'Interior Designer in Bhopal | Lodhi Interiors',
     template: '%s | LODHI INTERIORS',
   },
   description:
@@ -95,6 +95,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-IN" className={`${serifFont.variable} ${sansFont.variable}`}>
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/hero-poster.webp"
+          type="image/webp"
+          // @ts-expect-error fetchpriority attribute is supported in modern browsers
+          fetchpriority="high"
+        />
+      </head>
       <body className="flex min-h-screen flex-col bg-bone text-charcoal">
         <a href="#main-content" className="skip-link">
           Skip to content

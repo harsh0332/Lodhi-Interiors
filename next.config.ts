@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.resolve(__dirname),
   reactStrictMode: true,
   poweredByHeader: false,
+  trailingSlash: false,
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
@@ -63,14 +64,10 @@ const nextConfig: NextConfig = {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
           },
-          ...(process.env.NODE_ENV === 'production' && process.env.ENABLE_HSTS === 'true'
-            ? [
-                {
-                  key: 'Strict-Transport-Security',
-                  value: 'max-age=63072000; includeSubDomains; preload',
-                },
-              ]
-            : []),
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
@@ -90,6 +87,21 @@ const nextConfig: NextConfig = {
           },
         ],
         destination: 'https://lodhiinteriors.com/:path*',
+        permanent: true,
+      },
+      {
+        source: '/about',
+        destination: '/studio',
+        permanent: true,
+      },
+      {
+        source: '/portfolio',
+        destination: '/work',
+        permanent: true,
+      },
+      {
+        source: '/portfolio/:slug',
+        destination: '/work/:slug',
         permanent: true,
       },
       {

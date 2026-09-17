@@ -880,6 +880,740 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     metaDescription:
       'Institutional and commercial interior design and turnkey execution in Bhopal. Full civil, MEP, fire compliance, and large-scale project management.',
   },
+
+  'modular-kitchen-bhopal': {
+    slug: 'modular-kitchen-bhopal',
+    name: 'Modular Kitchen Design',
+    shortDescription:
+      'Custom modular kitchen design and turnkey installation in Bhopal with 100% IS 710 BWP marine plywood, Austrian Blum hardware, and quartz stone countertops.',
+    categoryTag: 'Modular Kitchens',
+    heroH1: 'Modular Kitchen Design in Bhopal',
+    heroPromise:
+      'Culinary spaces engineered for heavy Indian cooking, moisture resistance, and seamless workflow.',
+    heroImage:
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1800&auto=format&fit=crop',
+    heroImageAlt:
+      'Minimal architectural modular kitchen with fluted oak island and dark quartz counters in Bhopal',
+    scopeSummary:
+      'We design, manufacture, and install turnkey modular kitchens engineered for Central Indian culinary habits, damp resistance, and daily durability.',
+    scopeItems: [
+      'Ergonomic zoning: Preparation, Cooking, Cleaning, Dry Pantry, and Appliance Garage',
+      '100% IS 710 Boiling Waterproof (BWP) calibrated marine plywood internal carcasses',
+      'Austrian Blum and German Hettich soft-close drawer runners with 40–70kg load capacity',
+      'Heat-resistant, non-porous engineered quartz and natural black pearl granite slabs',
+      'High-suction chimney ducting (1200+ m3/hr) with concealed core cutting',
+      'Anti-fingerprint acrylic, PU lacquer, and natural veneer shutter frontages',
+      'Concealed spice organizers, corner carousel pull-outs, and tandem pantry units',
+      'Under-cabinet 3000K shadow-free task LED profile illumination',
+    ],
+    approachTitle: 'Engineering for High Heat, Turmeric Spices, and Water Resistance',
+    approachParagraphs: [
+      'In Bhopal homes, a kitchen is not a showroom ornament—it is a heavy-duty workroom exposed to mustard oil vapors, turmeric splatters, and daily wet floor mopping. Many mass-market modular kitchen vendors use compressed particle board (MDF/HDF) that swells and sags within two monsoons. At Lodhi Interiors, we build every carcass from calibrated IS 710 marine plywood bonded with 2mm hot-melt PVC edging.',
+      'We source authentic Austrian Blum hinges and Tandembox drawer systems backed by lifetime warranties. Drawers are calculated to comfortably support 60kg of cast iron and heavy brass cookware without track deflection or sticking.',
+      'From core cutting for chimney exhaust to concealed copper gas piping and dedicated 16A appliance circuits, our in-house turnkey technicians handle every trade under one accountable contract.',
+    ],
+    projectType: 'modular-kitchen',
+    materialsTitle: 'Industrial Kitchen Core & Countertop Materials',
+    materialsProse:
+      'We combine zero-emission BWP marine ply with non-staining architectural surfaces.',
+    materialsList: [
+      {
+        title: 'IS 710 Calibrated BWP Marine Ply',
+        description:
+          'Zero core voids, chemically treated against termites and boiling water immersion.',
+        image: '/images/projects/craft-moulding-installation.jpg',
+        imageAlt: 'Master carpenters assembling BWP marine ply kitchen cabinets in Bhopal',
+      },
+      {
+        title: 'Turmeric-Resistant Engineered Quartz',
+        description:
+          'Non-porous composite quartz resistant to lime juice, haldi stains, and heat shock.',
+        image:
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Engineered quartz kitchen countertop with seamless undermount sink in Bhopal',
+      },
+      {
+        title: 'Anti-Fingerprint Matte Acrylic & PU',
+        description:
+          'Grease-resistant frontages that clean effortlessly with warm microfibre cloth.',
+        image:
+          'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Matte acrylic and veneer kitchen shutter finishes',
+      },
+    ],
+    faqs: [
+      {
+        question: 'How much does a modular kitchen cost in Bhopal?',
+        answer:
+          'In Bhopal, a custom modular kitchen by Lodhi Interiors typically ranges from ₹2.5 Lakhs to ₹6.5 Lakhs for standard apartments (L-shaped or parallel layouts), and ₹6.5 Lakhs to ₹15 Lakhs+ for luxury island kitchens with built-in appliances. Cost depends on linear footage, shutter finishes (acrylic vs PU vs veneer), and internal Blum hardware configurations.',
+      },
+      {
+        question: 'How long does modular kitchen execution take from design to handover?',
+        answer:
+          'From 3D design approval and site measurements, off-site factory carcass fabrication takes 3 to 4 weeks. On-site installation, countertop fabrication, plumbing, and appliance testing require 7 to 10 working days.',
+      },
+      {
+        question: 'Why does Lodhi Interiors avoid MDF and particle board in kitchens?',
+        answer:
+          'In Bhopal’s climate with monsoon humidity and floor washing, MDF or particle board absorbs ambient moisture at screw anchor points, leading to hinge drop and blown panels within 24 to 36 months. We exclusively use certified IS 710 BWP marine ply.',
+      },
+      {
+        question: 'Do you handle gas pipelines, electrical wiring, and exhaust ducting?',
+        answer:
+          'Yes. Our turnkey service includes core cutting for 6-inch chimney exhaust, concealed gas piping from utility balconies, and dedicated high-amperage electrical wiring for ovens, dishwashers, and induction cooktops.',
+      },
+    ],
+    relatedServices: [
+      {
+        slug: 'residential-interior-design-bhopal',
+        name: 'Residential Interior Design',
+        description: 'Turnkey residential interiors for luxury homes and apartments across Bhopal.',
+      },
+      {
+        slug: 'false-ceiling-design-bhopal',
+        name: 'False Ceiling Design',
+        description: 'Gypsum false ceilings, acoustic baffles, and concealed architectural coves.',
+      },
+      {
+        slug: 'civil-construction-interior-work-bhopal',
+        name: 'Civil & Construction Work',
+        description: 'Wall alterations, masonry, waterproofing, and structural modifications.',
+      },
+    ],
+    metaTitle: 'Modular Kitchen in Bhopal | Turnkey Design | Lodhi Interiors',
+    metaDescription:
+      'Bespoke modular kitchens in Bhopal. 100% IS 710 BWP marine ply, Austrian Blum hardware, quartz counters & turnkey installation. Book a design consultation.',
+  },
+
+  'false-ceiling-design-bhopal': {
+    slug: 'false-ceiling-design-bhopal',
+    name: 'False Ceiling Design',
+    shortDescription:
+      'Architectural false ceiling design and execution in Bhopal utilizing Saint-Gobain Gyproc gypsum, acoustic timber baffles, concealed cove lighting, and ducted AC integration.',
+    categoryTag: 'False Ceilings & Lighting',
+    heroH1: 'False Ceiling Design in Bhopal',
+    heroPromise:
+      'Sculpted architectural ceilings integrating diffused lighting, acoustic discipline, and air conditioning.',
+    heroImage:
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop',
+    heroImageAlt:
+      'Minimal recessed false ceiling with continuous architectural cove lighting and magnetic track fixtures in Bhopal',
+    scopeSummary:
+      'We design and construct seamless, crack-free false ceilings engineered for acoustic comfort, indirect architectural lighting, and MEP concealment.',
+    scopeItems: [
+      'Saint-Gobain Gyproc 12.5mm gypsum plasterboard with galvanized GI framing',
+      'Concealed perimeter LED cove lighting channels with flicker-free drivers',
+      'Magnetic track lighting systems with adjustable spotlights and linear diffusers',
+      'Micro-perforated acoustic wooden ceiling panels for echo absorption (NRC > 0.75)',
+      'Seamless coordination with ducted VRV/cassette air conditioning grills and access traps',
+      'Paper tape and multi-coat joint compound finishing to eliminate hairline cracks',
+      'Water-resistant cement board and calcium silicate ceilings for bathrooms and balconies',
+      'Decorative fluted veneer and acoustic fabric baffle ceilings for living salons and home theatres',
+    ],
+    approachTitle: 'Lighting Hierarchy, Acoustic Control, and Structural Anti-Crack Detailing',
+    approachParagraphs: [
+      'Too many false ceilings in Bhopal are built with cheap local channels and low-grade plaster that sag or develop visible hairline fracture lines within a single summer. At Lodhi Interiors, our false ceilings are conceived as an architectural lighting plane. We calculate photometric lux levels room by room to blend glare-free ambient coves with focused accent beams.',
+      'We build frames exclusively with heavy-gauge galvanized steel (GI) sections spaced at 400mm centers with perimeter channels anchored into solid slab masonry. Board joints are taped with Saint-Gobain fiberglass paper tape and finished with three coats of jointing compound to ensure monolithic smoothness.',
+      'For open-plan living rooms and media lounges, we incorporate micro-perforated acoustic timber panels with rockwool backing, reducing reverberation time to an intimate 0.55 seconds.',
+    ],
+    projectType: 'residential',
+    materialsTitle: 'Ceiling Substrates & Optical Luminaires',
+    materialsProse:
+      'High-density gypsum, acoustic timber, and commercial-grade LED architectural profiles.',
+    materialsList: [
+      {
+        title: 'Saint-Gobain Gyproc 12.5mm Plasterboard',
+        description:
+          'Fire-resistant, high-density gypsum boards that ensure plumb surfaces and sharp edge reveals.',
+        image:
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Gyproc plasterboard false ceiling installation with GI framing in Bhopal',
+      },
+      {
+        title: 'Acoustic Micro-Perforated Oak Panels',
+        description:
+          'Natural veneer acoustic tiles backed with sound-absorbing fleece for media and living rooms.',
+        image:
+          'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Fluted timber acoustic ceiling paneling',
+      },
+      {
+        title: 'Architectural Magnetic Track Profiles',
+        description:
+          'Low-voltage 48V magnetic rails accommodating spotlights, wall washers, and glare-free downlights.',
+        image:
+          'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Flush magnetic track lighting embedded in ceiling cove',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the cost of false ceiling design in Bhopal?',
+        answer:
+          'In Bhopal, standard Gyproc gypsum false ceilings cost between ₹95 and ₹135 per sq.ft. for framing, boarding, and painting. Architectural ceilings featuring perimeter indirect cove lighting, magnetic tracks, or wooden acoustic baffles typically range from ₹160 to ₹260 per sq.ft. including electrical wiring.',
+      },
+      {
+        question: 'How long does false ceiling installation take for a 3BHK flat?',
+        answer:
+          'A complete 3BHK apartment spanning 1,800 to 2,400 sq.ft. takes approximately 10 to 14 working days for GI framing, gypsum boarding, jointing, and initial electrical conduit pulls.',
+      },
+      {
+        question: 'How do you prevent cracks from appearing in false ceilings?',
+        answer:
+          'We avoid cheap local GI channels that warp with seasonal temperature shifts. We use heavy 0.50mm BMT GI sections, screw spacing strictly under 200mm, and Saint-Gobain fiberglass paper joint tape with three coats of polymer jointing compound.',
+      },
+      {
+        question: 'Can false ceilings accommodate cassette and ducted AC systems?',
+        answer:
+          'Yes. We coordinate false ceiling drop levels (typically 7 to 10 inches) with HVAC duct runs and install flush magnetic access doors for servicing filter traps without damaging ceiling paint.',
+      },
+    ],
+    relatedServices: [
+      {
+        slug: 'residential-interior-design-bhopal',
+        name: 'Residential Interior Design',
+        description: 'Complete turnkey residential interiors and architectural villas in Bhopal.',
+      },
+      {
+        slug: 'modular-kitchen-bhopal',
+        name: 'Modular Kitchens',
+        description: 'Architectural modular kitchens with 100% BWP ply and Austrian Blum hardware.',
+      },
+      {
+        slug: 'office-interior-design-bhopal',
+        name: 'Office Interior Design',
+        description: 'Commercial corporate offices with STC-rated acoustic ceiling baffles.',
+      },
+    ],
+    metaTitle: 'False Ceiling Design in Bhopal | Gypsum | Lodhi Interiors',
+    metaDescription:
+      'Architectural false ceiling design in Bhopal. Gyproc gypsum, acoustic timber baffles, concealed cove lighting & ducted AC integration. Request site estimate.',
+  },
+
+  'residential-interior-design-bhopal': {
+    slug: 'residential-interior-design-bhopal',
+    name: 'Residential Interior Design',
+    shortDescription:
+      'Complete turnkey residential interior design and execution for private apartments, standalone bungalows, and luxury villas across Bhopal.',
+    categoryTag: 'Residential & Luxury Villas',
+    heroH1: 'Residential Interior Design in Bhopal',
+    heroPromise:
+      'Homes shaped with spatial clarity, natural central Indian materials, and single-custody execution.',
+    heroImage:
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop',
+    heroImageAlt:
+      'Open-plan modern living and dining room with fluted timber partitions in an Arera Colony residence, Bhopal',
+    scopeSummary:
+      'We manage the entire residential build from architectural planning and structural modifications to custom joinery, stone flooring, and final styling.',
+    scopeItems: [
+      'Comprehensive space planning, circulation analysis, and functional zoning',
+      'Civil wall alterations, doorway reconfigurations, and structural masonry',
+      'Complete electrical overhaul, balanced 3-phase circuits, and smart lighting conduits',
+      'Custom full-height wardrobe suites with integrated LED profiles and internal joinery',
+      'Bespoke TV consoles, fluted timber partitions, and living room credenzas',
+      'Luxury bathroom vanity fabrication, sanitary re-piping, and waterproofing',
+      'Italian marble and Kota stone dry-lay inspection, diamond polishing, and sealing',
+      'Loose furniture procurement, custom upholstery, and bespoke soft furnishings',
+    ],
+    approachTitle: 'Designing for Central Indian Climate and Family Living Rhythms',
+    approachParagraphs: [
+      'Residential architecture in Bhopal must respond to extreme seasonal conditions—from 44°C dry summer heat to heavy monsoons. Our design methodology begins by mapping cross-ventilation, natural sun angles, and multi-generational privacy requirements before specifying a single decorative item.',
+      'Unlike local decorators who pass off work to unvetted contractors, Lodhi Interiors controls every trade directly. Soumya Lodhi personally reviews site milestones, dry-lays natural stone slabs to ensure grain continuation, and verifies joinery reveals with laser levels.',
+      'We prioritize authentic tactile materials—honed travertine, quarter-sawn teak, breathable mineral lime plaster, and patinated bronze trims—that age gracefully over decades of family life.',
+    ],
+    projectType: 'residential',
+    materialsTitle: 'Curated Central Indian Residential Palette',
+    materialsProse:
+      'Natural stones, kiln-dried hardwoods, and breathable mineral finishes.',
+    materialsList: [
+      {
+        title: 'Honed Travertine & Kota Stone',
+        description:
+          'Thermal-regulating natural stone slabs calibrated for barefoot comfort during Central Indian summers.',
+        image:
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Honed travertine floor slabs with flush architectural grouting',
+      },
+      {
+        title: 'Fluted Teak & Smoked Oak',
+        description:
+          'Kiln-dried natural hardwoods finished with matte organic hardwax oils to prevent monsoon warping.',
+        image:
+          'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Close-up of bespoke fluted teak joinery detailing',
+      },
+      {
+        title: 'Cast Lime & Mineral Plaster',
+        description:
+          'Breathable, non-toxic wall coatings that regulate ambient humidity and reflect soft daylight.',
+        image:
+          'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Textured matte lime plaster wall finish',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the cost of residential interior design and execution in Bhopal?',
+        answer:
+          'In Bhopal, turnkey residential execution typically ranges from ₹1,800 to ₹3,200 per sq.ft. for premium apartments, and ₹3,500 to ₹6,500+ per sq.ft. for luxury villas in Arera Colony and Shahpura. Cost depends on civil modifications, imported stone selections, and joinery density.',
+      },
+      {
+        question: 'How long does a full home turnkey execution take in Bhopal?',
+        answer:
+          'A typical 3BHK or 4BHK home spanning 2,200 to 3,500 sq.ft. takes 4.5 to 6.5 months from concept sign-off to handover, encompassing 4 weeks of design detailing followed by phased civil, joinery, and finishing works.',
+      },
+      {
+        question: 'Do you work in gated communities and high-rise apartments in Bhopal?',
+        answer:
+          'Yes. We regularly execute projects in premium societies across Arera Colony, Bawadiya Kalan, and Shahpura, managing society permissions, noise windows (10 AM to 5 PM), debris haulage, and elevator protection.',
+      },
+      {
+        question: 'Who supervises the execution on site?',
+        answer:
+          'Lodhi Interiors maintains dedicated in-house site supervisors on every project in Bhopal. Founder Soumya Lodhi personally conducts critical weekly milestone inspections.',
+      },
+    ],
+    relatedServices: [
+      {
+        slug: 'modular-kitchen-bhopal',
+        name: 'Modular Kitchens',
+        description: 'Turnkey culinary spaces engineered with BWP marine ply and Blum hardware.',
+      },
+      {
+        slug: 'false-ceiling-design-bhopal',
+        name: 'False Ceiling Design',
+        description: 'Gyproc gypsum ceilings with concealed coves and acoustic timber baffles.',
+      },
+      {
+        slug: 'civil-construction-interior-work-bhopal',
+        name: 'Civil & Construction Work',
+        description: 'Turnkey civil demolition, waterproofing, and structural modifications.',
+      },
+    ],
+    metaTitle: 'Residential Interior Design in Bhopal | Lodhi Interiors',
+    metaDescription:
+      'Turnkey residential interior design for apartments & luxury villas in Bhopal. Custom joinery, natural stone & single-custody execution. Discuss your home.',
+  },
+
+  'office-interior-design-bhopal': {
+    slug: 'office-interior-design-bhopal',
+    name: 'Office Interior Design',
+    shortDescription:
+      'Corporate headquarters, advisory suites, and modern commercial offices designed for acoustic focus and turnkey execution in Bhopal.',
+    categoryTag: 'Commercial Workplace',
+    heroH1: 'Office Interior Design in Bhopal',
+    heroPromise:
+      'Workplaces engineered for acoustic discipline, ergonomic posture, and corporate brand stature.',
+    heroImage:
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1800&auto=format&fit=crop',
+    heroImageAlt:
+      'Executive boardroom with acoustic timber paneling and linear architectural lighting in MP Nagar, Bhopal',
+    scopeSummary:
+      'We deliver turnkey commercial offices from bare shell or live refurbishment, handling civil works, HVAC zoning, acoustic partitions, and structured cabling.',
+    scopeItems: [
+      'Agile space programming, occupancy density modeling, and ergonomic circulation',
+      'Acoustic double-glazed glass partitions with concealed aluminum floor channels',
+      'Structured Cat6/fiber network cabling, server rack setup, and modular floor raceways',
+      'VRV/ducted air conditioning zoning with individual conference room motorized dampers',
+      'Acoustic baffle ceilings with sound absorption ratings exceeding NRC 0.75',
+      'Custom executive desks, conference tables with integrated AV ports, and ergonomic task joinery',
+      'Reception statement architecture, backlit brand wall, and visitor lounge curation',
+      'Bhopal Municipal Corporation (BMC) fire egress compliance and sprinkler drops',
+    ],
+    approachTitle: 'Acoustics, Cable Infrastructure, and Rapid Turnkey Phased Delivery',
+    approachParagraphs: [
+      'In Bhopal’s business corridors like MP Nagar, Arera Hills, and Hoshangabad Road, offices often fail because of acoustic bleed or spaghetti cable clutter. Our studio approaches commercial workplaces with acoustic engineering and functional ergonomics.',
+      'Boardroom walls are constructed with double-stud gypsum assemblies with 50mm acoustic rockwool infill, achieving Sound Transmission Class (STC) ratings above 50 to guarantee absolute boardroom confidentiality.',
+      'We operate on strict Gantt schedules to minimize corporate lease holding costs—pre-fabricating modular workstations off-site while on-site electrical and civil works run in coordinated night shifts.',
+    ],
+    projectType: 'office',
+    materialsTitle: 'Commercial-Grade Durability Standards',
+    materialsProse:
+      'High-traffic commercial materials certified for acoustic absorption and fire retardation.',
+    materialsList: [
+      {
+        title: 'Acoustic Fluted Oak Paneling',
+        description:
+          'Micro-perforated natural timber panels with acoustic black fleece backing for targeted sound absorption.',
+        image:
+          'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Acoustic fluted oak boardroom wall paneling',
+      },
+      {
+        title: 'Frameless Acoustic Glass Partitions',
+        description:
+          '12mm acoustic laminated glass with matte powder-coated slimline aluminum profiles.',
+        image:
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Glass office partition with blackened steel hardware',
+      },
+      {
+        title: 'Modular Commercial Carpet Tiles',
+        description:
+          'Heavy commercial nylon carpet tiles with cushion backing for footfall sound dampening.',
+        image:
+          'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'High-density commercial modular carpet tiles',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the cost per square foot for office interiors in Bhopal?',
+        answer:
+          'Commercial office fit-outs in Bhopal typically range from ₹1,500 to ₹2,800 per sq.ft. for standard corporate workstations and IT suites, and ₹2,800 to ₹4,500+ per sq.ft. for executive headquarters with high-spec acoustic partitions and bespoke boardroom tables.',
+      },
+      {
+        question: 'How fast can you deliver a 4,000 sq.ft. commercial office in Bhopal?',
+        answer:
+          'A 4,000 sq.ft. office is typically completed in 8 to 12 weeks from finalized layout approval, supported by our off-site workstation modular fabrication.',
+      },
+      {
+        question: 'Can you carry out office renovation while the company remains operational?',
+        answer:
+          'Yes. We frequently execute phased commercial refurbishments, isolating active working zones with dust containment and running noisy civil tasks during night shifts and weekends.',
+      },
+      {
+        question: 'Do you handle BMC fire NOC and safety compliance?',
+        answer:
+          'Yes. We align all internal partitions, sprinkler drops, smoke detectors, and emergency exits with Bhopal Municipal Corporation (BMC) and NBC fire safety standards.',
+      },
+    ],
+    relatedServices: [
+      {
+        slug: 'retail-showroom-interior-bhopal',
+        name: 'Retail Showroom Interiors',
+        description: 'Commercial retail flagships, luxury showrooms, and brand environments.',
+      },
+      {
+        slug: 'false-ceiling-design-bhopal',
+        name: 'False Ceiling Design',
+        description: 'Acoustic ceilings, magnetic tracks, and concealed HVAC integration.',
+      },
+      {
+        slug: 'civil-construction-interior-work-bhopal',
+        name: 'Civil & Construction Work',
+        description: 'Turnkey structural civil works, masonry, and floor screeds.',
+      },
+    ],
+    metaTitle: 'Office Interior Design in Bhopal | Fitouts | Lodhi Interiors',
+    metaDescription:
+      'Corporate office interior design & turnkey fitouts in Bhopal. Acoustic meeting spaces, ergonomic workstations, IT cabling & fast delivery. Contact our team.',
+  },
+
+  'retail-showroom-interior-bhopal': {
+    slug: 'retail-showroom-interior-bhopal',
+    name: 'Retail & Showroom Interior Design',
+    shortDescription:
+      'Brand-defining luxury retail environments, jewelry boutiques, and flagship showrooms engineered for customer conversion in Bhopal.',
+    categoryTag: 'Retail & Brand Spaces',
+    heroH1: 'Retail Showroom Interiors in Bhopal',
+    heroPromise:
+      'Brand spaces engineered for customer journey flow, product focal clarity, and sales velocity.',
+    heroImage:
+      'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?q=80&w=1800&auto=format&fit=crop',
+    heroImageAlt:
+      'Minimal luxury boutique showroom interior with focal pedestal displays and warm architectural lighting in Bhopal',
+    scopeSummary:
+      'We design and construct high-converting retail stores, jewelry boutiques, and showrooms in Bhopal, balancing brand storytelling with heavy footfall durability.',
+    scopeItems: [
+      'Customer journey pathing, sightline hierarchy, and visual merchandising architecture',
+      'Bespoke retail vitrines, display islands, and concealed secure jewelry counters',
+      'High Color Rendering Index (CRI > 95) architectural retail track lighting',
+      'Heavy-traffic flooring systems (abrasion resistance PEI 5 vitrified slabs and natural terrazzo)',
+      'Secure cash-wrap counters with integrated POS, cable concealment, and safe anchoring',
+      'Storefront facade design, structural glass entries, and illuminated architectural signage',
+      'Inventory backrooms, staff utility zones, and secure merchandise storage',
+      'Integrated security camera conduit maps, EAS anti-theft sensors, and access control',
+    ],
+    approachTitle: 'Sightlines, High-CRI Optical Lighting, and Commercial Footfall Resistance',
+    approachParagraphs: [
+      'Retail interiors in prime Bhopal shopping districts like New Market, Malviya Nagar, and 10 No. Market must fulfill one commercial rule: guide customers effortlessly and display products with zero optical distortion.',
+      'We deploy architectural track lighting with Color Rendering Index (CRI) exceeding 95, ensuring accurate fabric colors, diamond brilliance, and gemstone warmth without ugly yellow tints.',
+      'Retail floors endure relentless abuse. We specify heavy vitrified slabs, cast terrazzo, and PVD titanium-coated stainless steel trims that preserve showroom luxury under thousands of daily visitors.',
+    ],
+    projectType: 'retail',
+    materialsTitle: 'High-Impact Commercial Retail Materials',
+    materialsProse:
+      'Surfaces engineered to endure relentless commercial footfall without showing wear.',
+    materialsList: [
+      {
+        title: 'PVD-Coated Titanium Stainless Steel',
+        description:
+          'Ultra-durable, scratch-resistant brass and champagne metal finishes for garment racks and display cases.',
+        image:
+          'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'PVD coated brass retail display hardware',
+      },
+      {
+        title: 'Ultra-Clear Optiwhite Glass Vitrines',
+        description:
+          'Low-iron security glass with zero greenish tint for crystal-clear jewelry and apparel presentation.',
+        image:
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Low-iron glass retail jewelry display showcase',
+      },
+      {
+        title: 'Honed Cast Terrazzo & Granite',
+        description:
+          'Dense, non-porous floor slabs resistant to heavy foot traffic, cart wheels, and daily mechanical cleaning.',
+        image:
+          'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Honed terrazzo retail flooring finish',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the cost of setting up a retail showroom in Bhopal?',
+        answer:
+          'Retail showroom fit-outs in Bhopal typically range from ₹1,800 to ₹3,500 per sq.ft. for standard apparel and lifestyle stores, and ₹3,500 to ₹7,000+ per sq.ft. for luxury jewelry boutiques requiring security vitrines, 95+ CRI optical lighting, and PVD metal finishes.',
+      },
+      {
+        question: 'How fast can you complete a retail fit-out to save rent?',
+        answer:
+          'We understand the cost of dark store days. We execute 1,500 to 3,000 sq.ft. retail fit-outs in 30 to 45 calendar days by pre-fabricating display modules off-site while flooring and ceiling works proceed on site.',
+      },
+      {
+        question: 'Do you design retail storefront facades as well as interiors?',
+        answer:
+          'Yes. We deliver the complete street-facing envelope: structural glass glazing, ACP or stone cladding, weather-sealed entrances, and local municipality-compliant signage.',
+      },
+      {
+        question: 'How do you handle retail store security wiring and POS integration?',
+        answer:
+          'Our turnkey scope includes concealed conduit networks for EAS anti-theft gates, CCTV high-res cameras, biometric lock integration, and secure under-counter POS data cabling.',
+      },
+    ],
+    relatedServices: [
+      {
+        slug: 'office-interior-design-bhopal',
+        name: 'Office Interior Design',
+        description: 'Commercial corporate offices, advisory suites, and modern workspaces.',
+      },
+      {
+        slug: 'restaurant-hospitality-interior-bhopal',
+        name: 'Restaurant & Hospitality',
+        description: 'Atmospheric dining spaces, cafes, and boutique hotel interiors.',
+      },
+      {
+        slug: 'civil-construction-interior-work-bhopal',
+        name: 'Civil & Construction Work',
+        description: 'Commercial structural alterations, floor screeds, and storefront masonry.',
+      },
+    ],
+    metaTitle: 'Retail Showroom Interior Design in Bhopal | Lodhi Interiors',
+    metaDescription:
+      'High-conversion retail store & luxury showroom interior design in Bhopal. High-CRI track lighting, security vitrines & durable flooring. Start your build.',
+  },
+
+  'restaurant-hospitality-interior-bhopal': {
+    slug: 'restaurant-hospitality-interior-bhopal',
+    name: 'Restaurant & Hospitality Design',
+    shortDescription:
+      'Atmospheric dining spaces, boutique cafes, lounge bars, and luxury hotel suites crafted turnkey in Bhopal.',
+    categoryTag: 'Hospitality & Dining',
+    heroH1: 'Restaurant Interior Design in Bhopal',
+    heroPromise:
+      'Atmospheric culinary spaces balancing guest intimacy, acoustic comfort, and commercial kitchen MEP.',
+    heroImage:
+      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1800&auto=format&fit=crop',
+    heroImageAlt:
+      'Warm atmospheric dining room with curved booths, fluted timber, and intimate architectural lighting in Bhopal',
+    scopeSummary:
+      'We design and execute experiential dining spaces, cafes, and boutique hospitality interiors in Bhopal, coordinating front-of-house atmosphere with commercial kitchen MEP.',
+    scopeItems: [
+      'Table cover yield optimization, circulation aisle flow, and service station ergonomics',
+      'Multi-tiered dimmable architectural lighting design (ambient, accent, table intimacy at 2400K)',
+      'Commercial kitchen layout coordination: exhaust hoods, fresh air ducts, and grease traps',
+      'Custom acoustic ceiling baffles and upholstered booth sound absorption',
+      'Heavy commercial stain-resistant banquet upholstery and solid hardwood tables',
+      'Feature bar counter architecture with brass glass racks, speed rails, and bottle displays',
+      'Restroom design as a luxury brand extension with touchless premium fixtures',
+      'Compliance with local commercial food safety layouts, fire exits, and ventilation codes',
+    ],
+    approachTitle: 'Atmosphere, Acoustic Intimacy, and Commercial Kitchen Synergy',
+    approachParagraphs: [
+      'In Bhopal’s dining destinations across Arera Colony, Shyamla Hills, and Gulmohar, interior architecture governs table turnover, average spend per guest, and repeat patronage. If a restaurant is noisy, guests leave early; if lighting is flat, the food fails to look appetising.',
+      'We create hospitality venues from sensory principles: multi-circuit dimmable scenes that transition from afternoon daylight to warm, candlelit intimacy in the evening. Ceilings, wall banquettes, and drapery are acoustically tuned to keep noise lively without requiring guests to shout.',
+      'Our turnkey team coordinates exhaust riser routes, grease traps, and kitchen gas bank manifolds from day one, preventing kitchen odors from spilling into guest dining rooms.',
+    ],
+    projectType: 'hospitality',
+    materialsTitle: 'Atmospheric & High-Resilience Hospitality Materials',
+    materialsProse:
+      'Tactile surfaces that absorb sound and resist spills, hot dishes, and commercial cleaning.',
+    materialsList: [
+      {
+        title: 'Commercial Crypton Upholstery & Leather',
+        description:
+          'Stain-repellent, moisture-barrier commercial fabrics that feel luxurious yet wipe clean easily.',
+        image:
+          'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Custom leather hospitality booth banquette seating detail',
+      },
+      {
+        title: 'Solid Ash & Teak Dining Tops',
+        description:
+          'Heavy solid hardwood tops treated with food-safe polyurethanes resistant to hot ceramic plates and alcohol.',
+        image:
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Solid timber dining table finish detail',
+      },
+      {
+        title: 'Deep Warm Travertine & Ribbed Concrete',
+        description:
+          'Tactile bar frontages and washroom vanities with water-repellent silane impregnators.',
+        image:
+          'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Textured ribbed bar counter finish in natural stone',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the average fit-out cost for a restaurant or cafe in Bhopal?',
+        answer:
+          'Restaurant fit-outs in Bhopal typically range from ₹2,000 to ₹3,800 per sq.ft. for contemporary cafes and bistros, and ₹3,800 to ₹7,000+ per sq.ft. for fine-dining restaurants and lounge bars. Cost drivers include commercial exhaust hoods, acoustic ceiling baffles, and custom booth seating.',
+      },
+      {
+        question: 'How do you coordinate commercial kitchen MEP with the dining area?',
+        answer:
+          'We model kitchen exhaust risers, fresh air makeup units, grease trap drainage gradients, and gas bank manifolds before wall layouts are finalized, ensuring seamless food service operations.',
+      },
+      {
+        question: 'How do you prevent restaurants from becoming deafeningly noisy?',
+        answer:
+          'We engineer acoustic absorption into ceilings, upholstered banquettes, and fabric drapery, ensuring room reverberation remains below 0.7 seconds even at 100% table capacity.',
+      },
+      {
+        question: 'Can you deliver within strict pre-opening marketing deadlines?',
+        answer:
+          'Yes. We execute hospitality projects under committed Gantt schedules with milestone tracking, keeping marketing campaigns and launch dates on schedule.',
+      },
+    ],
+    relatedServices: [
+      {
+        slug: 'retail-showroom-interior-bhopal',
+        name: 'Retail Showroom Interiors',
+        description: 'Brand-defining retail environments and commercial flagships.',
+      },
+      {
+        slug: 'office-interior-design-bhopal',
+        name: 'Office Interior Design',
+        description: 'Corporate headquarters, advisory suites, and modern workspaces.',
+      },
+      {
+        slug: 'civil-construction-interior-work-bhopal',
+        name: 'Civil & Construction Work',
+        description: 'Commercial kitchen civil works, drainage gradients, and masonry.',
+      },
+    ],
+    metaTitle: 'Restaurant Interior Design in Bhopal | Lodhi Interiors',
+    metaDescription:
+      'Experiential restaurant, cafe & hotel interior design in Bhopal. Acoustic dining comfort, layered lighting & commercial kitchen MEP delivery. Consult us.',
+  },
+
+  'civil-construction-interior-work-bhopal': {
+    slug: 'civil-construction-interior-work-bhopal',
+    name: 'Civil & Construction Work',
+    shortDescription:
+      'Turnkey civil alterations, structural modifications, wall masonry, damp-proofing, and flooring execution in Bhopal.',
+    categoryTag: 'Civil & Turnkey Construction',
+    heroH1: 'Civil Construction & Interior Work in Bhopal',
+    heroPromise:
+      'Structural integrity, precision laser screeds, and single-source turnkey site custody.',
+    heroImage:
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop',
+    heroImageAlt:
+      'Turnkey civil interior construction and architectural masonry execution on site in Bhopal',
+    scopeSummary:
+      'We execute structural demolition, wall masonry, plumbing overhauls, waterproofing, and screeding in-house under single-point studio custody.',
+    scopeItems: [
+      'Controlled internal wall demolition, lintel casting, and reinforced brick masonry',
+      'Three-layer elastomeric polymer waterproofing for wet areas, terraces, and sunken slabs',
+      'Precision floor screeding with laser levels to achieve 1mm flatness tolerances',
+      'Concealed CPVC/UPVC plumbing manifolds with pressure testing to 10 bar',
+      'Electrical conduit chasing, main distribution board balancing, and earth rod installations',
+      'Natural Kota stone, Italian marble, and large-format vitrified slab installation',
+      'Structural crack injection, anti-termite chemical soil barrier treatment, and curing management',
+      'Debris removal, site cleanup, and structural handover sign-offs',
+    ],
+    approachTitle: 'Substrate Integrity: Why Lasting Interiors Depend on Civil Precision',
+    approachParagraphs: [
+      'In the Indian construction ecosystem, interior designers often hand drawings to independent civil contractors who lack architectural understanding. The outcome is crooked walls, hollow floor tiles, and hidden plumbing leaks that ruin expensive woodwork two years later.',
+      'Lodhi Interiors eliminates this risk by keeping civil execution in-house. Our site supervisors establish laser datum lines before masonry begins, ensuring walls are perfectly plumb and corners are true 90-degree angles.',
+      'Every bathroom and wet balcony undergoes flood testing for 72 hours following application of three-coat elastomeric polymer waterproofing. Only when moisture integrity is certified do tile and joinery trades begin.',
+    ],
+    projectType: 'residential',
+    materialsTitle: 'Structural Substrates & Waterproofing Chemistry',
+    materialsProse:
+      'Industrial-grade mortars, polymer waterproofing, and pressure-tested plumbing lines.',
+    materialsList: [
+      {
+        title: 'Three-Coat Elastomeric Waterproofing',
+        description:
+          'Flexible polymer membrane reinforced with non-woven geotextile mesh across all corners and floor joints.',
+        image:
+          'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Precision waterproofing substrate application',
+      },
+      {
+        title: 'Polymer-Modified Tile Adhesive (Type 2/3)',
+        description:
+          'High-shear strength adhesive preventing hollow tiles or debonding under heavy thermal movement.',
+        image:
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Large format tile adhesive application with notched trowel',
+      },
+      {
+        title: 'Pressure-Tested CPVC Plumbing Manifolds',
+        description:
+          'Chlorinated polyvinyl chloride piping with individual isolation valves tested to 10 bar hydrostatic pressure.',
+        image:
+          'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=800&auto=format&fit=crop',
+        imageAlt: 'Concealed manifold plumbing infrastructure',
+      },
+    ],
+    faqs: [
+      {
+        question: 'What civil construction services do you provide in Bhopal?',
+        answer:
+          'Our in-house civil team handles internal wall alterations, structural lintels, bathroom relocation, 3-layer polymer waterproofing, concealed plumbing, electrical chasing, floor leveling screeds, and natural stone or tile laying.',
+      },
+      {
+        question: 'Why is in-house civil execution better than hiring independent masons?',
+        answer:
+          'Independent masons and carpenters routinely blame each other for out-of-plumb walls and mismatched levels. Because Lodhi Interiors employs both civil teams and joiners, we enforce 1.5mm tolerances and take 100% single-source custody.',
+      },
+      {
+        question: 'How do you guarantee leak-free bathrooms and balconies?',
+        answer:
+          'We apply three coats of elastomeric polymer waterproofing with geotextile reinforcement at junctions, followed by a mandatory 72-hour pond testing under standing water before laying tiles.',
+      },
+      {
+        question: 'What is the cost of interior civil modifications in Bhopal?',
+        answer:
+          'Civil interior work in Bhopal typically ranges from ₹450 to ₹950 per sq.ft. depending on structural demolition, waterproofing scope, plumbing overhaul, and tile installation complexity.',
+      },
+    ],
+    relatedServices: [
+      {
+        slug: 'residential-interior-design-bhopal',
+        name: 'Residential Interior Design',
+        description: 'Turnkey residential interiors for luxury homes and apartments across Bhopal.',
+      },
+      {
+        slug: 'modular-kitchen-bhopal',
+        name: 'Modular Kitchens',
+        description: 'Architectural modular kitchens with 100% BWP ply and Austrian Blum hardware.',
+      },
+      {
+        slug: 'false-ceiling-design-bhopal',
+        name: 'False Ceiling Design',
+        description: 'Gyproc gypsum ceilings with concealed coves and acoustic timber baffles.',
+      },
+    ],
+    metaTitle: 'Civil & Interior Construction in Bhopal | Lodhi Interiors',
+    metaDescription:
+      'In-house civil alterations, structural modifications, masonry, waterproofing & flooring in Bhopal. Single-custody turnkey execution. Inquire for site quote.',
+  },
 };
 
 export function getAllServices(): ServiceData[] {

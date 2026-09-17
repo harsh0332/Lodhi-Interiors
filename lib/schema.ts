@@ -55,7 +55,7 @@ export function buildLocalBusinessSchema() {
     image: `${env.NEXT_PUBLIC_SITE_URL}/images/og-default.jpg`,
     hasMap: 'https://maps.app.goo.gl/vUjqWdot6fNntShv9',
     sameAs: [
-      'https://instagram.com/lodhiinteriors',
+      'https://instagram.com/best_interior_work_bhopal_',
       'https://maps.app.goo.gl/vUjqWdot6fNntShv9',
       'https://share.google/IB2n0yeAwqOrG2RqV',
     ],
@@ -86,7 +86,7 @@ export function buildFounderPersonSchema() {
     description:
       'Founder and Principal Designer at Lodhi Interiors with 8+ years of practice in architectural interior design and turnkey execution in Bhopal, Madhya Pradesh.',
     url: `${env.NEXT_PUBLIC_SITE_URL}/studio`,
-    sameAs: ['https://instagram.com/lodhiinteriors'],
+    sameAs: ['https://instagram.com/best_interior_work_bhopal_'],
     knowsAbout: [
       'Interior Architecture',
       'Turnkey Execution',

@@ -60,8 +60,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // 2. Service Pages (8 Commercial Money Pages)
-  const services = getAllServices();
+  // 2. Dedicated Bhopal Core Service Pages
+  const bhopalServiceSlugs = [
+    'modular-kitchen-bhopal',
+    'false-ceiling-design-bhopal',
+    'residential-interior-design-bhopal',
+    'office-interior-design-bhopal',
+    'retail-showroom-interior-bhopal',
+    'restaurant-hospitality-interior-bhopal',
+    'civil-construction-interior-work-bhopal',
+  ];
+  const bhopalServiceRoutes: MetadataRoute.Sitemap = bhopalServiceSlugs.map((slug) => ({
+    url: `${baseUrl}/${slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.95,
+  }));
+
+  // 3. Services Directory Pages
+  const services = getAllServices().filter((s) => !bhopalServiceSlugs.includes(s.slug));
   const serviceRoutes: MetadataRoute.Sitemap = services.map((service) => ({
     url: `${baseUrl}/services/${service.slug}`,
     lastModified: now,
@@ -96,5 +113,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...projectRoutes, ...insightRoutes, ...localityRoutes];
+  return [
+    ...staticRoutes,
+    ...bhopalServiceRoutes,
+    ...serviceRoutes,
+    ...projectRoutes,
+    ...insightRoutes,
+    ...localityRoutes,
+  ];
 }

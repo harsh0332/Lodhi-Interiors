@@ -20,7 +20,7 @@ async function runSeoAudit() {
   // 1. Static Core Pages
   routesToCheck.push({
     route: '/',
-    title: 'Lodhi Interiors — Interior Design and Turnkey Execution Studio in Bhopal',
+    title: 'Interior Designer in Bhopal | Lodhi Interiors',
     description: formatMetaDescription(
       'Bhopal studio shaping complete luxury residential and commercial interiors from concept to turnkey execution. Founded by Soumya Lodhi, 8+ years in practice.',
     ),
@@ -90,8 +90,31 @@ async function runSeoAudit() {
     canonical: 'https://lodhiinteriors.com/locations',
   });
 
-  // 2. Services (8)
-  const services = getAllServices();
+  // 2. Dedicated Bhopal Core Services (7)
+  const bhopalSlugs = [
+    'modular-kitchen-bhopal',
+    'false-ceiling-design-bhopal',
+    'residential-interior-design-bhopal',
+    'office-interior-design-bhopal',
+    'retail-showroom-interior-bhopal',
+    'restaurant-hospitality-interior-bhopal',
+    'civil-construction-interior-work-bhopal',
+  ];
+
+  for (const slug of bhopalSlugs) {
+    const svc = getAllServices().find((s) => s.slug === slug);
+    if (svc) {
+      routesToCheck.push({
+        route: `/${slug}`,
+        title: svc.metaTitle,
+        description: formatMetaDescription(svc.metaDescription),
+        canonical: `https://lodhiinteriors.com/${slug}`,
+      });
+    }
+  }
+
+  // 3. Category Service Directory Pages
+  const services = getAllServices().filter((s) => !bhopalSlugs.includes(s.slug));
   for (const svc of services) {
     routesToCheck.push({
       route: `/services/${svc.slug}`,
