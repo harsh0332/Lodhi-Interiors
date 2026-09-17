@@ -1,0 +1,42 @@
+<svg viewBox='0 0 512 512' width='512' height='512' xmlns='http://www.w3.org/2000/svg'>
+  <defs>
+    <linearGradient id='goldGrad' x1='0%' y1='0%' x2='100%' y2='100%'>
+      <stop offset='0%' stop-color='#F7EBD9'/>
+      <stop offset='35%' stop-color='#E5C77A'/>
+      <stop offset='70%' stop-color='#C5A265'/>
+      <stop offset='100%' stop-color='#9E7B3A'/>
+    </linearGradient>
+    <radialGradient id='bgGrad' cx='50%' cy='50%' r='65%'>
+      <stop offset='0%' stop-color='#26221E'/>
+      <stop offset='65%' stop-color='#161412'/>
+      <stop offset='100%' stop-color='#0B0A09'/>
+    </radialGradient>
+    <filter id='shadow' x='-15%' y='-15%' width='130%' height='130%'>
+      <feDropShadow dx='0' dy='6' stdDeviation='12' flood-color='#000000' flood-opacity='0.75'/>
+    </filter>
+  </defs>
+
+  <!-- Full Bleed Luxury Charcoal Base -->
+  <rect width='512' height='512' fill='url(#bgGrad)'/>
+
+  <!-- Circular Outer Architectural Bezel (Safe inside circular SERP crop) -->
+  <circle cx='256' cy='256' r='236' stroke='url(#goldGrad)' stroke-width='3.5' stroke-opacity='0.8'/>
+  <circle cx='256' cy='256' r='222' stroke='url(#goldGrad)' stroke-width='1.2' stroke-opacity='0.4' stroke-dasharray='5 7'/>
+
+  <!-- Architectural Compass Marks at 12, 3, 6, 9 o clock -->
+  <line x1='256' y1='18' x2='256' y2='34' stroke='url(#goldGrad)' stroke-width='3.5'/>
+  <line x1='256' y1='478' x2='256' y2='494' stroke='url(#goldGrad)' stroke-width='3.5'/>
+  <line x1='18' y1='256' x2='34' y2='256' stroke='url(#goldGrad)' stroke-width='3.5'/>
+  <line x1='478' y1='256' x2='494' y2='256' stroke='url(#goldGrad)' stroke-width='3.5'/>
+
+  <!-- Golden Central LI Monogram with calibrated kerning -->
+  <g filter='url(#shadow)'>
+    <text x='256' y='338' 
+          font-family='Georgia, "Times New Roman", serif' 
+          font-size='240' 
+          font-weight='700' 
+          letter-spacing='10' 
+          fill='url(#goldGrad)' 
+          text-anchor='middle'>LI</text>
+  </g>
+</svg>
