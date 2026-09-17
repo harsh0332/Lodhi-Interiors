@@ -53,7 +53,11 @@ export function buildLocalBusinessSchema() {
     ],
     priceRange: '₹₹₹₹',
     image: `${env.NEXT_PUBLIC_SITE_URL}/images/og-default.jpg`,
-    sameAs: ['https://instagram.com/lodhiinteriors'],
+    hasMap: 'https://share.google/IB2n0yeAwqOrG2RqV',
+    sameAs: [
+      'https://instagram.com/lodhiinteriors',
+      'https://share.google/IB2n0yeAwqOrG2RqV',
+    ],
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',

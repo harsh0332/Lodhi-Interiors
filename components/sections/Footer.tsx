@@ -74,13 +74,22 @@ export function Footer() {
                 <BrandLogo size="md" tone="light" />
               </div>
 
-              <address className="not-italic leading-relaxed text-greige/90">
+              <a
+                href="https://share.google/IB2n0yeAwqOrG2RqV"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block not-italic leading-relaxed text-greige/90 transition-colors hover:text-bone"
+                title="View Lodhi Interiors on Google Maps"
+              >
                 Shop No 10, Sagar High Street,
                 <br />
                 Near Dmart, Ayodhya Bypass,
                 <br />
                 Bhopal, Madhya Pradesh 462021, India
-              </address>
+                <span className="mt-1 flex items-center gap-1.5 font-mono text-[0.75rem] text-accent transition-transform duration-200 group-hover:translate-x-1">
+                  View on Google Maps &rarr;
+                </span>
+              </a>
 
               {/* Structured Action Buttons with Icons */}
               <div className="pt-2">
@@ -88,6 +97,24 @@ export function Footer() {
                   Direct Inquiries &amp; Studio Desk
                 </span>
                 <div className="flex flex-wrap gap-2.5">
+                  <a
+                    href="https://share.google/IB2n0yeAwqOrG2RqV"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 border border-greige/30 bg-bone/[0.04] px-3.5 py-2 text-[0.8125rem] font-sans font-medium text-bone/90 transition-all duration-200 hover:border-accent hover:bg-bone/10 hover:text-bone focus-visible:ring-2 focus-visible:ring-accent"
+                    aria-label="Google Maps Location & Directions"
+                  >
+                    <svg
+                      className="h-3.5 w-3.5 text-accent"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                    </svg>
+                    <span>Google Maps</span>
+                  </a>
+
                   <a
                     href={`tel:${env.NEXT_PUBLIC_PHONE_NUMBER}`}
                     className="inline-flex items-center gap-2 border border-greige/30 bg-bone/[0.04] px-3.5 py-2 text-[0.8125rem] font-sans font-medium text-bone/90 transition-all duration-200 hover:border-accent hover:bg-bone/10 hover:text-bone focus-visible:ring-2 focus-visible:ring-accent"
