@@ -155,7 +155,7 @@ export function Footer() {
                   </a>
 
                   <a
-                    href="https://instagram.com/best_interior_work_bhopal_"
+                    href="https://www.instagram.com/lodhiinteriors.bhopal"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 border border-greige/30 bg-bone/[0.04] px-3.5 py-2 text-[0.8125rem] font-sans font-medium text-bone/90 transition-all duration-200 hover:border-[#E4405F] hover:bg-bone/10 hover:text-bone focus-visible:ring-2 focus-visible:ring-[#E4405F]"

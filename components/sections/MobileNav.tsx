@@ -132,7 +132,7 @@ export function MobileNav({ isOpen, onClose, triggerRef }: MobileNavProps) {
           </a>
           <span aria-hidden="true" className="text-greige/40">•</span>
           <a
-            href="https://instagram.com/lodhiinteriors"
+            href="https://www.instagram.com/lodhiinteriors.bhopal"
             target="_blank"
             rel="noopener noreferrer"
             className="flex min-h-[44px] items-center py-2 transition-colors hover:text-bone focus-visible:ring-2 focus-visible:ring-accent"
