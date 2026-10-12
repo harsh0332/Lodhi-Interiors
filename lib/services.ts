@@ -52,9 +52,9 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     heroPromise:
       'Homes conceived with spatial clarity, honest natural materials, and turnkey site custody.',
     heroImage:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-ayodhya-bypass-dining-atrium.jpg',
     heroImageAlt:
-      'Open-plan modern living and dining room with fluted timber partitions in an Arera Colony residence, Bhopal',
+      'Turnkey residential interior in Bhopal featuring double-height dining atrium, fluted wooden screens, and contemporary chandelier by Lodhi Interiors',
     scopeSummary:
       'We take complete responsibility for your residential space from architectural planning through to civil modifications and custom joinery installation.',
     scopeItems: [
@@ -159,9 +159,9 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     heroPromise:
       'Architectural estates tailored with bespoke masonry, imported stone, and hand-finished joinery.',
     heroImage:
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1800&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-shahpura-villa-double-height-atrium.jpg',
     heroImageAlt:
-      'Grand double-height villa living room overlooking lakefront gardens in Shahpura, Bhopal',
+      'Grand double-height villa living room atrium with mezzanine glass bridge and multi-tier halo chandelier in Bhopal by Lodhi Interiors',
     scopeSummary:
       'Comprehensive architectural interior execution for sprawling residential homes exceeding 4,000 sq.ft., encompassing interior civil interventions, double-height volumes, and custom artisan fabrication.',
     scopeItems: [
@@ -263,8 +263,9 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     heroH1: 'Turnkey Interiors in Bhopal',
     heroPromise: 'One accountable contract from architectural concept to final keys in hand.',
     heroImage:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop',
-    heroImageAlt: 'Seamless turnkey interior execution of a living and dining salon in Bhopal',
+      '/images/projects/lodhi-interiors-ayodhya-bypass-formal-living-lounge.jpg',
+    heroImageAlt:
+      'Turnkey formal living salon with curved fluted wall panelling and designer furnishings in Bhopal by Lodhi Interiors',
     scopeSummary:
       'We eliminate the traditional friction between interior designers and independent contractors by providing a complete, vertically integrated execution service under one contract.',
     scopeItems: [
@@ -367,9 +368,9 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     heroPromise:
       'Architectural culinary systems engineered for heavy Indian cooking, moisture, and daily utility.',
     heroImage:
-      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1800&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-bawadiya-kalan-u-shaped-modular-kitchen.jpg',
     heroImageAlt:
-      'Minimal architectural modular kitchen with fluted oak island and dark quartz counters in Bhopal',
+      'High-performance U-shaped modular kitchen with glossy acrylic cabinetry, built-in appliances, and ambient lighting in Bhopal by Lodhi Interiors',
     scopeSummary:
       'We design and install heavy-duty, architecturally resolved modular kitchens engineered specifically for the demands of Indian cooking, wet cleaning, and long-term hardware durability.',
     scopeItems: [
@@ -891,9 +892,9 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     heroPromise:
       'Culinary spaces engineered for heavy Indian cooking, moisture resistance, and seamless workflow.',
     heroImage:
-      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1800&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-bawadiya-kalan-u-shaped-modular-kitchen.jpg',
     heroImageAlt:
-      'Minimal architectural modular kitchen with fluted oak island and dark quartz counters in Bhopal',
+      'High-performance U-shaped modular kitchen with glossy acrylic cabinetry and built-in appliances in Bhopal by Lodhi Interiors',
     scopeSummary:
       'We design, manufacture, and install turnkey modular kitchens engineered for Central Indian culinary habits, damp resistance, and daily durability.',
     scopeItems: [
@@ -995,9 +996,9 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     heroPromise:
       'Sculpted architectural ceilings integrating diffused lighting, acoustic discipline, and air conditioning.',
     heroImage:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-shahpura-villa-pop-false-ceiling-cove.jpg',
     heroImageAlt:
-      'Minimal recessed false ceiling with continuous architectural cove lighting and magnetic track fixtures in Bhopal',
+      'Sculpted curved POP false ceiling with warm diffused cove lighting in living lounge Bhopal by Lodhi Interiors',
     scopeSummary:
       'We design and construct seamless, crack-free false ceilings engineered for acoustic comfort, indirect architectural lighting, and MEP concealment.',
     scopeItems: [
@@ -1100,9 +1101,9 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     heroPromise:
       'Homes shaped with spatial clarity, natural central Indian materials, and single-custody execution.',
     heroImage:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-ayodhya-bypass-dining-atrium.jpg',
     heroImageAlt:
-      'Open-plan modern living and dining room with fluted timber partitions in an Arera Colony residence, Bhopal',
+      'Turnkey residential interior in Bhopal featuring double-height dining atrium and fluted wooden screens by Lodhi Interiors',
     scopeSummary:
       'We manage the entire residential build from architectural planning and structural modifications to custom joinery, stone flooring, and final styling.',
     scopeItems: [
@@ -1520,9 +1521,9 @@ export const SERVICES_DATA: Record<string, ServiceData> = {
     heroPromise:
       'Structural integrity, precision laser screeds, and single-source turnkey site custody.',
     heroImage:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1800&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-ayodhya-bypass-formal-living-lounge.jpg',
     heroImageAlt:
-      'Turnkey civil interior construction and architectural masonry execution on site in Bhopal',
+      'Turnkey civil interior construction and architectural living room execution in Bhopal by Lodhi Interiors',
     scopeSummary:
       'We execute structural demolition, wall masonry, plumbing overhauls, waterproofing, and screeding in-house under single-point studio custody.',
     scopeItems: [

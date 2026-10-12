@@ -52,9 +52,9 @@ const STAGES: Stage[] = [
       'Developing the spatial layout, circulation flows, lighting strategies, and photorealistic 3D architectural models.',
     detail:
       'Our team reorganises the floor plan to unlock natural light, cross-ventilation, and logical circulation. We test multiple spatial volumes, ceiling reveals, and joinery planes. You receive photorealistic 3D perspectives that model true Bhopal daylight angles and authentic material textures, allowing you to experience the exact proportion and light of each space before physical work starts.',
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: '3D volumetric visualization and natural daylight simulation in Bhopal',
-    imageCaption: 'Stage 02 • High-fidelity photometric 3D renders and spatial zoning',
+    image: '/images/projects/lodhi-interiors-shahpura-villa-double-height-atrium.jpg',
+    imageAlt: '3D volumetric visualization and double-height villa living space simulation in Bhopal',
+    imageCaption: 'Stage 02 • High-fidelity architectural 3D perspectives and spatial zoning',
     receives: [
       'Measured spatial layout blueprints',
       'Comprehensive 3D photorealistic architectural renders',
@@ -74,8 +74,8 @@ const STAGES: Stage[] = [
       'Physical material curation, joinery construction drawings, comprehensive BOQ, and fixed-rate turnkey estimate.',
     detail:
       'In this phase, tactile decisions are locked in. We assemble physical samples of stone slabs, quarter-sawn veneers, textured lime plasters, and architectural hardware in our studio. Concurrently, our technical team completes MEP engineering drawings and an exhaustive, itemised Bill of Quantities (BOQ). Every finish, linear foot of ply, and hardware hinge is quantified with fixed rates—eliminating budget ambiguities.',
-    image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: 'Tactile material board curation and fixed line-item BOQ in Bhopal studio',
+    image: '/images/projects/lodhi-interiors-ayodhya-bypass-dining-atrium.jpg',
+    imageAlt: 'Tactile material board curation, turned joinery and dining showcase in Bhopal studio',
     imageCaption: 'Stage 03 • Studio material curation and transparent fixed-price BOQ',
     receives: [
       'Physical tactile material board (stone, timber, metal, fabric)',

@@ -25,9 +25,9 @@ export const LOCALITIES_DATA: Record<string, LocalityData> = {
     metaDescription:
       'Architectural interior design and turnkey execution in Arera Colony, Bhopal. Monolithic stone, custom teak joinery, and single-source site custody by Soumya Lodhi.',
     heroImage:
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1600&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-aranya-residence-chevron-master-suite.jpg',
     heroImageAlt:
-      'Turnkey residence interior with fluted teak and travertine flooring in Arera Colony, Bhopal',
+      'Luxury master bedroom suite with geometric gold chevron backlit wall panel in Arera Colony, Bhopal by Lodhi Interiors',
     projectSlugs: ['aranya-residence'],
     relatedServices: [
       { slug: 'residential-interiors', name: 'Residential Interiors' },
@@ -70,9 +70,9 @@ export const LOCALITIES_DATA: Record<string, LocalityData> = {
     metaDescription:
       'Luxury residential interior design and turnkey execution in Shahpura, Bhopal. Tailored waterfront estates, moisture-resistant joinery, and architectural lighting.',
     heroImage:
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1600&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-shahpura-villa-double-height-atrium.jpg',
     heroImageAlt:
-      'Double-height living space overlooking Shahpura Lake in Bhopal by Lodhi Interiors',
+      'Double-height villa living space atrium with glass bridge and halo chandelier in Shahpura Bhopal by Lodhi Interiors',
     projectSlugs: ['shahpura-villa'],
     relatedServices: [
       { slug: 'luxury-home-interiors', name: 'Luxury Home Interiors' },
@@ -160,9 +160,9 @@ export const LOCALITIES_DATA: Record<string, LocalityData> = {
     metaDescription:
       'Bespoke villa interior design and turnkey construction execution in Chuna Bhatti, Bhopal. Monolithic marble floors, custom kitchens, and precision architectural millwork.',
     heroImage:
-      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1600&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-ayodhya-bypass-dining-atrium.jpg',
     heroImageAlt:
-      'Sprawling modern villa dining and living pavilion in Chuna Bhatti, Bhopal by Lodhi Interiors',
+      'Sprawling modern villa dining atrium with double-height volume and fluted wooden partition in Bhopal by Lodhi Interiors',
     projectSlugs: ['chunabhatti-villa'],
     relatedServices: [
       { slug: 'luxury-home-interiors', name: 'Luxury Home Interiors' },
@@ -205,9 +205,9 @@ export const LOCALITIES_DATA: Record<string, LocalityData> = {
     metaDescription:
       'Turnkey interior design and modular kitchen execution in Bawadiya Kalan, Bhopal. Precision joinery, German hardware, and contemporary residential spaces.',
     heroImage:
-      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1600&auto=format&fit=crop',
+      '/images/projects/lodhi-interiors-bawadiya-kalan-u-shaped-modular-kitchen.jpg',
     heroImageAlt:
-      'High-performance contemporary kitchen with waterfall marble island in Bawadiya Kalan, Bhopal',
+      'Turnkey high-gloss U-shaped modular kitchen with appliance towers and under-cabinet LED in Bawadiya Kalan, Bhopal by Lodhi Interiors',
     projectSlugs: ['bawadiya-kitchen'],
     relatedServices: [
       { slug: 'modular-kitchens', name: 'Modular Kitchens' },
