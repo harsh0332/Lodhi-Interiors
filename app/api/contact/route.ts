@@ -155,27 +155,33 @@ export async function POST(req: NextRequest) {
       submittedAt: new Date().toISOString(),
     };
 
-    // 11. Dispatch notifications (Studio Email & CRM Webhook)
-    console.log('[Lodhi Interiors Lead Captured]:', {
-      name: payload.name,
-      phone: payload.phone,
-      projectType: payload.projectType,
-      locality: payload.locality,
-      budgetRange: payload.budgetRange,
-      submittedAt: payload.submittedAt,
-    });
-
-    // If external CRM or webhook is configured:
-    if (process.env.CRM_WEBHOOK_URL) {
-      try {
-        await fetch(process.env.CRM_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-      } catch (webhookErr) {
-        console.error('[Webhook Dispatch Error]:', webhookErr);
-      }
+    // A successful response means the configured delivery endpoint accepted the enquiry.
+    // Never acknowledge a lead that was only written to a process log.
+    if (!process.env.CRM_WEBHOOK_URL) {
+      return NextResponse.json(
+        {
+          error:
+            'Online enquiries are temporarily unavailable. Please contact the studio using WhatsApp or telephone.',
+        },
+        { status: 503 },
+      );
+    }
+    try {
+      const delivery = await fetch(process.env.CRM_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: AbortSignal.timeout(10000),
+      });
+      if (!delivery.ok) throw new Error('Delivery was not accepted');
+    } catch {
+      return NextResponse.json(
+        {
+          error:
+            'We could not deliver your enquiry. Your details are still here; please try again or contact us on WhatsApp.',
+        },
+        { status: 502 },
+      );
     }
 
     return NextResponse.json(

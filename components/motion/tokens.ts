@@ -29,6 +29,6 @@ export const MOTION_STAGGER = {
 
 export const MOTION_MEDIA = {
   desktop: '(min-width: 900px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)',
-  mobile: '(max-width: 899px), (hover: none), (pointer: coarse)',
+  mobile: '(max-width: 899px) and (prefers-reduced-motion: no-preference), (hover: none) and (prefers-reduced-motion: no-preference), (pointer: coarse) and (prefers-reduced-motion: no-preference)',
   reduced: '(prefers-reduced-motion: reduce)',
 } as const;

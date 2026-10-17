@@ -28,3 +28,11 @@ next-env.d.ts
 
 # Staging uploads
 /public/newimage/
+
+# Local redesign previews and deliverables
+.next*/
+.env
+.env.local
+node_modules.icloud-backup/
+lodhi-*.zip
+__pycache__/

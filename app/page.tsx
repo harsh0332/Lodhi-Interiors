@@ -1,74 +1,23 @@
 import type { Metadata } from 'next';
 import { getFeaturedProjects, getAllInsights } from '@/lib/content';
 import { buildMetadata } from '@/lib/seo';
-import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '@/lib/schema';
-import {
-  Hero,
-  Position,
-  SelectedWork,
-  ServicesList,
-  StudioBio,
-  Process,
-  Numbers,
-  Testimonials,
-  InsightsTeaser,
-  ClosingCTA,
-} from '@/components/sections';
-
+import { buildLocalBusinessSchema } from '@/lib/schema';
+import { Home } from '@/components/editorial/Home';
 export const metadata: Metadata = buildMetadata({
   title: 'Interior Designer in Bhopal | Lodhi Interiors',
   description:
-    'Bhopal studio shaping complete luxury residential and commercial interiors from concept to turnkey execution. Founded by Soumya Lodhi, 8+ years in practice.',
+    'Thoughtful residential and commercial interiors by Soumya Lodhi. A Bhopal design and turnkey studio, from the first idea to the final detail.',
   path: '/',
 });
-
 export default async function HomePage() {
-  const [featuredProjects, allInsights] = await Promise.all([
-    getFeaturedProjects(),
-    getAllInsights(),
-  ]);
-
-  const localBusinessSchema = buildLocalBusinessSchema();
-  const breadcrumbSchema = buildBreadcrumbSchema([{ name: 'Home', url: '/' }]);
-
+  const [projects, insights] = await Promise.all([getFeaturedProjects(), getAllInsights()]);
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([localBusinessSchema, breadcrumbSchema]),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildLocalBusinessSchema()) }}
       />
-
-      {/* 1. Hero */}
-      <Hero />
-
-      {/* 2. Position Statement */}
-      <Position />
-
-      {/* 3. Selected Work */}
-      <SelectedWork projects={featuredProjects} />
-
-      {/* 4. Services Typographic List */}
-      <ServicesList />
-
-      {/* 5. Studio Bio & Founder Narrative */}
-      <StudioBio />
-
-      {/* 6. Turnkey Process Sequence */}
-      <Process />
-
-      {/* 7. Verified Metrics & Count-up */}
-      <Numbers />
-
-      {/* 8. Client Perspectives */}
-      <Testimonials />
-
-      {/* 9. Editorial Insights (Skips if < 2 exist) */}
-      <InsightsTeaser insights={allInsights} />
-
-      {/* 10. Closing Call to Action */}
-      <ClosingCTA />
+      <Home projects={projects} insights={insights} />
     </>
   );
 }

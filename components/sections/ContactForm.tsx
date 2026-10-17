@@ -1,10 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState, useRef } from 'react';
-import { useRouter } from 'next/navigation';
-import { trackFormStart, trackFormSubmit } from '@/lib/analytics';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/Button';
+import React, { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { trackFormStart, trackFormSubmit } from "@/lib/analytics";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
+import { env } from "@/lib/env";
 
 interface FormDataState {
   name: string;
@@ -22,35 +23,58 @@ interface FormDataState {
 }
 
 const INITIAL_STATE: FormDataState = {
-  name: '',
-  phone: '',
+  name: "",
+  phone: "",
   preferWhatsApp: true,
-  email: '',
-  locality: '',
-  projectType: 'Home interiors',
-  scope: 'Design and execution (turnkey)',
-  areaSqft: '',
-  startTimeline: 'Within 3 months',
-  budgetRange: '₹30L — ₹60L',
-  notes: '',
-  _hp_website: '',
+  email: "",
+  locality: "",
+  projectType: "Home interiors",
+  scope: "Design and execution (turnkey)",
+  areaSqft: "",
+  startTimeline: "Within 3 months",
+  budgetRange: "Prefer to discuss",
+  notes: "",
+  _hp_website: "",
 };
 
-export function ContactForm() {
+export function ContactForm({
+  deliveryEnabled = false,
+}: {
+  deliveryEnabled?: boolean;
+}) {
   const router = useRouter();
   const [formData, setFormData] = useState<FormDataState>(INITIAL_STATE);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStarted, setFormStarted] = useState(false);
-  const [mobileStep, setMobileStep] = useState<1 | 2>(1);
+  const [step, setStep] = useState<1 | 2>(1);
   const [serverError, setServerError] = useState<string | null>(null);
 
+  useEffect(() => {
+    const selected = new URLSearchParams(window.location.search).get("project");
+    const allowed = [
+      "Home interiors",
+      "Luxury home or villa",
+      "Modular kitchen",
+      "Office",
+      "Retail or showroom",
+      "Restaurant or hospitality",
+      "Other",
+    ];
+    if (selected && allowed.includes(selected))
+      setFormData((current) => ({ ...current, projectType: selected }));
+  }, []);
+
+  const projectInputRef = useRef<HTMLSelectElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const phoneInputRef = useRef<HTMLInputElement>(null);
   const localityInputRef = useRef<HTMLInputElement>(null);
 
   const handleFieldChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
@@ -62,7 +86,7 @@ export function ContactForm() {
 
     setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
 
     // Clear error on change
@@ -79,19 +103,26 @@ export function ContactForm() {
     const stepErrors: Record<string, string> = {};
 
     if (formData.name.trim().length < 2) {
-      stepErrors.name = 'Full name must contain at least 2 characters.';
+      stepErrors.name = "Full name must contain at least 2 characters.";
     }
 
-    const cleanPhone = formData.phone.trim().replace(/[\s\-()]/g, '');
+    const cleanPhone = formData.phone.trim().replace(/[\s\-()]/g, "");
     const indianPhoneRegex = /^(?:\+91|0)?[6-9]\d{9}$/;
     if (!cleanPhone || !indianPhoneRegex.test(cleanPhone)) {
-      stepErrors.phone = 'Valid 10-digit Indian mobile number required (e.g. 98765 43210).';
+      stepErrors.phone =
+        "Valid 10-digit Indian mobile number required (e.g. 98765 43210).";
     }
 
     if (formData.locality.trim().length < 2) {
-      stepErrors.locality = 'Specify location (e.g. Arera Colony, Bhopal).';
+      stepErrors.locality = "Specify location (e.g. Arera Colony, Bhopal).";
     }
 
+    if (
+      formData.email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())
+    ) {
+      stepErrors.email = "Enter a valid email address or leave it blank.";
+    }
     setErrors(stepErrors);
 
     if (stepErrors.name) {
@@ -100,40 +131,96 @@ export function ContactForm() {
       phoneInputRef.current?.focus();
     } else if (stepErrors.locality) {
       localityInputRef.current?.focus();
+    } else if (stepErrors.email) {
+      emailInputRef.current?.focus();
     }
 
     return Object.keys(stepErrors).length === 0;
   };
 
+  const scrollToForm = () => {
+    requestAnimationFrame(() =>
+      nameInputRef.current
+        ?.closest("form")
+        ?.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
+            ? "auto"
+            : "smooth",
+          block: "start",
+        }),
+    );
+  };
+
   const handleNextStep = (e: React.MouseEvent) => {
     e.preventDefault();
     if (validateStep1()) {
-      setMobileStep(2);
-      window.scrollTo({ top: 180, behavior: 'smooth' });
+      setStep(2);
+      requestAnimationFrame(() =>
+        projectInputRef.current?.focus({ preventScroll: true }),
+      );
+      scrollToForm();
     }
   };
 
   const handleBackStep = (e: React.MouseEvent) => {
     e.preventDefault();
-    setMobileStep(1);
+    setStep(1);
+    requestAnimationFrame(() =>
+      nameInputRef.current?.focus({ preventScroll: true }),
+    );
+    scrollToForm();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setServerError(null);
 
-    // Validate Step 1 first
-    if (!validateStep1()) {
-      setMobileStep(1);
+    // Enter on step one advances the form; it never sends an enquiry.
+    if (step === 1) {
+      if (validateStep1()) {
+        setStep(2);
+        requestAnimationFrame(() =>
+          projectInputRef.current?.focus({ preventScroll: true }),
+        );
+        scrollToForm();
+      }
       return;
     }
 
+    // Validate Step 1 first
+    if (!validateStep1()) {
+      setStep(1);
+      return;
+    }
+
+    if (!deliveryEnabled) {
+      const brief = [
+        "Hello Soumya, I would like to discuss an interior project.",
+        `Name: ${formData.name.trim()}`,
+        `Phone: ${formData.phone.trim()}`,
+        `Location: ${formData.locality.trim()}`,
+        `Project: ${formData.projectType}`,
+        `Scope: ${formData.scope}`,
+        `Budget: ${formData.budgetRange}`,
+        `Timing: ${formData.startTimeline}`,
+        formData.areaSqft ? `Area: ${formData.areaSqft}` : "",
+        formData.email ? `Email: ${formData.email}` : "",
+        formData.notes ? `Notes: ${formData.notes}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n");
+      window.location.assign(
+        `https://wa.me/${env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${encodeURIComponent(brief)}`,
+      );
+      return;
+    }
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
@@ -142,19 +229,23 @@ export function ContactForm() {
       if (!response.ok) {
         if (data?.fieldErrors) {
           setErrors(data.fieldErrors);
+          if (data.fieldErrors.email) {
+            setStep(1);
+          }
           if (data.fieldErrors.name) {
-            setMobileStep(1);
+            setStep(1);
             nameInputRef.current?.focus();
           } else if (data.fieldErrors.phone) {
-            setMobileStep(1);
+            setStep(1);
             phoneInputRef.current?.focus();
           } else if (data.fieldErrors.locality) {
-            setMobileStep(1);
+            setStep(1);
             localityInputRef.current?.focus();
           }
         }
         setServerError(
-          data?.error || 'Unable to submit your details. Please reach out via WhatsApp.',
+          data?.error ||
+            "Unable to submit your details. Please reach out via WhatsApp.",
         );
         setIsSubmitting(false);
         return;
@@ -164,10 +255,10 @@ export function ContactForm() {
       trackFormSubmit(formData.projectType, formData.budgetRange);
 
       // Redirect on success
-      router.push('/thank-you');
+      router.push("/thank-you");
     } catch {
       setServerError(
-        'A network connection error occurred. Please message Soumya directly on WhatsApp.',
+        "A network connection error occurred. Please message Soumya directly on WhatsApp.",
       );
       setIsSubmitting(false);
     }
@@ -177,12 +268,15 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="border border-greige/30 bg-bone p-6 shadow-none sm:p-8 md:p-10"
+      className="project-enquiry border border-greige/30 bg-bone p-6 shadow-none sm:p-8 md:p-10"
       aria-label="Start your interior project inquiry"
     >
       {/* Live Region for Screen Readers */}
       <div role="alert" aria-live="assertive" className="sr-only">
-        {serverError || (Object.keys(errors).length > 0 ? 'The form has validation errors.' : '')}
+        {serverError ||
+          (Object.keys(errors).length > 0
+            ? "The form has validation errors."
+            : "")}
       </div>
 
       {/* Server Error Alert */}
@@ -192,6 +286,14 @@ export function ContactForm() {
             Notice
           </span>
           {serverError}
+          <a
+            href={`https://wa.me/${env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 block underline"
+          >
+            Contact the studio on WhatsApp ↗
+          </a>
         </div>
       )}
 
@@ -209,28 +311,37 @@ export function ContactForm() {
         />
       </div>
 
-      {/* Mobile Step Indicator (<768px) */}
-      <div className="mb-8 border-b border-greige/30 pb-4 md:hidden">
+      {/* Two clear steps on every screen size. */}
+      <div
+        className="enquiry-progress mb-8 border-b border-greige/30 pb-4"
+        aria-live="polite"
+      >
         <div className="mb-2 flex items-center justify-between font-mono text-ui-caption text-greige">
-          <span>{mobileStep === 1 ? 'Step 1 of 2: Contact' : 'Step 2 of 2: Spatial Specs'}</span>
-          <span className="font-medium text-accent">{mobileStep === 1 ? '50%' : '100%'}</span>
+          <span>
+            {step === 1
+              ? "Step 1 of 2: Contact"
+              : "Step 2 of 2: Project details"}
+          </span>
+          <span className="font-medium text-accent">
+            {step === 1 ? "01 / 02" : "02 / 02"}
+          </span>
         </div>
         <div className="h-1 w-full overflow-hidden rounded-full bg-paper">
           <div
             className="h-full bg-accent transition-all duration-300"
-            style={{ width: mobileStep === 1 ? '50%' : '100%' }}
+            style={{ width: step === 1 ? "50%" : "100%" }}
           />
         </div>
       </div>
 
       {/* STEP 1: Contact Details & Locality */}
-      <div className={cn('space-y-6', mobileStep === 2 ? 'hidden md:block' : 'block')}>
+      <div className={cn("space-y-6", step === 2 ? "hidden" : "block")}>
         <div className="mb-6 border-b border-greige/20 pb-2">
           <span className="block font-mono text-ui-caption uppercase tracking-wider text-accent">
-            Phase A
+            01 · About you
           </span>
           <h2 className="font-serif text-[1.25rem] font-normal text-charcoal">
-            Contact &amp; Property
+            Let’s get acquainted
           </h2>
         </div>
 
@@ -251,19 +362,22 @@ export function ContactForm() {
             autoComplete="name"
             value={formData.name}
             onChange={handleFieldChange}
-            aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-describedby={errors.name ? "name-error" : undefined}
             aria-invalid={Boolean(errors.name)}
-            placeholder="e.g. Vikramaditya Sharma"
+            placeholder="Your name"
             className={cn(
-              'min-h-[46px] w-full rounded-sm border bg-paper/50 px-4 font-sans text-[1rem] text-charcoal transition-colors',
+              "min-h-[46px] w-full rounded-sm border bg-paper/50 px-4 font-sans text-[1rem] text-charcoal transition-colors",
               errors.name
-                ? 'border-red-600 focus:ring-2 focus:ring-red-600'
-                : 'border-greige/40 focus:border-charcoal focus:bg-bone focus:ring-2 focus:ring-accent',
-              'focus:outline-none',
+                ? "border-red-600 focus:ring-2 focus:ring-red-600"
+                : "border-greige/40 focus:border-charcoal focus:bg-bone focus:ring-2 focus:ring-accent",
+              "focus:outline-none",
             )}
           />
           {errors.name && (
-            <p id="name-error" className="mt-1.5 font-sans text-xs text-red-700">
+            <p
+              id="name-error"
+              className="mt-1.5 font-sans text-xs text-red-700"
+            >
               {errors.name}
             </p>
           )}
@@ -287,19 +401,22 @@ export function ContactForm() {
             autoComplete="tel"
             value={formData.phone}
             onChange={handleFieldChange}
-            aria-describedby={errors.phone ? 'phone-error' : undefined}
+            aria-describedby={errors.phone ? "phone-error" : undefined}
             aria-invalid={Boolean(errors.phone)}
             placeholder="e.g. 98765 43210"
             className={cn(
-              'min-h-[46px] w-full rounded-sm border bg-paper/50 px-4 font-sans text-[1rem] text-charcoal transition-colors',
+              "min-h-[46px] w-full rounded-sm border bg-paper/50 px-4 font-sans text-[1rem] text-charcoal transition-colors",
               errors.phone
-                ? 'border-red-600 focus:ring-2 focus:ring-red-600'
-                : 'border-greige/40 focus:border-charcoal focus:bg-bone focus:ring-2 focus:ring-accent',
-              'focus:outline-none',
+                ? "border-red-600 focus:ring-2 focus:ring-red-600"
+                : "border-greige/40 focus:border-charcoal focus:bg-bone focus:ring-2 focus:ring-accent",
+              "focus:outline-none",
             )}
           />
           {errors.phone && (
-            <p id="phone-error" className="mt-1.5 font-sans text-xs text-red-700">
+            <p
+              id="phone-error"
+              className="mt-1.5 font-sans text-xs text-red-700"
+            >
               {errors.phone}
             </p>
           )}
@@ -318,7 +435,7 @@ export function ContactForm() {
               htmlFor="preferWhatsApp"
               className="select-none font-sans text-xs text-charcoal/85"
             >
-              Prefer WhatsApp for initial drawings &amp; feasibility notes
+              You can contact me on WhatsApp
             </label>
           </div>
         </div>
@@ -329,28 +446,35 @@ export function ContactForm() {
             htmlFor="email"
             className="mb-2 block font-sans text-ui-caption font-medium uppercase tracking-[0.06em] text-charcoal"
           >
-            Email address <span className="font-normal lowercase text-greige">(optional)</span>
+            Email address{" "}
+            <span className="font-normal lowercase text-greige">
+              (optional)
+            </span>
           </label>
           <input
+            ref={emailInputRef}
             type="email"
             id="email"
             name="email"
             autoComplete="email"
             value={formData.email}
             onChange={handleFieldChange}
-            aria-describedby={errors.email ? 'email-error' : undefined}
+            aria-describedby={errors.email ? "email-error" : undefined}
             aria-invalid={Boolean(errors.email)}
-            placeholder="e.g. vikram@example.com"
+            placeholder="you@example.com"
             className={cn(
-              'min-h-[46px] w-full rounded-sm border bg-paper/50 px-4 font-sans text-[1rem] text-charcoal transition-colors',
+              "min-h-[46px] w-full rounded-sm border bg-paper/50 px-4 font-sans text-[1rem] text-charcoal transition-colors",
               errors.email
-                ? 'border-red-600 focus:ring-2 focus:ring-red-600'
-                : 'border-greige/40 focus:border-charcoal focus:bg-bone focus:ring-2 focus:ring-accent',
-              'focus:outline-none',
+                ? "border-red-600 focus:ring-2 focus:ring-red-600"
+                : "border-greige/40 focus:border-charcoal focus:bg-bone focus:ring-2 focus:ring-accent",
+              "focus:outline-none",
             )}
           />
           {errors.email && (
-            <p id="email-error" className="mt-1.5 font-sans text-xs text-red-700">
+            <p
+              id="email-error"
+              className="mt-1.5 font-sans text-xs text-red-700"
+            >
               {errors.email}
             </p>
           )}
@@ -372,26 +496,29 @@ export function ContactForm() {
             required
             value={formData.locality}
             onChange={handleFieldChange}
-            aria-describedby={errors.locality ? 'locality-error' : undefined}
+            aria-describedby={errors.locality ? "locality-error" : undefined}
             aria-invalid={Boolean(errors.locality)}
             placeholder="e.g. Arera Colony, Bhopal"
             className={cn(
-              'min-h-[46px] w-full rounded-sm border bg-paper/50 px-4 font-sans text-[1rem] text-charcoal transition-colors',
+              "min-h-[46px] w-full rounded-sm border bg-paper/50 px-4 font-sans text-[1rem] text-charcoal transition-colors",
               errors.locality
-                ? 'border-red-600 focus:ring-2 focus:ring-red-600'
-                : 'border-greige/40 focus:border-charcoal focus:bg-bone focus:ring-2 focus:ring-accent',
-              'focus:outline-none',
+                ? "border-red-600 focus:ring-2 focus:ring-red-600"
+                : "border-greige/40 focus:border-charcoal focus:bg-bone focus:ring-2 focus:ring-accent",
+              "focus:outline-none",
             )}
           />
           {errors.locality && (
-            <p id="locality-error" className="mt-1.5 font-sans text-xs text-red-700">
+            <p
+              id="locality-error"
+              className="mt-1.5 font-sans text-xs text-red-700"
+            >
               {errors.locality}
             </p>
           )}
         </div>
 
-        {/* Mobile Next Button (<768px) */}
-        <div className="pt-4 md:hidden">
+        {/* Continue to the project brief. */}
+        <div className="pt-4">
           <Button
             type="button"
             variant="primary"
@@ -405,18 +532,13 @@ export function ContactForm() {
       </div>
 
       {/* STEP 2: Project Specifications & Budget */}
-      <div
-        className={cn(
-          'mt-8 space-y-6 md:mt-12 md:border-t md:border-greige/20 md:pt-8',
-          mobileStep === 1 ? 'hidden md:block' : 'block',
-        )}
-      >
+      <div className={cn("space-y-6", step === 1 ? "hidden" : "block")}>
         <div className="mb-6 border-b border-greige/20 pb-2">
           <span className="block font-mono text-ui-caption uppercase tracking-wider text-accent">
-            Phase B
+            02 · About your project
           </span>
           <h2 className="font-serif text-[1.25rem] font-normal text-charcoal">
-            Project Scope &amp; Timing
+            A little about your space
           </h2>
         </div>
 
@@ -428,22 +550,27 @@ export function ContactForm() {
               htmlFor="projectType"
               className="mb-2 block font-sans text-ui-caption font-medium uppercase tracking-[0.06em] text-charcoal"
             >
-              Project typology <span className="text-accent">*</span>
+              Project type <span className="text-accent">*</span>
             </label>
             <select
+              ref={projectInputRef}
               id="projectType"
               name="projectType"
               value={formData.projectType}
               onChange={handleFieldChange}
               className="min-h-[46px] w-full rounded-sm border border-greige/40 bg-paper/50 px-3 font-sans text-[1rem] text-charcoal focus:border-charcoal focus:bg-bone focus:outline-none focus:ring-2 focus:ring-accent"
             >
-              <option value="Home interiors">Home interiors (Apartments &amp; Residences)</option>
+              <option value="Home interiors">
+                Home interiors (Apartments &amp; Residences)
+              </option>
               <option value="Luxury home or villa">Luxury home or villa</option>
               <option value="Modular kitchen">Modular kitchen</option>
-              <option value="Office">Office &amp; Corporate Headquarters</option>
+              <option value="Office">Office or workspace</option>
               <option value="Retail or showroom">Retail or showroom</option>
-              <option value="Restaurant or hospitality">Restaurant or hospitality</option>
-              <option value="Other">Other architectural commission</option>
+              <option value="Restaurant or hospitality">
+                Restaurant or hospitality
+              </option>
+              <option value="Other">Something else</option>
             </select>
           </div>
 
@@ -453,7 +580,7 @@ export function ContactForm() {
               htmlFor="scope"
               className="mb-2 block font-sans text-ui-caption font-medium uppercase tracking-[0.06em] text-charcoal"
             >
-              Scope of engagement <span className="text-accent">*</span>
+              How can we help? <span className="text-accent">*</span>
             </label>
             <select
               id="scope"
@@ -463,10 +590,12 @@ export function ContactForm() {
               className="min-h-[46px] w-full rounded-sm border border-greige/40 bg-paper/50 px-3 font-sans text-[1rem] text-charcoal focus:border-charcoal focus:bg-bone focus:outline-none focus:ring-2 focus:ring-accent"
             >
               <option value="Design and execution (turnkey)">
-                Design and execution (turnkey) [Recommended]
+                Design and execution (turnkey)
               </option>
-              <option value="Design only">Design &amp; technical drawings only</option>
-              <option value="Not sure yet">Not sure yet / Seek advice</option>
+              <option value="Design only">
+                Design &amp; technical drawings only
+              </option>
+              <option value="Not sure yet">I’d like your advice</option>
             </select>
           </div>
         </div>
@@ -478,8 +607,10 @@ export function ContactForm() {
               htmlFor="areaSqft"
               className="mb-2 block font-sans text-ui-caption font-medium uppercase tracking-[0.06em] text-charcoal"
             >
-              Approximate footprint{' '}
-              <span className="font-normal lowercase text-greige">(optional)</span>
+              Approximate area{" "}
+              <span className="font-normal lowercase text-greige">
+                (optional)
+              </span>
             </label>
             <input
               type="text"
@@ -507,10 +638,10 @@ export function ContactForm() {
               onChange={handleFieldChange}
               className="min-h-[46px] w-full rounded-sm border border-greige/40 bg-paper/50 px-3 font-sans text-[1rem] text-charcoal focus:border-charcoal focus:bg-bone focus:outline-none focus:ring-2 focus:ring-accent"
             >
-              <option value="Immediately">Immediately (Ready for site possession)</option>
+              <option value="Immediately">Immediately</option>
               <option value="Within 3 months">Within 3 months</option>
               <option value="Later this year">Later this year</option>
-              <option value="Just exploring">Just exploring feasibility</option>
+              <option value="Just exploring">Just exploring</option>
             </select>
           </div>
         </div>
@@ -521,7 +652,7 @@ export function ContactForm() {
             htmlFor="budgetRange"
             className="mb-2 block font-sans text-ui-caption font-medium uppercase tracking-[0.06em] text-charcoal"
           >
-            Indicative budget parameter <span className="text-accent">*</span>
+            Your budget range <span className="text-accent">*</span>
           </label>
           <select
             id="budgetRange"
@@ -530,20 +661,17 @@ export function ContactForm() {
             onChange={handleFieldChange}
             className="min-h-[46px] w-full rounded-sm border border-greige/40 bg-paper/50 px-3 font-sans text-[1rem] text-charcoal focus:border-charcoal focus:bg-bone focus:outline-none focus:ring-2 focus:ring-accent"
           >
-            <option value="₹15L — ₹30L">
-              ₹15L — ₹30L (Modular kitchens &amp; compact renovations)
+            <option value="₹15L — ₹30L">₹15L — ₹30L</option>
+            <option value="₹30L — ₹60L">₹30L — ₹60L</option>
+            <option value="₹60L — ₹1.2 Cr">₹60L — ₹1.2 Cr</option>
+            <option value="₹1.2 Cr+">₹1.2 Cr+</option>
+            <option value="Prefer to discuss">
+              Prefer to discuss in person
             </option>
-            <option value="₹30L — ₹60L">₹30L — ₹60L (Complete 3–4 BHK turnkey interiors)</option>
-            <option value="₹60L — ₹1.2 Cr">
-              ₹60L — ₹1.2 Cr (Luxury villas &amp; bespoke residences)
-            </option>
-            <option value="₹1.2 Cr+">
-              ₹1.2 Cr+ (Grand architectural estates &amp; high-spec commercial)
-            </option>
-            <option value="Prefer to discuss">Prefer to discuss in person</option>
           </select>
           <p className="mt-1.5 font-sans text-ui-caption text-greige">
-            Helps us select appropriate stone grades, veneer finishes, and hardware from day one.
+            An approximate range is helpful. We can discuss the details
+            together.
           </p>
         </div>
 
@@ -553,7 +681,10 @@ export function ContactForm() {
             htmlFor="notes"
             className="mb-2 block font-sans text-ui-caption font-medium uppercase tracking-[0.06em] text-charcoal"
           >
-            Anything else? <span className="font-normal lowercase text-greige">(optional)</span>
+            Anything else?{" "}
+            <span className="font-normal lowercase text-greige">
+              (optional)
+            </span>
           </label>
           <textarea
             id="notes"
@@ -561,18 +692,24 @@ export function ContactForm() {
             rows={3}
             value={formData.notes}
             onChange={handleFieldChange}
-            placeholder="Tell us about the property condition, key aspirations, or architectural preferences..."
+            placeholder="What do you have in mind for your space?"
             className="w-full resize-y rounded-sm border border-greige/40 bg-paper/50 p-4 font-sans text-[1rem] text-charcoal focus:border-charcoal focus:bg-bone focus:outline-none focus:ring-2 focus:ring-accent"
           />
         </div>
 
+        {!deliveryEnabled && (
+          <p className="text-sm leading-relaxed text-greige">
+            Your project details will open as a draft in WhatsApp. Review and
+            send it to start the conversation.
+          </p>
+        )}
         {/* Action Controls */}
         <div className="flex flex-col items-center justify-between gap-4 border-t border-greige/20 pt-6 sm:flex-row">
-          {/* Mobile Back Button (<768px) */}
+          {/* Back preserves all entered details. */}
           <button
             type="button"
             onClick={handleBackStep}
-            className="order-2 font-sans text-xs text-greige transition-colors hover:text-charcoal sm:order-1 md:hidden"
+            className="order-2 font-sans text-xs text-greige transition-colors hover:text-charcoal sm:order-1"
           >
             &larr; Back to Contact Details
           </button>
@@ -584,7 +721,11 @@ export function ContactForm() {
             tone="light"
             className="order-1 min-h-[50px] w-full justify-center px-10 text-[0.9375rem] active:scale-[0.99] sm:order-2 sm:w-auto"
           >
-            {isSubmitting ? 'Transmitting inquiry...' : 'Plan your space'}
+            {isSubmitting
+              ? "Sending your enquiry…"
+              : deliveryEnabled
+                ? "Send enquiry"
+                : "Continue on WhatsApp"}
           </Button>
         </div>
       </div>

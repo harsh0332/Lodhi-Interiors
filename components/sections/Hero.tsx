@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { useRef, useEffect } from 'react';
-import { Button } from '@/components/ui/Button';
-import { useHeroSequence } from '@/components/motion/useHeroSequence';
+import React, { useRef, useEffect, useState } from "react";
+import { Button } from "@/components/ui/Button";
+import { useHeroSequence } from "@/components/motion/useHeroSequence";
 
 /**
  * Hero: Primary viewpoint into LODHI INTERIORS.
@@ -17,10 +17,17 @@ export function Hero() {
   const containerRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   useHeroSequence(containerRef);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduced.matches) {
+      setPaused(true);
+      return;
+    }
 
     video.defaultMuted = true;
     video.muted = true;
@@ -28,7 +35,7 @@ export function Hero() {
     // Defer attaching video src and playing until after initial paint / idle to keep mobile LCP under 1.4s
     const loadAndPlayVideo = () => {
       if (!video.src || video.src === window.location.href) {
-        video.src = '/hero-video.mp4';
+        video.src = "/hero-video.mp4";
         video.load();
       }
       const promise = video.play();
@@ -39,17 +46,20 @@ export function Hero() {
       }
     };
 
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
       const handle = (
         window as unknown as {
-          requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number;
+          requestIdleCallback: (
+            cb: () => void,
+            opts?: { timeout: number },
+          ) => number;
         }
       ).requestIdleCallback(loadAndPlayVideo, { timeout: 2000 });
       return () => {
-        if ('cancelIdleCallback' in window) {
-          (window as unknown as { cancelIdleCallback: (h: number) => void }).cancelIdleCallback(
-            handle,
-          );
+        if ("cancelIdleCallback" in window) {
+          (
+            window as unknown as { cancelIdleCallback: (h: number) => void }
+          ).cancelIdleCallback(handle);
         }
       };
     } else {
@@ -66,7 +76,10 @@ export function Hero() {
       aria-label="Studio Overview"
     >
       {/* 1. Cinematic Hero Video */}
-      <div data-motion="media" className="absolute inset-0 h-full w-full overflow-hidden">
+      <div
+        data-motion="media"
+        className="absolute inset-0 h-full w-full overflow-hidden"
+      >
         <video
           ref={videoRef}
           poster="/hero-poster.webp"
@@ -78,7 +91,10 @@ export function Hero() {
           className="h-full w-full object-cover object-[center_35%] md:object-center will-change-transform pointer-events-none select-none"
         />
         {/* Solid charcoal scrim for contrast; strictly no gradients */}
-        <div className="pointer-events-none absolute inset-0 bg-charcoal/45" aria-hidden="true" />
+        <div
+          className="pointer-events-none absolute inset-0 bg-charcoal/45"
+          aria-hidden="true"
+        />
       </div>
 
       {/* 2. Content Layer */}
@@ -101,11 +117,14 @@ export function Hero() {
               data-motion-item
               className="mb-8 max-w-[48ch] font-sans text-fluid-body leading-relaxed text-bone/90 md:mb-10"
             >
-              A Bhopal studio shaping complete residential and commercial spaces — from first
-              drawing to final handover.
+              A Bhopal studio shaping complete residential and commercial spaces
+              — from first drawing to final handover.
             </p>
 
-            <div data-motion-item className="flex flex-wrap items-center gap-3 sm:gap-4">
+            <div
+              data-motion-item
+              className="flex flex-wrap items-center gap-3 sm:gap-4"
+            >
               <Button
                 variant="secondary"
                 tone="dark"
@@ -138,6 +157,26 @@ export function Hero() {
         </div>
       </div>
 
+      <button
+        className="hero-playback"
+        aria-label={paused ? "Play background film" : "Pause background film"}
+        onClick={() => {
+          const video = videoRef.current;
+          if (!video) return;
+          if (paused) {
+            if (!video.getAttribute("src")) video.src = "/hero-video.mp4";
+            video
+              .play()
+              .then(() => setPaused(false))
+              .catch(() => setPaused(true));
+          } else {
+            video.pause();
+            setPaused(true);
+          }
+        }}
+      >
+        {paused ? "▶ Play film" : "Ⅱ Pause film"}
+      </button>
       {/* 3. Quiet Scroll Cue at Base */}
       <div
         data-motion="cue"

@@ -4,10 +4,13 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   outputFileTracingRoot: path.resolve(__dirname),
   reactStrictMode: true,
+  distDir: '.next-cinematic',
+  devIndicators: false,
   poweredByHeader: false,
   trailingSlash: false,
   images: {
     formats: ['image/avif', 'image/webp'],
+    qualities: [75, 80, 85],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
@@ -93,7 +96,7 @@ const nextConfig: NextConfig = {
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",
-              "upgrade-insecure-requests",
+              'upgrade-insecure-requests',
             ].join('; '),
           },
         ],

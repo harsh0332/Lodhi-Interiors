@@ -1,413 +1,93 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { getFeaturedProjects } from '@/lib/content';
-import { buildFounderPersonSchema, buildBreadcrumbSchema } from '@/lib/schema';
-import { buildMetadata } from '@/lib/seo';
-import { env } from '@/lib/env';
-import { Section } from '@/components/ui/Section';
-import { Display, Label } from '@/components/ui/Typography';
-import { Button } from '@/components/ui/Button';
-import { ProjectCard } from '@/components/ui/ProjectCard';
-import { Reveal } from '@/components/motion/Reveal';
-
-export const metadata: Metadata = buildMetadata({
-  title: 'The studio — Soumya Lodhi, interior designer in Bhopal | Lodhi Interiors',
+import { buildMetadata } from "@/lib/seo";
+import { buildFounderPersonSchema } from "@/lib/schema";
+import {
+  PageIntro,
+  Photo,
+  TextLink,
+  SectionHeading,
+} from "@/components/editorial/Elements";
+import { StudioSignature } from "@/components/editorial/StudioSignature";
+import { ClosingCTA } from "@/components/sections/ClosingCTA";
+export const metadata = buildMetadata({
+  title: "The studio — Soumya Lodhi | Lodhi Interiors",
   description:
-    'Founded by Soumya Lodhi with 8+ years of practice in Bhopal. Lodhi Interiors unites architectural interior design with single-source turnkey site execution.',
-  path: '/studio',
-  ogImage: '/images/soumya-lodhi.jpg',
-  ogType: 'profile',
+    "Meet Soumya Lodhi and the Bhopal interior design studio bringing thoughtful spaces to life through design and turnkey execution.",
+  path: "/studio",
+  ogImage: "/images/soumya-lodhi.jpg",
 });
-
-const DIFFERENTIATORS = [
-  {
-    title: 'Single-Point Accountability',
-    tag: 'Turnkey Custody',
-    description:
-      'One studio drafts the architectural drawings, manages procurement, and directs on-site execution. When challenges arise on site, there is no third-party contractor to deflect responsibility onto.',
-    icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="9" />
-        <line x1="12" y1="3" x2="12" y2="7" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-        <line x1="3" y1="12" x2="7" y2="12" />
-        <line x1="17" y1="12" x2="21" y2="12" />
-        <circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
-  },
-  {
-    title: 'In-House Joinery & Trade Custody',
-    tag: '1.5mm Shadowline',
-    description:
-      'Rather than bidding projects out to transient labor crews, our master carpenters, certified electricians, and plumbing technicians work under direct studio supervision, preserving 1.5mm shadowline tolerances.',
-    icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 21V7l5-4v18" />
-        <path d="M9 21h11V10l-6-5-5 4" />
-        <path d="M14 14h3" />
-        <path d="M14 18h3" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Climatic Material Discipline',
-    tag: 'IS 710 Marine Grade',
-    description:
-      'We specify natural stones, quarter-sawn veneers, breathable lime plasters, and certified IS 710 marine plywood engineered to endure Bhopal’s 44°C dry summers and high monsoon humidity cycles.',
-    icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
-        <path d="M12 8v8" />
-        <path d="M8 12h8" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Daily Site Supervision',
-    tag: 'Daily Field Audit',
-    description:
-      'Execution quality is governed on site, not from a distant showroom. Our project leads maintain continuous daily presence in Bhopal, verifying laser alignment, structural waterproofing, and trade sequencing.',
-    icon: (
-      <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <path d="M3 9h18" />
-        <path d="M9 21V9" />
-        <circle cx="15" cy="15" r="2" />
-      </svg>
-    ),
-  },
-];
-
-const LOCALITIES = [
-  { name: 'Arera Colony', note: 'Private family residences and multi-generational villas' },
-  { name: 'Shahpura', note: 'Waterfront estates and minimal architectural villas' },
-  { name: 'Koh-e-Fiza', note: 'Elevated penthouses and heritage-adjacent homes' },
-  { name: 'MP Nagar', note: 'Corporate headquarters and advisory office interiors' },
-  { name: 'Bawadiya Kalan', note: 'Custom culinary studios and modern residential builds' },
-  { name: 'Malviya Nagar', note: 'High-focus retail showrooms and fine jewelry boutiques' },
-  { name: 'Gulmohar', note: 'Bespoke residential apartments and hospitality bistros' },
-  { name: 'Chuna Bhatti', note: 'Contemporary villas with double-height central lightwells' },
-];
-
-export default async function StudioPage() {
-  const featuredProjects = await getFeaturedProjects();
-  const displayProjects = featuredProjects.slice(0, 3);
-
-  const founderSchema = buildFounderPersonSchema();
-  const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'Home', url: '/' },
-    { name: 'Studio', url: '/studio' },
-  ]);
-
+export default function StudioPage() {
   return (
-    <>
-      {/* Structured Data */}
+    <div className="studio-page refined-page">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(founderSchema) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(buildFounderPersonSchema()),
+        }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      <PageIntro
+        eyebrow="The studio · Bhopal"
+        title="Good spaces."
+        italic="Real connections."
+        description="A personal studio with a complete perspective. We connect the ideas on the drawing board with the care and craft it takes to bring them to life."
       />
-
-      {/* 1. Opening: Large portrait of Soumya Lodhi + H1 + Positioning statement */}
-      <div className="pt-28 md:pt-36">
-        <Section tone="light" className="pb-16 pt-10 md:pb-24">
-          <Reveal>
-            <div className="mb-8">
-              <Label className="mb-3 block text-accent">Architectural Practice · Bhopal</Label>
-              <Display as="h1" className="mb-4 max-w-3xl">
-                The studio
-              </Display>
-              <p className="max-w-2xl font-sans text-[1.125rem] leading-relaxed text-charcoal/85 md:text-[1.25rem]">
-                An architectural interior design and turnkey execution practice in Bhopal, shaping
-                complete residential and commercial spaces from initial concept to physical
-                handover.
-              </p>
-            </div>
-          </Reveal>
-
-          {/* Portrait + Narrative Grid */}
-          <div className="mt-12 grid grid-cols-1 items-start gap-12 border-t border-greige/30 pt-12 md:mt-16 md:pt-16 lg:grid-cols-12 lg:gap-16">
-            {/* Portrait: Sits above narrative on mobile, left column on desktop */}
-            <div className="order-1 lg:order-1 lg:col-span-5">
-              <Reveal>
-                <div className="relative aspect-[3/4] w-full overflow-hidden border border-greige/25 bg-paper">
-                  <Image
-                    src="/images/soumya-lodhi.jpg"
-                    alt="Soumya Lodhi, founder and principal designer of Lodhi Interiors in Bhopal"
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    quality={85}
-                    className="object-cover object-top"
-                  />
-                </div>
-                <div className="mt-4 flex flex-col">
-                  <span className="font-serif text-[1.125rem] font-medium text-charcoal">
-                    Soumya Lodhi
-                  </span>
-                  <span className="mt-0.5 font-sans text-ui-caption text-greige">
-                    Principal Designer &amp; Founder · 8+ Years Practice
-                  </span>
-                </div>
-              </Reveal>
-            </div>
-
-            {/* 2. Founder Narrative: Considered account (not CV, not sales pitch) */}
-            <div className="order-2 space-y-6 font-sans text-[1.0625rem] leading-[1.8] text-charcoal/85 lg:order-2 lg:col-span-7">
-              <Reveal delay={0.05}>
-                <p>
-                  Lodhi Interiors began over eight years ago with a single conviction: an interior
-                  concept cannot be separated from the hands that physically build it. Too often in
-                  Bhopal, thoughtful architectural drawings were handed over to disconnected
-                  contractors who substituted materials, compromised shadowline tolerances, and
-                  eroded the spatial intention before the client ever moved in.
-                </p>
-              </Reveal>
-
-              <Reveal delay={0.1}>
-                <p>
-                  We structured our practice to eliminate that compromise entirely. By keeping
-                  architectural interior design and complete turnkey execution under one roof, we
-                  take unconditional custody of the space. Every civil modification, electrical
-                  chase, and bespoke piece of joinery is engineered, procured, and assembled by our
-                  in-house teams.
-                </p>
-              </Reveal>
-
-              <Reveal delay={0.15}>
-                <p>
-                  We care deeply about proportion, daylight, and tactile restraint. We do not design
-                  around transient showroom trends or decorative excess. Instead, we seek a quiet
-                  permanence: honest natural stone planes, quarter-sawn timbers, breathable lime
-                  washes, and calibrated architectural lighting that settles into Bhopal&rsquo;s
-                  climate over decades of family residence.
-                </p>
-              </Reveal>
-
-              <Reveal delay={0.2}>
-                <p>
-                  Bhopal remains our home and our laboratory. From historic lakeside residences in
-                  Koh-e-Fiza to private estates in Arera Colony and Shahpura, our work is shaped by
-                  the regional light, monsoon rhythms, and craftsmanship of central India.
-                </p>
-              </Reveal>
-            </div>
-          </div>
-        </Section>
-      </div>
-
-      {/* 3. How We Work Differently: Four factual operational blocks */}
-      <Section tone="umber" className="border-t border-white/10 py-16 sm:py-24 md:py-36">
-        <div className="mb-10 sm:mb-16 max-w-3xl">
-          <Reveal>
-            <span className="mb-2.5 inline-flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-widest text-accent-gold">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent-gold" />
-              Operational Architecture
-            </span>
-            <h2 className="mb-3.5 font-serif text-[1.625rem] sm:text-fluid-h2 text-bone">How We Work Differently</h2>
-            <p className="font-sans text-xs sm:text-[1.0625rem] leading-relaxed text-bone/75">
-              Our advantage is not a slogan; it is the structural separation between studio-led
-              turnkey custody and ordinary contractor brokerage.
-            </p>
-          </Reveal>
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 sm:gap-8 md:grid-cols-2 lg:gap-8">
-          {DIFFERENTIATORS.map((diff, idx) => (
-            <Reveal key={diff.title} delay={idx * 0.05}>
-              <div className="group relative flex h-full flex-col justify-between border border-white/10 bg-[#191714] p-5 sm:p-8 md:p-10 transition-all duration-300 hover:-translate-y-1 hover:border-accent-gold/50 hover:shadow-glow-gold rounded-sm">
-                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-accent-gold/0 via-accent-gold/40 to-accent-gold/0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                <div>
-                  <div className="mb-4 sm:mb-6 flex items-center justify-between">
-                    <div className="flex items-center gap-2.5 sm:gap-3">
-                      <div className="flex h-9 w-9 sm:h-11 sm:w-11 items-center justify-center rounded-sm border border-accent-gold/30 bg-accent/15 text-accent-gold transition-colors duration-300 group-hover:border-accent-gold group-hover:bg-accent/25">
-                        {diff.icon}
-                      </div>
-                      <span className="font-mono text-[0.625rem] sm:text-[0.6875rem] font-semibold uppercase tracking-widest text-accent-gold">
-                        {diff.tag}
-                      </span>
-                    </div>
-                    <span className="font-mono text-xs font-medium text-bone/40">
-                      0{idx + 1}
-                    </span>
-                  </div>
-
-                  <h3 className="mb-2 sm:mb-3 font-serif text-[1.1875rem] sm:text-[1.3125rem] font-medium text-bone transition-colors duration-200 group-hover:text-accent-gold">
-                    {diff.title}
-                  </h3>
-                  <p className="font-sans text-xs sm:text-[0.9375rem] leading-relaxed text-bone/70">
-                    {diff.description}
-                  </p>
-                </div>
+      <StudioSignature full />
+      <section className="values-section">
+        <div className="wrap">
+          <SectionHeading
+            number="01"
+            label="What matters to us"
+            title="Considered from"
+            italic="every angle."
+          />
+          <div className="values-grid studio-values">
+            {[
+              [
+                "Personal by design",
+                "Your routines and preferences guide the brief. We make room for the way you actually live, work and gather.",
+              ],
+              [
+                "Materials that belong",
+                "Texture, colour and light work together. We select materials for their feel, function and place within the whole.",
+              ],
+              [
+                "Connected from start to finish",
+                "Design decisions and on-site work stay in conversation. A coordinated process helps the finished space reflect the original idea.",
+              ],
+            ].map(([title, text], i) => (
+              <div key={title} data-reveal>
+                <span className="eyebrow">0{i + 1}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
               </div>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      {/* 4. The Team: Real craftsmen, designers & site supervisors */}
-      <Section tone="light" className="border-t border-greige/20 py-16 sm:py-20 md:py-32">
-        <div className="grid grid-cols-1 items-center gap-8 sm:gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="space-y-4 sm:space-y-6 lg:col-span-6">
-            <Reveal>
-              <Label className="mb-2 block text-accent">Collective Craft</Label>
-              <h2 className="mb-3 sm:mb-4 font-serif text-[1.625rem] sm:text-fluid-h2 text-charcoal">
-                The Site &amp; Studio Team
-              </h2>
-              <p className="font-sans text-xs sm:text-[1.0625rem] leading-[1.75] text-charcoal/85">
-                A disciplined team of interior architects, project managers, and trade specialists.
-                Our core site supervisors, master carpenters, stone masons, and MEP technicians have
-                worked alongside Soumya Lodhi for up to eight years.
-              </p>
-              <p className="font-sans text-xs sm:text-[0.9375rem] leading-relaxed text-charcoal/75">
-                We do not use outsourced labor brokers. When you commission Lodhi Interiors, the
-                same craftsmen who fabricated our documented Arera Colony and Shahpura millwork are
-                the ones setting laser levels on your site.
-              </p>
-            </Reveal>
-          </div>
-
-          <div className="lg:col-span-6">
-            <Reveal delay={0.1}>
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-sm border border-greige/25 bg-paper">
-                <Image
-                  src="/images/projects/craft-moulding-installation.jpg"
-                  alt="Lodhi Interiors in-house master joinery craftsmen on site in Bhopal"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  quality={85}
-                  className="object-cover"
-                />
-              </div>
-              <span className="mt-2.5 block font-sans text-ui-caption text-greige">
-                On-site joinery calibration and millwork framing in Bhopal.
-              </span>
-            </Reveal>
+            ))}
           </div>
         </div>
-      </Section>
-
-      {/* 5. Where We Work: Genuine Bhopal Localities */}
-      <Section tone="travertine" className="border-t border-greige/20 py-16 sm:py-20 md:py-32">
-        <div className="mb-10 sm:mb-16 max-w-3xl">
-          <Reveal>
-            <Label className="mb-2 block text-accent">Geography of Practice</Label>
-            <h2 className="mb-3 sm:mb-4 font-serif text-[1.625rem] sm:text-fluid-h2 text-charcoal">Where We Work</h2>
-            <p className="font-sans text-xs sm:text-[1rem] leading-relaxed text-charcoal/80">
-              Headquartered in Bhopal, we accept commissions across Madhya Pradesh and selective
-              architectural projects across central India. We maintain active project presence in
-              Bhopal’s key residential and commercial sectors.
-            </p>
-          </Reveal>
+      </section>
+      <section className="story-grid wrap">
+        <div>
+          <span className="eyebrow">The people who make it real</span>
+          <h2>
+            Good ideas.
+            <br />
+            <em>Skilled hands.</em>
+          </h2>
+          <p>
+            A drawing is only the beginning. On site, our designers, supervisors
+            and craftspeople work through the measurements, material transitions
+            and finishing details that give a space its character.
+          </p>
+          <p>
+            Our practice is rooted in Bhopal, with an understanding of local
+            homes, materials and the practical needs of a project.
+          </p>
+          <TextLink href="/process">See how we work</TextLink>
         </div>
-
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {LOCALITIES.map((loc, idx) => (
-            <Reveal key={loc.name} delay={idx * 0.03}>
-              <div className="group flex h-full flex-col justify-between rounded-sm border border-greige/25 bg-white p-3.5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-luxury">
-                <div className="mb-1.5 sm:mb-2 flex items-baseline justify-between">
-                  <span className="font-serif text-[0.9375rem] sm:text-[1.125rem] font-medium text-charcoal transition-colors group-hover:text-accent">
-                    {loc.name}
-                  </span>
-                  <span className="font-mono text-[0.6875rem] sm:text-[0.75rem] text-accent/50 transition-colors group-hover:text-accent">
-                    &rarr;
-                  </span>
-                </div>
-                <span className="font-sans text-[0.75rem] sm:text-[0.8125rem] leading-snug sm:leading-relaxed text-charcoal/65">
-                  {loc.note}
-                </span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      {/* 6. Selected Work Strip: 3 Featured Commissions */}
-      <Section tone="light" className="border-t border-greige/20 py-20 md:py-32">
-        <div className="mb-12 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <div>
-            <Reveal>
-              <Label className="mb-2 block text-accent">Built Portfolio</Label>
-              <h2 className="font-serif text-fluid-h2 text-charcoal">Selected Commissions</h2>
-            </Reveal>
-          </div>
-          <Reveal delay={0.1}>
-            <Link
-              href="/work"
-              className="font-sans text-ui-caption font-medium text-charcoal transition-colors hover:text-accent"
-            >
-              View complete archive &rarr;
-            </Link>
-          </Reveal>
-        </div>
-
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {displayProjects.map((project, idx) => (
-            <Reveal key={project.frontmatter.slug} delay={idx * 0.08}>
-              <ProjectCard
-                slug={project.frontmatter.slug}
-                title={project.frontmatter.title}
-                locality={project.frontmatter.locality}
-                projectType={project.frontmatter.projectType}
-                heroImage={project.frontmatter.heroImage}
-                aspectRatio="4/3"
-              />
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      {/* 7. Closing Call to Action */}
-      <Section
-        tone="dark"
-        className="border-t border-greige/20 py-24 md:py-36"
-        aria-label="Start your project with the studio"
-      >
-        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <Reveal>
-            <Label className="mb-3 block text-accent">Direct Consultation</Label>
-            <h2 className="mb-6 font-serif text-fluid-display font-normal text-bone">
-              Discuss your space with Soumya Lodhi.
-            </h2>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <p className="mx-auto mb-10 max-w-xl font-sans text-[1.0625rem] leading-relaxed text-bone/80">
-              We take on a limited number of commissions each year to preserve direct founder
-              supervision over design and execution.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <div className="flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-              <Button
-                variant="secondary"
-                tone="dark"
-                href="/contact"
-                className="min-h-[48px] w-full px-8 text-[0.9375rem] sm:w-auto"
-              >
-                Start your project
-              </Button>
-              <Button
-                variant="primary"
-                tone="dark"
-                href={`https://wa.me/${env.NEXT_PUBLIC_WHATSAPP_NUMBER}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="min-h-[48px] w-full text-[0.9375rem] text-bone/90 hover:text-bone sm:w-auto"
-              >
-                WhatsApp Consultation
-              </Button>
-            </div>
-          </Reveal>
-        </div>
-      </Section>
-    </>
+        <Photo
+          src="/images/projects/craft-moulding-installation.jpg"
+          alt="A craftsperson installing wall mouldings on a Lodhi Interiors site"
+        />
+      </section>
+      <ClosingCTA />
+    </div>
   );
 }

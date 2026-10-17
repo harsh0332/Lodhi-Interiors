@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return buildMetadata({
     title: service.metaTitle,
     description: service.metaDescription,
-    path: "/" + service.slug,
+    path: '/' + service.slug,
     ogImage: service.heroImage,
   });
 }
