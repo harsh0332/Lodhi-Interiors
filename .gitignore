@@ -36,3 +36,6 @@ next-env.d.ts
 node_modules.icloud-backup/
 lodhi-*.zip
 __pycache__/
+
+# Browser bundles generated after each production build
+/public/site-assets/

@@ -2,6 +2,10 @@ import path from 'path';
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  // Hostinger can serve public files directly even when its /_next proxy fails.
+  // scripts/package-assets.mjs copies only browser assets into this prefix.
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/site-assets' : undefined,
+  output: 'standalone',
   outputFileTracingRoot: path.resolve(__dirname),
   reactStrictMode: true,
   // Keep the default .next output directory for managed Next.js hosting.
@@ -9,6 +13,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   trailingSlash: false,
   images: {
+    // These source images are already compressed. Avoid Hostinger's failing
+    // on-demand /_next/image endpoint; next/image still keeps lazy loading.
+    unoptimized: true,
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 80, 85],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
