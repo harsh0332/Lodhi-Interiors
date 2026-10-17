@@ -30,7 +30,7 @@ def fetch(route):
     except HTTPError as e:return e.code,'',b''
     except TimeoutError:return 599,'',b''
 
-routes=json.loads(Path('.next-cinematic/prerender-manifest.json').read_text())['routes']
+routes=json.loads(Path('.next/prerender-manifest.json').read_text())['routes']
 html_routes=[r for r in routes if not r.endswith(('.txt','.xml','.png')) and r not in ['/demo','/_not-found']]
 errors=[]; links=set();image_count=0
 with ThreadPoolExecutor(max_workers=4) as pool:

@@ -24,7 +24,7 @@ npm run build
 npm run start -- --port 3000
 
 Development: npm run dev -- --port 3000
-Do not build into the same .next-cinematic directory while a production preview is serving it.
+Do not build into the same .next directory while a production preview is serving it.
 
 Source is also mirrored at /Users/harshchouksey/.cache/lodhi-cinematic-preview to avoid iCloud file-offloading stalls in the Desktop project. Changed source files are synced atomically to the user's project folder. No deployment or Git commit was performed.
 

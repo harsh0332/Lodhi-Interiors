@@ -4,7 +4,7 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   outputFileTracingRoot: path.resolve(__dirname),
   reactStrictMode: true,
-  distDir: '.next-cinematic',
+  // Keep the default .next output directory for managed Next.js hosting.
   devIndicators: false,
   poweredByHeader: false,
   trailingSlash: false,

@@ -44,7 +44,7 @@
     "next.config.ts",
     "tailwind.config.ts",
     "next-env.d.ts",
-    ".next-cinematic/types/**/*.ts"
+    ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules", "node_modules.icloud-backup"]
 }
