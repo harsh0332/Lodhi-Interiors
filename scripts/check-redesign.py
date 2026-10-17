@@ -31,7 +31,7 @@ def fetch(route):
     except TimeoutError:return 599,'',b''
 
 routes=json.loads(Path('.next/prerender-manifest.json').read_text())['routes']
-html_routes=[r for r in routes if not r.endswith(('.txt','.xml','.png')) and r not in ['/demo','/_not-found']]
+html_routes=[r for r in routes if not r.endswith(('.txt','.xml','.png','.ico')) and r not in ['/demo','/_not-found']]
 errors=[]; links=set();image_count=0
 with ThreadPoolExecutor(max_workers=4) as pool:
     for route,(status,kind,body) in zip(html_routes,pool.map(fetch,html_routes)):
