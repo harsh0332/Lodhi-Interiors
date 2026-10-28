@@ -1,135 +1,45 @@
-import type { Metadata, Viewport } from "next";
-import Script from "next/script";
-import { serifFont, sansFont } from "@/app/fonts";
-import { env } from "@/lib/env";
-import { GA_MEASUREMENT_ID } from "@/lib/analytics";
-
-import { Header } from "@/components/sections/Header";
-import { Footer } from "@/components/sections/Footer";
-import "@/styles/globals.css";
-import "@/styles/editorial.css";
-import "@/styles/cinematic.css";
-import "@/styles/atelier.css";
-import "@/styles/refinements.css";
-import { MotionDirector } from "@/components/cinematic/MotionDirector";
+import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
-  title: {
-    default: "Interior Designer in Bhopal | Lodhi Interiors",
-    template: "%s | LODHI INTERIORS",
-  },
-  description:
-    "Bespoke interior design and turnkey execution studio in Bhopal, Madhya Pradesh, India. Founded by Soumya Lodhi with 8+ years of craft in luxury residential and commercial architecture.",
-  keywords: [
-    "Interior Designer Bhopal",
-    "Architectural Studio Bhopal",
-    "Turnkey Interior Execution",
-    "Luxury Home Design Bhopal",
-    "Soumya Lodhi",
-    "Lodhi Interiors",
-    "Arera Colony Interior Designer",
-  ],
-  authors: [{ name: "Soumya Lodhi", url: env.NEXT_PUBLIC_SITE_URL }],
-  creator: "LODHI INTERIORS",
-  publisher: "LODHI INTERIORS",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: env.NEXT_PUBLIC_SITE_URL,
-    siteName: "LODHI INTERIORS",
-    title: "LODHI INTERIORS | Architectural & Turnkey Interior Studio Bhopal",
-    description:
-      "Bespoke interior design and turnkey execution studio in Bhopal, Madhya Pradesh, India. Founded by Soumya Lodhi.",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "LODHI INTERIORS | Architectural & Turnkey Interior Studio Bhopal",
-    description:
-      "Bespoke interior design and turnkey execution studio in Bhopal, Madhya Pradesh, India.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  verification: {
-    google: [
-      "Atuff5E5Q6dYHtIgxzxI97aMES3pBu1YoH15TsBdsTw",
-      "googleecadafb3769b6cc7",
-    ],
-  },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/icon-48.png", sizes: "48x48", type: "image/png" },
-      { url: "/icon-96.png", sizes: "96x96", type: "image/png" },
-      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-    shortcut: "/favicon.ico",
-  },
-  manifest: "/site.webmanifest",
+  title: 'Temporarily unavailable | Lodhi Interiors',
+  description: 'Website temporarily unavailable. Please try again later.',
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F6F3EE",
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
+  themeColor: '#251c21',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+// Fallback presentation if a hosting layer does not run Next middleware.
+// Remove this temporary layout together with middleware.ts when restoring the site.
+export default function RootLayout() {
   return (
-    <html lang="en-IN" className={`${serifFont.variable} ${sansFont.variable}`}>
-      <body className="flex min-h-screen flex-col bg-bone text-charcoal">
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-
-        <Header />
-        <main id="main-content" tabIndex={-1} className="flex-grow">
-          {children}
-        </main>
-        <Footer />
-        <MotionDirector />
-        {/* Global Conversion & Visual Motion Layer */}
-
-        {/* Google Analytics 4 (Non-blocking) */}
-        {GA_MEASUREMENT_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_MEASUREMENT_ID}', {
-                  page_path: window.location.pathname,
-                });
-              `}
-            </Script>
-          </>
-        )}
+    <html lang="en">
+      <body>
+        <style>{`
+          :root{color-scheme:dark}
+          *{box-sizing:border-box}
+          html,body{margin:0;min-height:100%}
+          body{min-height:100svh;background:#251c21;color:#f7f1e9;font-family:Arial,Helvetica,sans-serif}
+          .shell{min-height:100svh;max-width:1680px;margin:auto;padding:clamp(24px,4vw,64px);display:flex;flex-direction:column}
+          header{display:flex;align-items:center;gap:16px;padding-bottom:28px;border-bottom:1px solid #6e585c}
+          .mark{width:34px;height:34px;border:1px solid #cba985;display:grid;place-items:center;color:#e5c4a1;font:24px Georgia,serif}
+          .brand{font:clamp(18px,2vw,23px) Georgia,serif;letter-spacing:.14em;text-transform:uppercase}
+          main{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:72px 0}
+          .content{max-width:780px}
+          .rule{width:42px;height:1px;background:#cba985;margin:0 auto 38px}
+          .eyebrow{margin:0 0 28px;color:#d9b99b;font-size:12px;letter-spacing:.26em;text-transform:uppercase}
+          h1{font:normal clamp(46px,8vw,108px)/1.04 Georgia,'Times New Roman',serif;letter-spacing:-.045em;margin:0}
+          p{font-size:clamp(16px,2vw,19px);line-height:1.6;color:#dbcfc9;margin:30px 0 0}
+          footer{padding-top:28px;border-top:1px solid #6e585c;color:#b9a4a0;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+          @media(max-width:600px){main{padding:60px 0}.brand{letter-spacing:.08em}}
+        `}</style>
+        <div className="shell">
+          <header><span className="mark" aria-hidden="true">L</span><span className="brand">Lodhi Interiors</span></header>
+          <main><div className="content"><div className="rule" aria-hidden="true" /><p className="eyebrow">Site notice</p><h1>Website temporarily unavailable.</h1><p>Please try again later.</p></div></main>
+          <footer>Lodhi Interiors</footer>
+        </div>
       </body>
     </html>
   );
