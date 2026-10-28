@@ -19,33 +19,28 @@ export function DesignResources() {
           </p>
         </div>
         <a
-          href="https://lodhiinteriors.vercel.app/"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/work"
           className="atelier-tour"
         >
           <div className="tour-picture">
             <Photo
               src="/images/projects/lodhi-interiors-ayodhya-bypass-dining-atrium.webp"
-              alt="Dining atrium visualisation introducing the 3D experience"
+              alt="Dining atrium interior design"
               sizes="(max-width: 760px) 100vw, 60vw"
             />
           </div>
           <div className="tour-copy">
-            <span className="atelier-kicker">An immersive perspective</span>
-            <span className="tour-degree" aria-hidden="true">
-              360<sup>°</sup>
-            </span>
+            <span className="atelier-kicker">Selected interiors</span>
             <h3>
               Step into
               <br />
               <em>the possibilities.</em>
             </h3>
             <span className="text-link">
-              Explore in 3D <Arrow diagonal />
+              View projects <Arrow diagonal />
             </span>
             <span className="resource-meta">
-              AI-imagined tour · Opens in a new tab
+              Interior design portfolio
             </span>
           </div>
         </a>
