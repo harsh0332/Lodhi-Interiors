@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Photo, Arrow } from "./Elements";
 export function DesignResources() {
   return (
@@ -18,7 +19,7 @@ export function DesignResources() {
             See how a space takes shape before work begins.
           </p>
         </div>
-        <a
+        <Link
           href="/work"
           className="atelier-tour"
         >
@@ -43,7 +44,7 @@ export function DesignResources() {
               Interior design portfolio
             </span>
           </div>
-        </a>
+        </Link>
         <div className="atelier-documents">
           <a
             href="/design-resources/residence-24x42-3d-views.pdf"
